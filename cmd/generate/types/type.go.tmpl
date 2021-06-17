@@ -142,9 +142,19 @@ func init() {
             {{- end }}
         )
 
-        runtime.KeepAlive(rcv)
+		go func(x interface{}) {
+			select {
+			case <-time.After(33 * time.Millisecond):
+				return
+			}
+		}(rcv)
         {{- range $k, $arg := .Arguments }}
-            runtime.KeepAlive(in{{$k}})
+			go func(x interface{}) {
+				select {
+				case <-time.After(33 * time.Millisecond):
+					return
+				}
+			}(in{{$k}})
         {{- end }}
 
         RegisterState.Stats.GodotTypeAllocs["{{ $returnTypeGoName }}"]++
@@ -197,7 +207,12 @@ func init() {
         )
 
         {{- range $k, $arg := .Arguments }}
-            runtime.KeepAlive(in{{$k}})
+			go func(x interface{}) {
+				select {
+				case <-time.After(33 * time.Millisecond):
+					return
+				}
+			}(in{{$k}})
         {{- end }}
 
         {{- if eq .Name "Destroy" }}
@@ -255,7 +270,12 @@ func init() {
         )
 
         {{- range $k, $arg := .Arguments }}
-            runtime.KeepAlive(in{{$k}})
+			go func(x interface{}) {
+				select {
+				case <-time.After(33 * time.Millisecond):
+					return
+				}
+			}(in{{$k}})
         {{- end }}
 
         return {{ if .ReturnType.IsGodotObjectPointer -}}
@@ -318,7 +338,12 @@ func init() {
             )
 
             {{- range $k, $arg := .Arguments }}
-                runtime.KeepAlive(in{{$k}})
+				go func(x interface{}) {
+					select {
+					case <-time.After(33 * time.Millisecond):
+						return
+					}
+				}(in{{$k}})
             {{- end }}
         {{ else }}
             ret := C.go_{{ .CName }}(
@@ -329,7 +354,12 @@ func init() {
             )
 
             {{- range $k, $arg := .Arguments }}
-                runtime.KeepAlive(in{{$k}})
+				go func(x interface{}) {
+					select {
+					case <-time.After(33 * time.Millisecond):
+						return
+					}
+				}(in{{$k}})
             {{- end }}
 
             return {{ if .ReturnType.IsGodotObjectPointer -}}

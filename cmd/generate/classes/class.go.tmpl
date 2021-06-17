@@ -398,10 +398,20 @@ func init() {
 				defer Free(unsafe.Pointer(ptrCArr))
 
 				{{ range $k, $arg := $method.Arguments -}}
-					runtime.KeepAlive(_arg{{ $k }})
+					go func(x interface{}) {
+						select {
+						case <-time.After(33 * time.Millisecond):
+							return
+						}
+					}(_arg{{ $k }})
 				{{ end }}
 
-				runtime.KeepAlive(ptrArguments)
+				go func(x interface{}) {
+					select {
+					case <-time.After(33 * time.Millisecond):
+						return
+					}
+				}(ptrArguments)
 
 				{{ if eq $goReturnUsage USAGE_VOID }}
 					/* USAGE_VOID ({{ $method.ReturnType }} / {{ $goReturnType }}) */
