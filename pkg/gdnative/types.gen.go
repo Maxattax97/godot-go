@@ -37,8 +37,6 @@ package gdnative
 */
 import "C"
 import (
-	"fmt"
-	gotime "time"
 	"unsafe"
 )
 
@@ -139,13 +137,6 @@ func StringChr(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 
@@ -165,13 +156,6 @@ func ObjectDestroy(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 }
 
@@ -190,13 +174,6 @@ func GlobalGetSingleton(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return (*GodotObject)(unsafe.Pointer(ret))
 
@@ -220,20 +197,6 @@ func MethodBindGetMethod(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return (*MethodBind)(unsafe.Pointer(&ret))
 
@@ -253,13 +216,6 @@ func Alloc(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return unsafe.Pointer(ret)
 
@@ -281,20 +237,6 @@ func Realloc(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return unsafe.Pointer(ret)
 
@@ -314,13 +256,6 @@ func Free(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 }
 
@@ -347,34 +282,6 @@ func PrintError(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 }
 
@@ -401,34 +308,6 @@ func PrintWarning(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 }
 
@@ -446,13 +325,6 @@ func Print(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 }
 
@@ -470,13 +342,6 @@ func IsInstanceValid(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 
@@ -496,13 +361,6 @@ func VariantGetOperatorName(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 
@@ -530,41 +388,6 @@ func VariantEvaluate(
 		in3,
 		in4,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in4)
 
 }
 
@@ -582,13 +405,6 @@ func GetClassTag(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return unsafe.Pointer(ret)
 
@@ -610,20 +426,6 @@ func ObjectCastTo(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return (*GodotObject)(unsafe.Pointer(ret))
 
@@ -643,13 +445,6 @@ func InstanceFromId(
 		api,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return (*GodotObject)(unsafe.Pointer(ret))
 
@@ -681,28 +476,6 @@ func NewAABB(
 		in0,
 		in1,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["AABB"]++
 
@@ -741,13 +514,6 @@ func (gdt *AABB) SetPosition(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_aabb_get_size -> godot_vector3 */
@@ -782,13 +548,6 @@ func (gdt *AABB) SetSize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_aabb_as_string -> godot_string */
@@ -871,13 +630,6 @@ func (gdt *AABB) Intersects(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -898,13 +650,6 @@ func (gdt *AABB) Encloses(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -925,13 +670,6 @@ func (gdt *AABB) Merge(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -952,13 +690,6 @@ func (gdt *AABB) Intersection(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -979,13 +710,6 @@ func (gdt *AABB) IntersectsPlane(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1008,20 +732,6 @@ func (gdt *AABB) IntersectsSegment(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1042,13 +752,6 @@ func (gdt *AABB) HasPoint(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1069,13 +772,6 @@ func (gdt *AABB) GetSupport(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -1192,13 +888,6 @@ func (gdt *AABB) Expand(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -1219,13 +908,6 @@ func (gdt *AABB) Grow(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -1246,13 +928,6 @@ func (gdt *AABB) GetEndpoint(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -1273,13 +948,6 @@ func (gdt *AABB) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1304,14 +972,6 @@ func NewArray() Array {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1333,21 +993,6 @@ func NewArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1371,21 +1016,6 @@ func NewArrayPoolColorArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1407,21 +1037,6 @@ func NewArrayPoolVector3Array(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1445,21 +1060,6 @@ func NewArrayPoolVector2Array(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1481,21 +1081,6 @@ func NewArrayPoolStringArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1519,21 +1104,6 @@ func NewArrayPoolRealArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1556,21 +1126,6 @@ func NewArrayPoolIntArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1592,21 +1147,6 @@ func NewArrayPoolByteArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1631,20 +1171,6 @@ func (gdt *Array) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_array_get -> godot_variant */
@@ -1663,13 +1189,6 @@ func (gdt *Array) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1690,13 +1209,6 @@ func (gdt *Array) OperatorIndex(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1717,13 +1229,6 @@ func (gdt *Array) OperatorIndexConst(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1744,13 +1249,6 @@ func (gdt *Array) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_array_clear -> void */
@@ -1783,13 +1281,6 @@ func (gdt *Array) Count(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1826,13 +1317,6 @@ func (gdt *Array) Erase(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_array_front -> godot_variant */
@@ -1885,20 +1369,6 @@ func (gdt *Array) Find(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1919,13 +1389,6 @@ func (gdt *Array) FindLast(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1946,13 +1409,6 @@ func (gdt *Array) Has(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1991,20 +1447,6 @@ func (gdt *Array) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Setter Method: godot_array_invert -> void */
@@ -2069,13 +1511,6 @@ func (gdt *Array) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_array_push_front -> void */
@@ -2094,13 +1529,6 @@ func (gdt *Array) PushFront(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_array_remove -> void */
@@ -2119,13 +1547,6 @@ func (gdt *Array) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_array_resize -> void */
@@ -2144,13 +1565,6 @@ func (gdt *Array) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_array_rfind -> godot_int */
@@ -2171,20 +1585,6 @@ func (gdt *Array) Rfind(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2237,20 +1637,6 @@ func (gdt *Array) SortCustom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_array_bsearch -> godot_int */
@@ -2271,20 +1657,6 @@ func (gdt *Array) Bsearch(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2311,34 +1683,6 @@ func (gdt *Array) BsearchCustom(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2375,13 +1719,6 @@ func (gdt *Array) Duplicate(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -2454,34 +1791,6 @@ func (gdt *Array) Slice(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -2514,35 +1823,6 @@ func NewBasisWithRows(
 		in2,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -2567,28 +1847,6 @@ func NewBasisWithAxisAndAngle(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -2611,21 +1869,6 @@ func NewBasisWithEuler(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -2643,14 +1886,6 @@ func NewBasis() Basis {
 		api,
 		rcv,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -2673,21 +1908,6 @@ func NewBasisWithEulerQuat(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -2792,20 +2012,6 @@ func (gdt *Basis) Rotated(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -2826,13 +2032,6 @@ func (gdt *Basis) Scaled(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -2885,13 +2084,6 @@ func (gdt *Basis) Tdotx(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2912,13 +2104,6 @@ func (gdt *Basis) Tdoty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2939,13 +2124,6 @@ func (gdt *Basis) Tdotz(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2966,13 +2144,6 @@ func (gdt *Basis) Xform(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -2993,13 +2164,6 @@ func (gdt *Basis) XformInv(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3036,13 +2200,6 @@ func (gdt *Basis) GetElements(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_basis_get_axis -> godot_vector3 */
@@ -3061,13 +2218,6 @@ func (gdt *Basis) GetAxis(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3090,20 +2240,6 @@ func (gdt *Basis) SetAxis(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_basis_get_row -> godot_vector3 */
@@ -3122,13 +2258,6 @@ func (gdt *Basis) GetRow(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3151,20 +2280,6 @@ func (gdt *Basis) SetRow(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_basis_operator_equal -> godot_bool */
@@ -3183,13 +2298,6 @@ func (gdt *Basis) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -3210,13 +2318,6 @@ func (gdt *Basis) OperatorAdd(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -3237,13 +2338,6 @@ func (gdt *Basis) OperatorSubtract(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -3264,13 +2358,6 @@ func (gdt *Basis) OperatorMultiplyVector(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -3291,13 +2378,6 @@ func (gdt *Basis) OperatorMultiplyScalar(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -3320,20 +2400,6 @@ func (gdt *Basis) Slerp(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -3370,13 +2436,6 @@ func (gdt *Basis) SetQuat(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_basis_set_axis_angle_scale -> void */
@@ -3399,27 +2458,6 @@ func (gdt *Basis) SetAxisAngleScale(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 }
 
 /* Setter Method: godot_basis_set_euler_scale -> void */
@@ -3440,20 +2478,6 @@ func (gdt *Basis) SetEulerScale(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Setter Method: godot_basis_set_quat_scale -> void */
@@ -3474,20 +2498,6 @@ func (gdt *Basis) SetQuatScale(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 type Color C.godot_color
@@ -3520,42 +2530,6 @@ func NewColorRgba(
 		in3,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
-
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
 	return dest
@@ -3581,35 +2555,6 @@ func NewColorRgb(
 		in1,
 		in2,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
@@ -3648,13 +2593,6 @@ func (gdt *Color) SetR(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_color_get_g -> godot_real */
@@ -3689,13 +2627,6 @@ func (gdt *Color) SetG(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_color_get_b -> godot_real */
@@ -3730,13 +2661,6 @@ func (gdt *Color) SetB(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_color_get_a -> godot_real */
@@ -3771,13 +2695,6 @@ func (gdt *Color) SetA(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_color_get_h -> godot_real */
@@ -3942,20 +2859,6 @@ func (gdt *Color) LinearInterpolate(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -3976,13 +2879,6 @@ func (gdt *Color) Blend(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -4003,13 +2899,6 @@ func (gdt *Color) ToHtml(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -4030,13 +2919,6 @@ func (gdt *Color) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4057,13 +2939,6 @@ func (gdt *Color) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4148,13 +3023,6 @@ func (gdt *Color) Darkened(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -4181,34 +3049,6 @@ func (gdt *Color) FromHsv(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -4229,13 +3069,6 @@ func (gdt *Color) Lightened(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -4260,14 +3093,6 @@ func NewDictionary() Dictionary {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
 	return dest
@@ -4289,21 +3114,6 @@ func NewDictionaryCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
@@ -4388,13 +3198,6 @@ func (gdt *Dictionary) Has(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4415,13 +3218,6 @@ func (gdt *Dictionary) HasAll(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4442,13 +3238,6 @@ func (gdt *Dictionary) Erase(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_dictionary_hash -> godot_int */
@@ -4515,13 +3304,6 @@ func (gdt *Dictionary) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -4544,20 +3326,6 @@ func (gdt *Dictionary) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_dictionary_operator_index -> godot_variant */
@@ -4576,13 +3344,6 @@ func (gdt *Dictionary) OperatorIndex(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -4603,13 +3364,6 @@ func (gdt *Dictionary) OperatorIndexConst(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -4630,13 +3384,6 @@ func (gdt *Dictionary) Next(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -4657,13 +3404,6 @@ func (gdt *Dictionary) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4702,20 +3442,6 @@ func (gdt *Dictionary) GetWithDefault(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -4736,13 +3462,6 @@ func (gdt *Dictionary) EraseWithReturn(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -4763,13 +3482,6 @@ func (gdt *Dictionary) Duplicate(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Dictionary)(unsafe.Pointer(&ret))
 }
@@ -4894,27 +3606,6 @@ func (gdt *MethodBind) Ptrcall(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 }
 
 /* Getter Method: godot_method_bind_call -> godot_variant */
@@ -4941,34 +3632,6 @@ func (gdt *MethodBind) Call(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -5008,21 +3671,6 @@ func NewNodePath(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
 	return dest
@@ -5044,21 +3692,6 @@ func NewNodePathCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
@@ -5145,13 +3778,6 @@ func (gdt *NodePath) GetName(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -5188,13 +3814,6 @@ func (gdt *NodePath) GetSubname(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -5247,13 +3866,6 @@ func (gdt *NodePath) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5304,42 +3916,6 @@ func NewPlaneWithReals(
 		in3,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
-
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -5366,35 +3942,6 @@ func NewPlaneWithVectors(
 		in2,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -5418,28 +3965,6 @@ func NewPlaneWithNormal(
 		in0,
 		in1,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
@@ -5526,13 +4051,6 @@ func (gdt *Plane) IsPointOver(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5553,13 +4071,6 @@ func (gdt *Plane) DistanceTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -5582,20 +4093,6 @@ func (gdt *Plane) HasPoint(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5616,13 +4113,6 @@ func (gdt *Plane) Project(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -5647,27 +4137,6 @@ func (gdt *Plane) Intersect3(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5692,27 +4161,6 @@ func (gdt *Plane) IntersectsRay(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5737,27 +4185,6 @@ func (gdt *Plane) IntersectsSegment(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5794,13 +4221,6 @@ func (gdt *Plane) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -5821,13 +4241,6 @@ func (gdt *Plane) SetNormal(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_plane_get_normal -> godot_vector3 */
@@ -5878,13 +4291,6 @@ func (gdt *Plane) SetD(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 type PoolArrayReadAccess C.godot_pool_array_read_access
@@ -5921,14 +4327,6 @@ func NewPoolByteArray() PoolByteArray {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -5950,21 +4348,6 @@ func NewPoolByteArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
@@ -5988,21 +4371,6 @@ func NewPoolByteArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -6024,13 +4392,6 @@ func (gdt *PoolByteArray) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_append_array -> void */
@@ -6049,13 +4410,6 @@ func (gdt *PoolByteArray) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_byte_array_insert -> godot_error */
@@ -6076,20 +4430,6 @@ func (gdt *PoolByteArray) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -6124,13 +4464,6 @@ func (gdt *PoolByteArray) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_remove -> void */
@@ -6149,13 +4482,6 @@ func (gdt *PoolByteArray) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_resize -> void */
@@ -6174,13 +4500,6 @@ func (gdt *PoolByteArray) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_byte_array_read -> godot_pool_byte_array_read_access */
@@ -6233,20 +4552,6 @@ func (gdt *PoolByteArray) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_byte_array_get -> uint8_t */
@@ -6265,13 +4570,6 @@ func (gdt *PoolByteArray) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*uint8)(unsafe.Pointer(&ret))
 }
@@ -6379,13 +4677,6 @@ func (gdt *PoolByteArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_read_access_destroy -> void */
@@ -6459,13 +4750,6 @@ func (gdt *PoolByteArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_write_access_destroy -> void */
@@ -6504,14 +4788,6 @@ func NewPoolColorArray() PoolColorArray {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -6533,21 +4809,6 @@ func NewPoolColorArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
@@ -6571,21 +4832,6 @@ func NewPoolColorArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -6607,13 +4853,6 @@ func (gdt *PoolColorArray) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_append_array -> void */
@@ -6632,13 +4871,6 @@ func (gdt *PoolColorArray) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_color_array_insert -> godot_error */
@@ -6659,20 +4891,6 @@ func (gdt *PoolColorArray) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -6707,13 +4925,6 @@ func (gdt *PoolColorArray) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_remove -> void */
@@ -6732,13 +4943,6 @@ func (gdt *PoolColorArray) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_resize -> void */
@@ -6757,13 +4961,6 @@ func (gdt *PoolColorArray) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_color_array_read -> godot_pool_color_array_read_access */
@@ -6816,20 +5013,6 @@ func (gdt *PoolColorArray) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_color_array_get -> godot_color */
@@ -6848,13 +5031,6 @@ func (gdt *PoolColorArray) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -6962,13 +5138,6 @@ func (gdt *PoolColorArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_read_access_destroy -> void */
@@ -7042,13 +5211,6 @@ func (gdt *PoolColorArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_write_access_destroy -> void */
@@ -7087,14 +5249,6 @@ func NewPoolIntArray() PoolIntArray {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -7116,21 +5270,6 @@ func NewPoolIntArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
@@ -7154,21 +5293,6 @@ func NewPoolIntArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -7190,13 +5314,6 @@ func (gdt *PoolIntArray) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_append_array -> void */
@@ -7215,13 +5332,6 @@ func (gdt *PoolIntArray) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_int_array_insert -> godot_error */
@@ -7242,20 +5352,6 @@ func (gdt *PoolIntArray) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -7290,13 +5386,6 @@ func (gdt *PoolIntArray) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_remove -> void */
@@ -7315,13 +5404,6 @@ func (gdt *PoolIntArray) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_resize -> void */
@@ -7340,13 +5422,6 @@ func (gdt *PoolIntArray) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_int_array_read -> godot_pool_int_array_read_access */
@@ -7399,20 +5474,6 @@ func (gdt *PoolIntArray) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_int_array_get -> godot_int */
@@ -7431,13 +5492,6 @@ func (gdt *PoolIntArray) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7545,13 +5599,6 @@ func (gdt *PoolIntArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_read_access_destroy -> void */
@@ -7625,13 +5672,6 @@ func (gdt *PoolIntArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_write_access_destroy -> void */
@@ -7670,14 +5710,6 @@ func NewPoolRealArray() PoolRealArray {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -7699,21 +5731,6 @@ func NewPoolRealArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
@@ -7737,21 +5754,6 @@ func NewPoolRealArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -7773,13 +5775,6 @@ func (gdt *PoolRealArray) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_append_array -> void */
@@ -7798,13 +5793,6 @@ func (gdt *PoolRealArray) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_real_array_insert -> godot_error */
@@ -7825,20 +5813,6 @@ func (gdt *PoolRealArray) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -7873,13 +5847,6 @@ func (gdt *PoolRealArray) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_remove -> void */
@@ -7898,13 +5865,6 @@ func (gdt *PoolRealArray) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_resize -> void */
@@ -7923,13 +5883,6 @@ func (gdt *PoolRealArray) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_real_array_read -> godot_pool_real_array_read_access */
@@ -7982,20 +5935,6 @@ func (gdt *PoolRealArray) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_real_array_get -> godot_real */
@@ -8014,13 +5953,6 @@ func (gdt *PoolRealArray) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -8128,13 +6060,6 @@ func (gdt *PoolRealArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_read_access_destroy -> void */
@@ -8208,13 +6133,6 @@ func (gdt *PoolRealArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_write_access_destroy -> void */
@@ -8253,14 +6171,6 @@ func NewPoolStringArray() PoolStringArray {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -8282,21 +6192,6 @@ func NewPoolStringArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
@@ -8320,21 +6215,6 @@ func NewPoolStringArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -8356,13 +6236,6 @@ func (gdt *PoolStringArray) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_append_array -> void */
@@ -8381,13 +6254,6 @@ func (gdt *PoolStringArray) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_string_array_insert -> godot_error */
@@ -8408,20 +6274,6 @@ func (gdt *PoolStringArray) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -8456,13 +6308,6 @@ func (gdt *PoolStringArray) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_remove -> void */
@@ -8481,13 +6326,6 @@ func (gdt *PoolStringArray) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_resize -> void */
@@ -8506,13 +6344,6 @@ func (gdt *PoolStringArray) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_string_array_read -> godot_pool_string_array_read_access */
@@ -8565,20 +6396,6 @@ func (gdt *PoolStringArray) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_string_array_get -> godot_string */
@@ -8597,13 +6414,6 @@ func (gdt *PoolStringArray) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8711,13 +6521,6 @@ func (gdt *PoolStringArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_read_access_destroy -> void */
@@ -8791,13 +6594,6 @@ func (gdt *PoolStringArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_write_access_destroy -> void */
@@ -8836,14 +6632,6 @@ func NewPoolVector2Array() PoolVector2Array {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -8865,21 +6653,6 @@ func NewPoolVector2ArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
@@ -8903,21 +6676,6 @@ func NewPoolVector2ArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -8939,13 +6697,6 @@ func (gdt *PoolVector2Array) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_append_array -> void */
@@ -8964,13 +6715,6 @@ func (gdt *PoolVector2Array) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_vector2_array_insert -> godot_error */
@@ -8991,20 +6735,6 @@ func (gdt *PoolVector2Array) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -9039,13 +6769,6 @@ func (gdt *PoolVector2Array) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_remove -> void */
@@ -9064,13 +6787,6 @@ func (gdt *PoolVector2Array) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_resize -> void */
@@ -9089,13 +6805,6 @@ func (gdt *PoolVector2Array) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_vector2_array_read -> godot_pool_vector2_array_read_access */
@@ -9148,20 +6857,6 @@ func (gdt *PoolVector2Array) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_vector2_array_get -> godot_vector2 */
@@ -9180,13 +6875,6 @@ func (gdt *PoolVector2Array) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -9294,13 +6982,6 @@ func (gdt *PoolVector2ArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_read_access_destroy -> void */
@@ -9374,13 +7055,6 @@ func (gdt *PoolVector2ArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_write_access_destroy -> void */
@@ -9419,14 +7093,6 @@ func NewPoolVector3Array() PoolVector3Array {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -9448,21 +7114,6 @@ func NewPoolVector3ArrayCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
@@ -9486,21 +7137,6 @@ func NewPoolVector3ArrayWithArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -9522,13 +7158,6 @@ func (gdt *PoolVector3Array) Append(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_append_array -> void */
@@ -9547,13 +7176,6 @@ func (gdt *PoolVector3Array) AppendArray(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_vector3_array_insert -> godot_error */
@@ -9574,20 +7196,6 @@ func (gdt *PoolVector3Array) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Error)(unsafe.Pointer(&ret))
 }
@@ -9622,13 +7230,6 @@ func (gdt *PoolVector3Array) PushBack(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_remove -> void */
@@ -9647,13 +7248,6 @@ func (gdt *PoolVector3Array) Remove(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_resize -> void */
@@ -9672,13 +7266,6 @@ func (gdt *PoolVector3Array) Resize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_pool_vector3_array_read -> godot_pool_vector3_array_read_access */
@@ -9731,20 +7318,6 @@ func (gdt *PoolVector3Array) Set(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_pool_vector3_array_get -> godot_vector3 */
@@ -9763,13 +7336,6 @@ func (gdt *PoolVector3Array) Get(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -9877,13 +7443,6 @@ func (gdt *PoolVector3ArrayReadAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_read_access_destroy -> void */
@@ -9957,13 +7516,6 @@ func (gdt *PoolVector3ArrayWriteAccess) OperatorAssign(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_write_access_destroy -> void */
@@ -10012,42 +7564,6 @@ func NewQuat(
 		in3,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
-
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -10072,28 +7588,6 @@ func NewQuatWithAxisAngle(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -10116,21 +7610,6 @@ func NewQuatWithBasis(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -10152,21 +7631,6 @@ func NewQuatWithEuler(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
@@ -10205,13 +7669,6 @@ func (gdt *Quat) SetX(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_quat_get_y -> godot_real */
@@ -10246,13 +7703,6 @@ func (gdt *Quat) SetY(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_quat_get_z -> godot_real */
@@ -10287,13 +7737,6 @@ func (gdt *Quat) SetZ(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_quat_get_w -> godot_real */
@@ -10328,13 +7771,6 @@ func (gdt *Quat) SetW(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_quat_as_string -> godot_string */
@@ -10449,13 +7885,6 @@ func (gdt *Quat) Dot(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -10476,13 +7905,6 @@ func (gdt *Quat) Xform(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -10505,20 +7927,6 @@ func (gdt *Quat) Slerp(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10541,20 +7949,6 @@ func (gdt *Quat) Slerpni(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10581,34 +7975,6 @@ func (gdt *Quat) CubicSlerp(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10629,13 +7995,6 @@ func (gdt *Quat) OperatorMultiply(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10656,13 +8015,6 @@ func (gdt *Quat) OperatorAdd(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10683,13 +8035,6 @@ func (gdt *Quat) OperatorSubtract(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10710,13 +8055,6 @@ func (gdt *Quat) OperatorDivide(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10737,13 +8075,6 @@ func (gdt *Quat) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10782,20 +8113,6 @@ func (gdt *Quat) SetAxisAngle(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 type Rect2 C.godot_rect2
@@ -10824,28 +8141,6 @@ func NewRect2WithPositionAndSize(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
 	return dest
@@ -10873,42 +8168,6 @@ func NewRect2(
 		in2,
 		in3,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
@@ -10963,13 +8222,6 @@ func (gdt *Rect2) Intersects(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10990,13 +8242,6 @@ func (gdt *Rect2) Encloses(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11033,13 +8278,6 @@ func (gdt *Rect2) Clip(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11060,13 +8298,6 @@ func (gdt *Rect2) Merge(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11087,13 +8318,6 @@ func (gdt *Rect2) HasPoint(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11114,13 +8338,6 @@ func (gdt *Rect2) Grow(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11141,13 +8358,6 @@ func (gdt *Rect2) Expand(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11168,13 +8378,6 @@ func (gdt *Rect2) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11227,13 +8430,6 @@ func (gdt *Rect2) SetPosition(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_rect2_set_size -> void */
@@ -11252,13 +8448,6 @@ func (gdt *Rect2) SetSize(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_rect2_grow_individual -> godot_rect2 */
@@ -11283,34 +8472,6 @@ func (gdt *Rect2) GrowIndividual(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11333,20 +8494,6 @@ func (gdt *Rect2) GrowMargin(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -11387,14 +8534,6 @@ func NewRID() RID {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
 	return dest
@@ -11416,21 +8555,6 @@ func NewRIDWithResource(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
@@ -11469,13 +8593,6 @@ func (gdt *RID) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11496,13 +8613,6 @@ func (gdt *RID) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11582,14 +8692,6 @@ func NewString() String {
 		rcv,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -11611,21 +8713,6 @@ func NewStringCopy(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
@@ -11651,28 +8738,6 @@ func NewStringWithWideString(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -11694,13 +8759,6 @@ func (gdt *String) OperatorIndex(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -11721,13 +8779,6 @@ func (gdt *String) OperatorIndexConst(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -11764,13 +8815,6 @@ func (gdt *String) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11791,13 +8835,6 @@ func (gdt *String) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11818,13 +8855,6 @@ func (gdt *String) OperatorPlus(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -11861,13 +8891,6 @@ func (gdt *String) BeginsWith(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11904,13 +8927,6 @@ func (gdt *String) EndsWith(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11931,13 +8947,6 @@ func (gdt *String) Find(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -11960,20 +8969,6 @@ func (gdt *String) FindFrom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -11994,13 +8989,6 @@ func (gdt *String) Findmk(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12023,20 +9011,6 @@ func (gdt *String) FindmkFrom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12057,13 +9031,6 @@ func (gdt *String) Findn(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12086,20 +9053,6 @@ func (gdt *String) FindnFrom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12120,13 +9073,6 @@ func (gdt *String) FindLast(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12147,13 +9093,6 @@ func (gdt *String) Format(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12208,20 +9147,6 @@ func (gdt *String) Insert(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12258,13 +9183,6 @@ func (gdt *String) IsSubsequenceOf(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -12285,13 +9203,6 @@ func (gdt *String) IsSubsequenceOfi(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -12312,13 +9223,6 @@ func (gdt *String) Lpad(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12341,20 +9245,6 @@ func (gdt *String) LpadWithCustomCharacter(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12375,13 +9265,6 @@ func (gdt *String) Match(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -12402,13 +9285,6 @@ func (gdt *String) Matchn(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -12429,13 +9305,6 @@ func (gdt *String) PadDecimals(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12456,13 +9325,6 @@ func (gdt *String) PadZeros(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12485,20 +9347,6 @@ func (gdt *String) ReplaceFirst(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12521,20 +9369,6 @@ func (gdt *String) Replace(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12557,20 +9391,6 @@ func (gdt *String) Replacen(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12591,13 +9411,6 @@ func (gdt *String) Rfind(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12618,13 +9431,6 @@ func (gdt *String) Rfindn(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12647,20 +9453,6 @@ func (gdt *String) RfindFrom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12683,20 +9475,6 @@ func (gdt *String) RfindnFrom(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -12717,13 +9495,6 @@ func (gdt *String) Rpad(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12746,20 +9517,6 @@ func (gdt *String) RpadWithCustomCharacter(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12780,13 +9537,6 @@ func (gdt *String) Similarity(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -12809,20 +9559,6 @@ func (gdt *String) Sprintf(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -12845,20 +9581,6 @@ func (gdt *String) Substr(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13023,13 +9745,6 @@ func (gdt *String) GetSliceCount(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -13052,20 +9767,6 @@ func (gdt *String) GetSlice(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13086,13 +9787,6 @@ func (gdt *String) Split(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13113,13 +9807,6 @@ func (gdt *String) SplitAllowEmpty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13140,13 +9827,6 @@ func (gdt *String) SplitFloats(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13167,13 +9847,6 @@ func (gdt *String) SplitFloatsAllowsEmpty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13194,13 +9867,6 @@ func (gdt *String) SplitFloatsMk(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13221,13 +9887,6 @@ func (gdt *String) SplitFloatsMkAllowsEmpty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13248,13 +9907,6 @@ func (gdt *String) SplitInts(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13275,13 +9927,6 @@ func (gdt *String) SplitIntsAllowsEmpty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13302,13 +9947,6 @@ func (gdt *String) SplitIntsMk(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13329,13 +9967,6 @@ func (gdt *String) SplitIntsMkAllowsEmpty(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -13436,13 +10067,6 @@ func (gdt *String) Left(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13463,13 +10087,6 @@ func (gdt *String) OrdAt(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -13490,13 +10107,6 @@ func (gdt *String) PlusFile(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13517,13 +10127,6 @@ func (gdt *String) Right(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13546,20 +10149,6 @@ func (gdt *String) StripEdges(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13598,20 +10187,6 @@ func (gdt *String) Erase(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_string_ascii -> godot_char_string */
@@ -13679,13 +10254,6 @@ func (gdt *String) ParseUtf8(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -13709,20 +10277,6 @@ func (gdt *String) ParseUtf8WithLen(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -13919,13 +10473,6 @@ func (gdt *String) PathTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -13946,13 +10493,6 @@ func (gdt *String) PathToFile(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -14085,13 +10625,6 @@ func (gdt *String) WordWrap(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -14208,13 +10741,6 @@ func (gdt *String) IsValidHexNumber(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -14331,13 +10857,6 @@ func (gdt *String) TrimPrefix(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -14358,13 +10877,6 @@ func (gdt *String) TrimSuffix(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -14385,13 +10897,6 @@ func (gdt *String) Rstrip(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -14416,27 +10921,6 @@ func (gdt *String) Rsplit(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*PoolStringArray)(unsafe.Pointer(&ret))
 }
@@ -14461,27 +10945,6 @@ func (gdt *String) Count(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -14506,27 +10969,6 @@ func (gdt *String) Countn(
 		in1,
 		in2,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -14555,21 +10997,6 @@ func NewStringName(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
 	return dest
@@ -14592,21 +11019,6 @@ func NewStringNameData(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
@@ -14677,13 +11089,6 @@ func (gdt *StringName) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -14704,13 +11109,6 @@ func (gdt *StringName) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -14761,42 +11159,6 @@ func NewTransformWithAxisOrigin(
 		in3,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -14821,28 +11183,6 @@ func NewTransform(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -14860,14 +11200,6 @@ func NewTransformIdentity() Transform {
 		api,
 		rcv,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -14890,21 +11222,6 @@ func NewTransformWithQuat(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -14943,13 +11260,6 @@ func (gdt *Transform) SetBasis(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_transform_get_origin -> godot_vector3 */
@@ -14984,13 +11294,6 @@ func (gdt *Transform) SetOrigin(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_transform_as_string -> godot_string */
@@ -15075,20 +11378,6 @@ func (gdt *Transform) Rotated(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -15109,13 +11398,6 @@ func (gdt *Transform) Scaled(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -15136,13 +11418,6 @@ func (gdt *Transform) Translated(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -15165,20 +11440,6 @@ func (gdt *Transform) LookingAt(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -15199,13 +11460,6 @@ func (gdt *Transform) XformPlane(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
@@ -15226,13 +11480,6 @@ func (gdt *Transform) XformInvPlane(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
@@ -15253,13 +11500,6 @@ func (gdt *Transform) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -15280,13 +11520,6 @@ func (gdt *Transform) OperatorMultiply(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -15307,13 +11540,6 @@ func (gdt *Transform) XformVector3(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -15334,13 +11560,6 @@ func (gdt *Transform) XformInvVector3(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -15361,13 +11580,6 @@ func (gdt *Transform) XformAABB(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -15388,13 +11600,6 @@ func (gdt *Transform) XformInvAABB(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -15425,28 +11630,6 @@ func NewTransform2D(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -15473,35 +11656,6 @@ func NewTransform2DAxisOrigin(
 		in2,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -15519,14 +11673,6 @@ func NewTransform2DIdentity() Transform2D {
 		api,
 		rcv,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
@@ -15661,13 +11807,6 @@ func (gdt *Transform2D) Rotated(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -15688,13 +11827,6 @@ func (gdt *Transform2D) Scaled(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -15715,13 +11847,6 @@ func (gdt *Transform2D) Translated(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -15742,13 +11867,6 @@ func (gdt *Transform2D) XformVector2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -15769,13 +11887,6 @@ func (gdt *Transform2D) XformInvVector2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -15796,13 +11907,6 @@ func (gdt *Transform2D) BasisXformVector2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -15823,13 +11927,6 @@ func (gdt *Transform2D) BasisXformInvVector2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -15852,20 +11949,6 @@ func (gdt *Transform2D) InterpolateWith(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -15886,13 +11969,6 @@ func (gdt *Transform2D) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -15913,13 +11989,6 @@ func (gdt *Transform2D) OperatorMultiply(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -15940,13 +12009,6 @@ func (gdt *Transform2D) XformRect2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -15967,13 +12029,6 @@ func (gdt *Transform2D) XformInvRect2(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -16002,21 +12057,6 @@ func NewVariantCopy(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16034,14 +12074,6 @@ func NewVariantNil() Variant {
 		api,
 		rcv,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16065,21 +12097,6 @@ func NewVariantBool(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16101,21 +12118,6 @@ func NewVariantUint(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16139,21 +12141,6 @@ func NewVariantInt(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16175,21 +12162,6 @@ func NewVariantReal(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16215,21 +12187,6 @@ func NewVariantString(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16251,21 +12208,6 @@ func NewVariantVector2(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16289,21 +12231,6 @@ func NewVariantRect2(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16325,21 +12252,6 @@ func NewVariantVector3(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16363,21 +12275,6 @@ func NewVariantTransform2D(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16399,21 +12296,6 @@ func NewVariantPlane(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16437,21 +12319,6 @@ func NewVariantQuat(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16473,21 +12340,6 @@ func NewVariantAABB(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16511,21 +12363,6 @@ func NewVariantBasis(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16547,21 +12384,6 @@ func NewVariantTransform(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16585,21 +12407,6 @@ func NewVariantColor(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16621,21 +12428,6 @@ func NewVariantNodePath(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16659,21 +12451,6 @@ func NewVariantRID(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16695,21 +12472,6 @@ func NewVariantObject(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16733,21 +12495,6 @@ func NewVariantDictionary(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16769,21 +12516,6 @@ func NewVariantArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16807,21 +12539,6 @@ func NewVariantPoolByteArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16843,21 +12560,6 @@ func NewVariantPoolIntArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16881,21 +12583,6 @@ func NewVariantPoolRealArray(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16917,21 +12604,6 @@ func NewVariantPoolStringArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -16955,21 +12627,6 @@ func NewVariantPoolVector2Array(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -16992,21 +12649,6 @@ func NewVariantPoolVector3Array(
 		in0,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -17028,21 +12670,6 @@ func NewVariantPoolColorArray(
 		rcv,
 		in0,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -17521,34 +13148,6 @@ func (gdt *Variant) Call(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -17569,13 +13168,6 @@ func (gdt *Variant) HasMethod(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -17596,13 +13188,6 @@ func (gdt *Variant) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -17623,13 +13208,6 @@ func (gdt *Variant) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -17650,13 +13228,6 @@ func (gdt *Variant) HashCompare(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -17818,28 +13389,6 @@ func NewVector2(
 		in1,
 	)
 
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-
 	RegisterState.Stats.GodotTypeAllocs["Vector2"]++
 
 	return dest
@@ -17957,13 +13506,6 @@ func (gdt *Vector2) DistanceTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -17984,13 +13526,6 @@ func (gdt *Vector2) DistanceSquaredTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -18011,13 +13546,6 @@ func (gdt *Vector2) AngleTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -18038,13 +13566,6 @@ func (gdt *Vector2) AngleToPoint(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -18067,20 +13588,6 @@ func (gdt *Vector2) LinearInterpolate(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18107,34 +13614,6 @@ func (gdt *Vector2) CubicInterpolate(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18155,13 +13634,6 @@ func (gdt *Vector2) Rotated(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18214,13 +13686,6 @@ func (gdt *Vector2) Snapped(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18257,13 +13722,6 @@ func (gdt *Vector2) Dot(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -18284,13 +13742,6 @@ func (gdt *Vector2) Slide(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18311,13 +13762,6 @@ func (gdt *Vector2) Bounce(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18338,13 +13782,6 @@ func (gdt *Vector2) Reflect(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18381,13 +13818,6 @@ func (gdt *Vector2) Clamped(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18408,13 +13838,6 @@ func (gdt *Vector2) OperatorAdd(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18435,13 +13858,6 @@ func (gdt *Vector2) OperatorSubtract(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18462,13 +13878,6 @@ func (gdt *Vector2) OperatorMultiplyVector(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18489,13 +13898,6 @@ func (gdt *Vector2) OperatorMultiplyScalar(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18516,13 +13918,6 @@ func (gdt *Vector2) OperatorDivideVector(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18543,13 +13938,6 @@ func (gdt *Vector2) OperatorDivideScalar(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18570,13 +13958,6 @@ func (gdt *Vector2) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -18597,13 +13978,6 @@ func (gdt *Vector2) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -18640,13 +14014,6 @@ func (gdt *Vector2) SetX(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Setter Method: godot_vector2_set_y -> void */
@@ -18665,13 +14032,6 @@ func (gdt *Vector2) SetY(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 }
 
 /* Getter Method: godot_vector2_get_x -> godot_real */
@@ -18724,20 +14084,6 @@ func (gdt *Vector2) MoveToward(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18758,13 +14104,6 @@ func (gdt *Vector2) DirectionTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -18796,35 +14135,6 @@ func NewVector3(
 		in1,
 		in2,
 	)
-
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(rcv)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
 
 	RegisterState.Stats.GodotTypeAllocs["Vector3"]++
 
@@ -18975,13 +14285,6 @@ func (gdt *Vector3) Snapped(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19004,20 +14307,6 @@ func (gdt *Vector3) Rotated(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19040,20 +14329,6 @@ func (gdt *Vector3) LinearInterpolate(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19080,34 +14355,6 @@ func (gdt *Vector3) CubicInterpolate(
 		in2,
 		in3,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in2)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in3)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19128,13 +14375,6 @@ func (gdt *Vector3) Dot(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -19155,13 +14395,6 @@ func (gdt *Vector3) Cross(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19182,13 +14415,6 @@ func (gdt *Vector3) Outer(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -19273,13 +14499,6 @@ func (gdt *Vector3) DistanceTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -19300,13 +14519,6 @@ func (gdt *Vector3) DistanceSquaredTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -19327,13 +14539,6 @@ func (gdt *Vector3) AngleTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -19354,13 +14559,6 @@ func (gdt *Vector3) Slide(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19381,13 +14579,6 @@ func (gdt *Vector3) Bounce(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19408,13 +14599,6 @@ func (gdt *Vector3) Reflect(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19435,13 +14619,6 @@ func (gdt *Vector3) OperatorAdd(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19462,13 +14639,6 @@ func (gdt *Vector3) OperatorSubtract(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19489,13 +14659,6 @@ func (gdt *Vector3) OperatorMultiplyVector(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19516,13 +14679,6 @@ func (gdt *Vector3) OperatorMultiplyScalar(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19543,13 +14699,6 @@ func (gdt *Vector3) OperatorDivideVector(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19570,13 +14719,6 @@ func (gdt *Vector3) OperatorDivideScalar(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19597,13 +14739,6 @@ func (gdt *Vector3) OperatorEqual(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -19624,13 +14759,6 @@ func (gdt *Vector3) OperatorLess(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -19669,20 +14797,6 @@ func (gdt *Vector3) SetAxis(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 }
 
 /* Getter Method: godot_vector3_get_axis -> godot_real */
@@ -19701,13 +14815,6 @@ func (gdt *Vector3) GetAxis(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -19730,20 +14837,6 @@ func (gdt *Vector3) MoveToward(
 		in0,
 		in1,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in1)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -19764,13 +14857,6 @@ func (gdt *Vector3) DirectionTo(
 		rcv,
 		in0,
 	)
-	go func(x interface{}) {
-		select {
-		case <-gotime.After(33 * gotime.Millisecond):
-			fmt.Printf("\tLetting go of object\n")
-			return
-		}
-	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }

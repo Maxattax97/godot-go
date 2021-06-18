@@ -398,24 +398,6 @@ func init() {
 
 				defer Free(unsafe.Pointer(ptrCArr))
 
-				{{ range $k, $arg := $method.Arguments -}}
-					go func(x interface{}) {
-						select {
-						case <-gotime.After(33 * gotime.Millisecond):
-							fmt.Printf("\tLetting go of object\n")
-							return
-						}
-					}(_arg{{ $k }})
-				{{ end }}
-
-				go func(x interface{}) {
-					select {
-					case <-gotime.After(33 * gotime.Millisecond):
-						fmt.Printf("\tLetting go of object\n")
-						return
-					}
-				}(ptrArguments)
-
 				{{ if eq $goReturnUsage USAGE_VOID }}
 					/* USAGE_VOID ({{ $method.ReturnType }} / {{ $goReturnType }}) */
 					// NOOP

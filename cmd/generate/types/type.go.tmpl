@@ -144,23 +144,6 @@ func init() {
             {{- end }}
         )
 
-		go func(x interface{}) {
-			select {
-			case <-gotime.After(33 * gotime.Millisecond):
-                fmt.Printf("\tLetting go of object\n")
-				return
-			}
-		}(rcv)
-        {{- range $k, $arg := .Arguments }}
-			go func(x interface{}) {
-				select {
-				case <-gotime.After(33 * gotime.Millisecond):
-                    fmt.Printf("\tLetting go of object\n")
-					return
-				}
-			}(in{{$k}})
-        {{- end }}
-
         RegisterState.Stats.GodotTypeAllocs["{{ $returnTypeGoName }}"]++
 
         {{/* {{- if $hasDestroyMethod }}
@@ -209,16 +192,6 @@ func init() {
                 in{{ $k }},
             {{- end }}
         )
-
-        {{- range $k, $arg := .Arguments }}
-			go func(x interface{}) {
-				select {
-				case <-gotime.After(33 * gotime.Millisecond):
-                    fmt.Printf("\tLetting go of object\n")
-					return
-				}
-			}(in{{$k}})
-        {{- end }}
 
         {{- if eq .Name "Destroy" }}
             RegisterState.Stats.GodotTypeFrees["{{ .Receiver.Type.GoName }}"]++
@@ -273,16 +246,6 @@ func init() {
                 in{{ $k }},
             {{- end }}
         )
-
-        {{- range $k, $arg := .Arguments }}
-			go func(x interface{}) {
-				select {
-				case <-gotime.After(33 * gotime.Millisecond):
-                    fmt.Printf("\tLetting go of object\n")
-					return
-				}
-			}(in{{$k}})
-        {{- end }}
 
         return {{ if .ReturnType.IsGodotObjectPointer -}}
             (*GodotObject)(unsafe.Pointer(ret))
@@ -342,16 +305,6 @@ func init() {
                     in{{ $k }},
                 {{- end }}
             )
-
-            {{- range $k, $arg := .Arguments }}
-				go func(x interface{}) {
-					select {
-					case <-gotime.After(33 * gotime.Millisecond):
-                        fmt.Printf("\tLetting go of object\n")
-						return
-					}
-				}(in{{$k}})
-            {{- end }}
         {{ else }}
             ret := C.go_{{ .CName }}(
                 api,
@@ -359,16 +312,6 @@ func init() {
                     in{{ $k }},
                 {{- end }}
             )
-
-            {{- range $k, $arg := .Arguments }}
-				go func(x interface{}) {
-					select {
-					case <-gotime.After(33 * gotime.Millisecond):
-                        fmt.Printf("\tLetting go of object\n")
-						return
-					}
-				}(in{{$k}})
-            {{- end }}
 
             return {{ if .ReturnType.IsGodotObjectPointer -}}
                 (*GodotObject)(unsafe.Pointer(ret))
