@@ -37,6 +37,7 @@ package gdnative
 */
 import "C"
 import (
+	gotime "time"
 	"unsafe"
 )
 
@@ -128,11 +129,23 @@ func init() {
 func StringChr(
 	p_character int32, /* else case */
 ) String {
+	api := CoreApi
+	in0 := *(*C.wchar_t)(unsafe.Pointer(&p_character))
 
 	/* go_godot_string_chr(API_STRUCT,wchar_t) ->godot_string */
 
-	api := CoreApi
-	in0 := *(*C.wchar_t)(unsafe.Pointer(&p_character))
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_string_chr(
 		api,
@@ -148,8 +161,23 @@ func StringChr(
 func ObjectDestroy(
 	p_o *GodotObject,
 ) {
+	api := CoreApi
+	in0 := unsafe.Pointer(p_o)
 
 	/* go_godot_object_destroy(API_STRUCT, *godot_object) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 }
 
@@ -158,12 +186,24 @@ func ObjectDestroy(
 func GlobalGetSingleton(
 	p_name string,
 ) *GodotObject {
-
-	/* go_godot_global_get_singleton(API_STRUCT, *char) -> *GodotObject */
-
 	api := CoreApi
 	in0 := C.CString(p_name)
 	defer C.free(unsafe.Pointer(in0))
+
+	/* go_godot_global_get_singleton(API_STRUCT, *char) -> *GodotObject */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_global_get_singleton(
 		api,
@@ -179,14 +219,32 @@ func GlobalGetSingleton(
 func MethodBindGetMethod(
 	p_classname string, p_methodname string,
 ) *MethodBind {
-
-	/* go_godot_method_bind_get_method(API_STRUCT, *char, *char) -> *MethodBind */
-
 	api := CoreApi
 	in0 := C.CString(p_classname)
 	defer C.free(unsafe.Pointer(in0))
 	in1 := C.CString(p_methodname)
 	defer C.free(unsafe.Pointer(in1))
+
+	/* go_godot_method_bind_get_method(API_STRUCT, *char, *char) -> *MethodBind */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	ret := C.go_godot_method_bind_get_method(
 		api,
@@ -203,11 +261,23 @@ func MethodBindGetMethod(
 func Alloc(
 	p_bytes int32, /* else case */
 ) unsafe.Pointer {
+	api := CoreApi
+	in0 := *(*C.int)(unsafe.Pointer(&p_bytes))
 
 	/* go_godot_alloc(API_STRUCT,int) -> *void */
 
-	api := CoreApi
-	in0 := *(*C.int)(unsafe.Pointer(&p_bytes))
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_alloc(
 		api,
@@ -223,12 +293,30 @@ func Alloc(
 func Realloc(
 	p_ptr unsafe.Pointer, p_bytes int32, /* else case */
 ) unsafe.Pointer {
-
-	/* go_godot_realloc(API_STRUCT, *void,int) -> *void */
-
 	api := CoreApi
 	in0 := unsafe.Pointer(p_ptr)
 	in1 := *(*C.int)(unsafe.Pointer(&p_bytes))
+
+	/* go_godot_realloc(API_STRUCT, *void,int) -> *void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	ret := C.go_godot_realloc(
 		api,
@@ -245,8 +333,23 @@ func Realloc(
 func Free(
 	p_ptr unsafe.Pointer,
 ) {
+	api := CoreApi
+	in0 := unsafe.Pointer(p_ptr)
 
 	/* go_godot_free(API_STRUCT, *void) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 }
 
@@ -255,8 +358,47 @@ func Free(
 func PrintError(
 	p_description string, p_function string, p_file string, p_line int32, /* else case */
 ) {
+	api := CoreApi
+	in0 := C.CString(p_description)
+	defer C.free(unsafe.Pointer(in0))
+	in1 := C.CString(p_function)
+	defer C.free(unsafe.Pointer(in1))
+	in2 := C.CString(p_file)
+	defer C.free(unsafe.Pointer(in2))
+	in3 := *(*C.int)(unsafe.Pointer(&p_line))
 
 	/* go_godot_print_error(API_STRUCT, *char, *char, *char,int) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
 
 }
 
@@ -265,8 +407,47 @@ func PrintError(
 func PrintWarning(
 	p_description string, p_function string, p_file string, p_line int32, /* else case */
 ) {
+	api := CoreApi
+	in0 := C.CString(p_description)
+	defer C.free(unsafe.Pointer(in0))
+	in1 := C.CString(p_function)
+	defer C.free(unsafe.Pointer(in1))
+	in2 := C.CString(p_file)
+	defer C.free(unsafe.Pointer(in2))
+	in3 := *(*C.int)(unsafe.Pointer(&p_line))
 
 	/* go_godot_print_warning(API_STRUCT, *char, *char, *char,int) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
 
 }
 
@@ -275,8 +456,23 @@ func PrintWarning(
 func Print(
 	p_message String, /* godot_string */
 ) {
+	api := CoreApi
+	in0 := (*C.godot_string)(unsafe.Pointer(&p_message))
 
 	/* go_godot_print(API_STRUCT, *godot_string) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 }
 
@@ -285,11 +481,23 @@ func Print(
 func IsInstanceValid(
 	p_object *GodotObject,
 ) bool {
+	api := Core11Api
+	in0 := unsafe.Pointer(p_object)
 
 	/* go_godot_is_instance_valid(API_STRUCT, *godot_object) ->bool */
 
-	api := Core11Api
-	in0 := unsafe.Pointer(p_object)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_is_instance_valid(
 		api,
@@ -305,11 +513,23 @@ func IsInstanceValid(
 func VariantGetOperatorName(
 	p_op VariantOperator, /* else case */
 ) String {
+	api := Core11Api
+	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
 
 	/* go_godot_variant_get_operator_name(API_STRUCT,godot_variant_operator) ->godot_string */
 
-	api := Core11Api
-	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_variant_get_operator_name(
 		api,
@@ -325,8 +545,51 @@ func VariantGetOperatorName(
 func VariantEvaluate(
 	p_op VariantOperator /* else case */, p_a Variant /* godot_variant */, p_b Variant /* godot_variant */, r_ret Variant /* godot_variant */, r_valid bool, /* godot_bool */
 ) {
+	api := Core11Api
+	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
+	in1 := (*C.godot_variant)(unsafe.Pointer(&p_a))
+	in2 := (*C.godot_variant)(unsafe.Pointer(&p_b))
+	in3 := (*C.godot_variant)(unsafe.Pointer(&r_ret))
+	in4 := (*C.godot_bool)(unsafe.Pointer(&r_valid))
 
 	/* go_godot_variant_evaluate(API_STRUCT,godot_variant_operator, *godot_variant, *godot_variant, *godot_variant, *godot_bool) ->void */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in4)
 
 }
 
@@ -335,11 +598,23 @@ func VariantEvaluate(
 func GetClassTag(
 	p_class StringName, /* godot_string_name */
 ) unsafe.Pointer {
+	api := Core12Api
+	in0 := (*C.godot_string_name)(unsafe.Pointer(&p_class))
 
 	/* go_godot_get_class_tag(API_STRUCT, *godot_string_name) -> *void */
 
-	api := Core12Api
-	in0 := (*C.godot_string_name)(unsafe.Pointer(&p_class))
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_get_class_tag(
 		api,
@@ -355,12 +630,30 @@ func GetClassTag(
 func ObjectCastTo(
 	p_object *GodotObject, p_class_tag unsafe.Pointer,
 ) *GodotObject {
-
-	/* go_godot_object_cast_to(API_STRUCT, *godot_object, *void) -> *GodotObject */
-
 	api := Core12Api
 	in0 := unsafe.Pointer(p_object)
 	in1 := unsafe.Pointer(p_class_tag)
+
+	/* go_godot_object_cast_to(API_STRUCT, *godot_object, *void) -> *GodotObject */
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	ret := C.go_godot_object_cast_to(
 		api,
@@ -377,11 +670,23 @@ func ObjectCastTo(
 func InstanceFromId(
 	p_instance_id int32, /* else case */
 ) *GodotObject {
+	api := Core12Api
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_instance_id))
 
 	/* go_godot_instance_from_id(API_STRUCT,godot_int) -> *GodotObject */
 
-	api := Core12Api
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_instance_id))
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	ret := C.go_godot_instance_from_id(
 		api,
@@ -405,6 +710,36 @@ func NewAABB(
 ) AABB {
 	dest := AABB{}
 
+	api := CoreApi
+	rcv := (*C.godot_aabb)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_pos))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	RegisterState.Stats.GodotTypeAllocs["AABB"]++
 
 	return dest
@@ -423,6 +758,19 @@ func (gdt *AABB) GetPosition() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -433,6 +781,21 @@ func (gdt *AABB) SetPosition(
 
 	/* go_godot_aabb_set_position(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_aabb)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_aabb_get_size -> godot_vector3 */
@@ -448,6 +811,19 @@ func (gdt *AABB) GetSize() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -458,6 +834,21 @@ func (gdt *AABB) SetSize(
 
 	/* go_godot_aabb_set_size(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_aabb)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_aabb_as_string -> godot_string */
@@ -472,6 +863,19 @@ func (gdt *AABB) AsString() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -489,6 +893,19 @@ func (gdt *AABB) GetArea() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -505,6 +922,19 @@ func (gdt *AABB) HasNoArea() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -520,6 +950,19 @@ func (gdt *AABB) HasNoSurface() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -541,6 +984,25 @@ func (gdt *AABB) Intersects(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -560,6 +1022,25 @@ func (gdt *AABB) Encloses(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -581,6 +1062,25 @@ func (gdt *AABB) Merge(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
 
@@ -601,6 +1101,25 @@ func (gdt *AABB) Intersection(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
 
@@ -620,6 +1139,25 @@ func (gdt *AABB) IntersectsPlane(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -643,6 +1181,31 @@ func (gdt *AABB) IntersectsSegment(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -662,6 +1225,25 @@ func (gdt *AABB) HasPoint(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -683,6 +1265,25 @@ func (gdt *AABB) GetSupport(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -698,6 +1299,19 @@ func (gdt *AABB) GetLongestAxis() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -715,6 +1329,19 @@ func (gdt *AABB) GetLongestAxisIndex() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -730,6 +1357,19 @@ func (gdt *AABB) GetLongestAxisSize() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -747,6 +1387,19 @@ func (gdt *AABB) GetShortestAxis() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -763,6 +1416,19 @@ func (gdt *AABB) GetShortestAxisIndex() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -778,6 +1444,19 @@ func (gdt *AABB) GetShortestAxisSize() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -799,6 +1478,25 @@ func (gdt *AABB) Expand(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
 
@@ -818,6 +1516,25 @@ func (gdt *AABB) Grow(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -839,6 +1556,25 @@ func (gdt *AABB) GetEndpoint(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -859,6 +1595,25 @@ func (gdt *AABB) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -872,6 +1627,22 @@ func InitArrayGodotType() {
 func NewArray() Array {
 	dest := Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -881,6 +1652,29 @@ func NewArrayCopy(
 	p_src Array, /* godot_array */
 ) Array {
 	dest := Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -892,6 +1686,29 @@ func NewArrayPoolColorArray(
 ) Array {
 	dest := Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_pca))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -901,6 +1718,29 @@ func NewArrayPoolVector3Array(
 	p_pv3a PoolVector3Array, /* godot_pool_vector3_array */
 ) Array {
 	dest := Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_pv3a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -912,6 +1752,29 @@ func NewArrayPoolVector2Array(
 ) Array {
 	dest := Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_pv2a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -921,6 +1784,29 @@ func NewArrayPoolStringArray(
 	p_psa PoolStringArray, /* godot_pool_string_array */
 ) Array {
 	dest := Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_psa))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -932,6 +1818,29 @@ func NewArrayPoolRealArray(
 ) Array {
 	dest := Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_pra))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -942,6 +1851,29 @@ func NewArrayPoolIntArray(
 ) Array {
 	dest := Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_pia))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -951,6 +1883,29 @@ func NewArrayPoolByteArray(
 	p_pba PoolByteArray, /* godot_pool_byte_array */
 ) Array {
 	dest := Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_pba))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -964,6 +1919,28 @@ func (gdt *Array) Set(
 
 	/* go_godot_array_set(API_STRUCT,godot_int, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_array_get -> godot_variant */
@@ -982,6 +1959,25 @@ func (gdt *Array) Get(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1003,6 +1999,25 @@ func (gdt *Array) OperatorIndex(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -1023,6 +2038,25 @@ func (gdt *Array) OperatorIndexConst(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -1033,6 +2067,21 @@ func (gdt *Array) Append(
 
 	/* go_godot_array_append(API_STRUCT, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_array_clear -> void */
@@ -1040,6 +2089,14 @@ func (gdt *Array) Clear() {
 
 	/* go_godot_array_clear(API_STRUCT) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Getter Method: godot_array_count -> godot_int */
@@ -1059,6 +2116,25 @@ func (gdt *Array) Count(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1075,6 +2151,19 @@ func (gdt *Array) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -1085,6 +2174,21 @@ func (gdt *Array) Erase(
 
 	/* go_godot_array_erase(API_STRUCT, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_array_front -> godot_variant */
@@ -1099,6 +2203,19 @@ func (gdt *Array) Front() Variant {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1115,6 +2232,19 @@ func (gdt *Array) Back() Variant {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1138,6 +2268,31 @@ func (gdt *Array) Find(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1157,6 +2312,25 @@ func (gdt *Array) FindLast(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1178,6 +2352,25 @@ func (gdt *Array) Has(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -1194,6 +2387,19 @@ func (gdt *Array) Hash() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1204,6 +2410,28 @@ func (gdt *Array) Insert(
 
 	/* go_godot_array_insert(API_STRUCT,godot_int, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_pos))
+	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Setter Method: godot_array_invert -> void */
@@ -1211,6 +2439,14 @@ func (gdt *Array) Invert() {
 
 	/* go_godot_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Getter Method: godot_array_pop_back -> godot_variant */
@@ -1225,6 +2461,19 @@ func (gdt *Array) PopBack() Variant {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1242,6 +2491,19 @@ func (gdt *Array) PopFront() Variant {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -1252,6 +2514,21 @@ func (gdt *Array) PushBack(
 
 	/* go_godot_array_push_back(API_STRUCT, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_array_push_front -> void */
@@ -1261,6 +2538,21 @@ func (gdt *Array) PushFront(
 
 	/* go_godot_array_push_front(API_STRUCT, *godot_variant) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_array_remove -> void */
@@ -1270,6 +2562,21 @@ func (gdt *Array) Remove(
 
 	/* go_godot_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_array_resize -> void */
@@ -1279,6 +2586,21 @@ func (gdt *Array) Resize(
 
 	/* go_godot_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_array_rfind -> godot_int */
@@ -1300,6 +2622,31 @@ func (gdt *Array) Rfind(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1316,6 +2663,19 @@ func (gdt *Array) Size() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1324,6 +2684,14 @@ func (gdt *Array) Sort() {
 
 	/* go_godot_array_sort(API_STRUCT) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_array_sort_custom -> void */
@@ -1333,6 +2701,28 @@ func (gdt *Array) SortCustom(
 
 	/* go_godot_array_sort_custom(API_STRUCT, *godot_object, *godot_string) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+	in0 := unsafe.Pointer(p_obj)
+	in1 := (*C.godot_string)(unsafe.Pointer(&p_func))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_array_bsearch -> godot_int */
@@ -1353,6 +2743,31 @@ func (gdt *Array) Bsearch(
 		in0,
 		in1,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1379,6 +2794,43 @@ func (gdt *Array) BsearchCustom(
 		in2,
 		in3,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -1409,6 +2861,25 @@ func (gdt *Array) Duplicate(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -1424,6 +2895,19 @@ func (gdt *Array) Max() Variant {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -1441,6 +2925,19 @@ func (gdt *Array) Min() Variant {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -1449,6 +2946,14 @@ func (gdt *Array) Shuffle() {
 
 	/* go_godot_array_shuffle(API_STRUCT) ->void */
 
+	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Getter Method: godot_array_slice -> godot_array */
@@ -1474,6 +2979,43 @@ func (gdt *Array) Slice(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -1489,6 +3031,43 @@ func NewBasisWithRows(
 ) Basis {
 	dest := Basis{}
 
+	api := CoreApi
+	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_x_axis))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_y_axis))
+	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_z_axis))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -1498,6 +3077,36 @@ func NewBasisWithAxisAndAngle(
 	p_axis Vector3 /* godot_vector3 */, p_phi float32, /* else case */
 ) Basis {
 	dest := Basis{}
+
+	api := CoreApi
+	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_phi))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -1509,6 +3118,29 @@ func NewBasisWithEuler(
 ) Basis {
 	dest := Basis{}
 
+	api := CoreApi
+	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -1516,6 +3148,22 @@ func NewBasisWithEuler(
 
 func NewBasis() Basis {
 	dest := Basis{}
+
+	api := CoreApi
+	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -1526,6 +3174,29 @@ func NewBasisWithEulerQuat(
 	p_euler Quat, /* godot_quat */
 ) Basis {
 	dest := Basis{}
+
+	api := CoreApi
+	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_quat)(unsafe.Pointer(&p_euler))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -1545,6 +3216,19 @@ func (gdt *Basis) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -1560,6 +3244,19 @@ func (gdt *Basis) Inverse() Basis {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -1577,6 +3274,19 @@ func (gdt *Basis) Transposed() Basis {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1593,6 +3303,19 @@ func (gdt *Basis) Orthonormalized() Basis {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1608,6 +3331,19 @@ func (gdt *Basis) Determinant() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -1631,6 +3367,31 @@ func (gdt *Basis) Rotated(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1651,6 +3412,25 @@ func (gdt *Basis) Scaled(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1667,6 +3447,19 @@ func (gdt *Basis) GetScale() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -1682,6 +3475,19 @@ func (gdt *Basis) GetEuler() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -1703,6 +3509,25 @@ func (gdt *Basis) Tdotx(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -1722,6 +3547,25 @@ func (gdt *Basis) Tdoty(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -1743,6 +3587,25 @@ func (gdt *Basis) Tdotz(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -1762,6 +3625,25 @@ func (gdt *Basis) Xform(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -1783,6 +3665,25 @@ func (gdt *Basis) XformInv(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -1799,6 +3700,19 @@ func (gdt *Basis) GetOrthogonalIndex() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -1809,6 +3723,21 @@ func (gdt *Basis) GetElements(
 
 	/* go_godot_basis_get_elements(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_elements))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_basis_get_axis -> godot_vector3 */
@@ -1828,6 +3757,25 @@ func (gdt *Basis) GetAxis(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -1838,6 +3786,28 @@ func (gdt *Basis) SetAxis(
 
 	/* go_godot_basis_set_axis(API_STRUCT,godot_int, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_axis))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_basis_get_row -> godot_vector3 */
@@ -1857,6 +3827,25 @@ func (gdt *Basis) GetRow(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -1867,6 +3856,28 @@ func (gdt *Basis) SetRow(
 
 	/* go_godot_basis_set_row(API_STRUCT,godot_int, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_row))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_basis_operator_equal -> godot_bool */
@@ -1885,6 +3896,25 @@ func (gdt *Basis) OperatorEqual(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -1906,6 +3936,25 @@ func (gdt *Basis) OperatorAdd(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1925,6 +3974,25 @@ func (gdt *Basis) OperatorSubtract(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -1946,6 +4014,25 @@ func (gdt *Basis) OperatorMultiplyVector(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -1965,6 +4052,25 @@ func (gdt *Basis) OperatorMultiplyScalar(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -1988,6 +4094,31 @@ func (gdt *Basis) Slerp(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -2004,6 +4135,19 @@ func (gdt *Basis) GetQuat() Quat {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -2014,6 +4158,21 @@ func (gdt *Basis) SetQuat(
 
 	/* go_godot_basis_set_quat(API_STRUCT, *godot_quat) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_basis_set_axis_angle_scale -> void */
@@ -2023,6 +4182,35 @@ func (gdt *Basis) SetAxisAngleScale(
 
 	/* go_godot_basis_set_axis_angle_scale(API_STRUCT, *godot_vector3,godot_real, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_phi))
+	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 }
 
 /* Setter Method: godot_basis_set_euler_scale -> void */
@@ -2032,6 +4220,28 @@ func (gdt *Basis) SetEulerScale(
 
 	/* go_godot_basis_set_euler_scale(API_STRUCT, *godot_vector3, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Setter Method: godot_basis_set_quat_scale -> void */
@@ -2041,6 +4251,28 @@ func (gdt *Basis) SetQuatScale(
 
 	/* go_godot_basis_set_quat_scale(API_STRUCT, *godot_quat, *godot_vector3) ->void */
 
+	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 type Color C.godot_color
@@ -2055,6 +4287,50 @@ func NewColorRgba(
 ) Color {
 	dest := Color{}
 
+	api := CoreApi
+	rcv := (*C.godot_color)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_r))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_g))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_b))
+	in3 := *(*C.godot_real)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
 	return dest
@@ -2064,6 +4340,43 @@ func NewColorRgb(
 	p_r float32 /* else case */, p_g float32 /* else case */, p_b float32, /* else case */
 ) Color {
 	dest := Color{}
+
+	api := CoreApi
+	rcv := (*C.godot_color)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_r))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_g))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_b))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
@@ -2083,6 +4396,19 @@ func (gdt *Color) GetR() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -2093,6 +4419,21 @@ func (gdt *Color) SetR(
 
 	/* go_godot_color_set_r(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&r))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_color_get_g -> godot_real */
@@ -2108,6 +4449,19 @@ func (gdt *Color) GetG() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -2118,6 +4472,21 @@ func (gdt *Color) SetG(
 
 	/* go_godot_color_set_g(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&g))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_color_get_b -> godot_real */
@@ -2133,6 +4502,19 @@ func (gdt *Color) GetB() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -2143,6 +4525,21 @@ func (gdt *Color) SetB(
 
 	/* go_godot_color_set_b(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&b))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_color_get_a -> godot_real */
@@ -2158,6 +4555,19 @@ func (gdt *Color) GetA() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -2168,6 +4578,21 @@ func (gdt *Color) SetA(
 
 	/* go_godot_color_set_a(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_color_get_h -> godot_real */
@@ -2182,6 +4607,19 @@ func (gdt *Color) GetH() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2199,6 +4637,19 @@ func (gdt *Color) GetS() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -2214,6 +4665,19 @@ func (gdt *Color) GetV() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2231,6 +4695,19 @@ func (gdt *Color) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -2246,6 +4723,19 @@ func (gdt *Color) ToRgba32() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2263,6 +4753,19 @@ func (gdt *Color) ToArgb32() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -2278,6 +4781,19 @@ func (gdt *Color) Gray() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -2295,6 +4811,19 @@ func (gdt *Color) Inverted() Color {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -2310,6 +4839,19 @@ func (gdt *Color) Contrasted() Color {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -2333,6 +4875,31 @@ func (gdt *Color) LinearInterpolate(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -2352,6 +4919,25 @@ func (gdt *Color) Blend(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -2373,6 +4959,25 @@ func (gdt *Color) ToHtml(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -2392,6 +4997,25 @@ func (gdt *Color) OperatorEqual(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -2413,6 +5037,25 @@ func (gdt *Color) OperatorLess(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -2428,6 +5071,19 @@ func (gdt *Color) ToAbgr32() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2445,6 +5101,19 @@ func (gdt *Color) ToAbgr64() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -2461,6 +5130,19 @@ func (gdt *Color) ToArgb64() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -2476,6 +5158,19 @@ func (gdt *Color) ToRgba64() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2496,6 +5191,25 @@ func (gdt *Color) Darkened(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -2523,6 +5237,43 @@ func (gdt *Color) FromHsv(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -2543,6 +5294,25 @@ func (gdt *Color) Lightened(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -2556,6 +5326,22 @@ func InitDictionaryGodotType() {
 func NewDictionary() Dictionary {
 	dest := Dictionary{}
 
+	api := CoreApi
+	rcv := (*C.godot_dictionary)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
 	return dest
@@ -2565,6 +5351,29 @@ func NewDictionaryCopy(
 	p_src Dictionary, /* godot_dictionary */
 ) Dictionary {
 	dest := Dictionary{}
+
+	api := CoreApi
+	rcv := (*C.godot_dictionary)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_dictionary)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
@@ -2593,6 +5402,19 @@ func (gdt *Dictionary) Size() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -2609,6 +5431,19 @@ func (gdt *Dictionary) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -2617,6 +5452,14 @@ func (gdt *Dictionary) Clear() {
 
 	/* go_godot_dictionary_clear(API_STRUCT) ->void */
 
+	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Getter Method: godot_dictionary_has -> godot_bool */
@@ -2635,6 +5478,25 @@ func (gdt *Dictionary) Has(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -2656,6 +5518,25 @@ func (gdt *Dictionary) HasAll(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -2666,6 +5547,21 @@ func (gdt *Dictionary) Erase(
 
 	/* go_godot_dictionary_erase(API_STRUCT, *godot_variant) ->void */
 
+	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_key))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_dictionary_hash -> godot_int */
@@ -2680,6 +5576,19 @@ func (gdt *Dictionary) Hash() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -2697,6 +5606,19 @@ func (gdt *Dictionary) Keys() Array {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -2712,6 +5634,19 @@ func (gdt *Dictionary) Values() Array {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -2733,6 +5668,25 @@ func (gdt *Dictionary) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -2743,6 +5697,28 @@ func (gdt *Dictionary) Set(
 
 	/* go_godot_dictionary_set(API_STRUCT, *godot_variant, *godot_variant) ->void */
 
+	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_key))
+	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_dictionary_operator_index -> godot_variant */
@@ -2761,6 +5737,25 @@ func (gdt *Dictionary) OperatorIndex(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -2782,6 +5777,25 @@ func (gdt *Dictionary) OperatorIndexConst(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -2801,6 +5815,25 @@ func (gdt *Dictionary) Next(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
@@ -2822,6 +5855,25 @@ func (gdt *Dictionary) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -2837,6 +5889,19 @@ func (gdt *Dictionary) ToJson() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -2860,6 +5925,31 @@ func (gdt *Dictionary) GetWithDefault(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -2880,6 +5970,25 @@ func (gdt *Dictionary) EraseWithReturn(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -2899,6 +6008,25 @@ func (gdt *Dictionary) Duplicate(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Dictionary)(unsafe.Pointer(&ret))
 }
@@ -3009,6 +6137,36 @@ func (gdt *MethodBind) Ptrcall(
 
 	/* go_godot_method_bind_ptrcall(API_STRUCT, *godot_object, **void, *void) ->void */
 
+	rcv := (*C.godot_method_bind)(unsafe.Pointer(gdt))
+	in0 := unsafe.Pointer(p_instance)
+	cArr1 := ArrayRefFromPtrSlice(p_args)
+	in1 := (*unsafe.Pointer)(unsafe.Pointer(cArr1))
+	in2 := unsafe.Pointer(p_ret)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 }
 
 /* Getter Method: godot_method_bind_call -> godot_variant */
@@ -3036,6 +6194,43 @@ func (gdt *MethodBind) Call(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -3060,6 +6255,31 @@ func NewNodePath(
 ) NodePath {
 	dest := NodePath{}
 
+	api := CoreApi
+	rcv := (*C.godot_node_path)(unsafe.Pointer(&dest))
+	// hide godot_string / String and expose native go string
+	strIn0 := internWithGoString(p_from)
+	in0 := (*C.godot_string)(unsafe.Pointer(&strIn0))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
 	return dest
@@ -3069,6 +6289,29 @@ func NewNodePathCopy(
 	p_src NodePath, /* godot_node_path */
 ) NodePath {
 	dest := NodePath{}
+
+	api := CoreApi
+	rcv := (*C.godot_node_path)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_node_path)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
@@ -3097,6 +6340,19 @@ func (gdt *NodePath) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -3113,6 +6369,19 @@ func (gdt *NodePath) IsAbsolute() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3128,6 +6397,19 @@ func (gdt *NodePath) GetNameCount() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -3149,6 +6431,25 @@ func (gdt *NodePath) GetName(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -3164,6 +6465,19 @@ func (gdt *NodePath) GetSubnameCount() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -3185,6 +6499,25 @@ func (gdt *NodePath) GetSubname(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -3201,6 +6534,19 @@ func (gdt *NodePath) GetConcatenatedSubnames() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -3216,6 +6562,19 @@ func (gdt *NodePath) IsEmpty() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -3237,6 +6596,25 @@ func (gdt *NodePath) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3253,6 +6631,19 @@ func (gdt *NodePath) GetAsPropertyPath() NodePath {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*NodePath)(unsafe.Pointer(&ret))
 }
 
@@ -3268,6 +6659,50 @@ func NewPlaneWithReals(
 ) Plane {
 	dest := Plane{}
 
+	api := CoreApi
+	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_a))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_b))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_c))
+	in3 := *(*C.godot_real)(unsafe.Pointer(&p_d))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -3278,6 +6713,43 @@ func NewPlaneWithVectors(
 ) Plane {
 	dest := Plane{}
 
+	api := CoreApi
+	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v1))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_v2))
+	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_v3))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -3287,6 +6759,36 @@ func NewPlaneWithNormal(
 	p_normal Vector3 /* godot_vector3 */, p_d float32, /* else case */
 ) Plane {
 	dest := Plane{}
+
+	api := CoreApi
+	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_normal))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_d))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
@@ -3306,6 +6808,19 @@ func (gdt *Plane) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -3321,6 +6836,19 @@ func (gdt *Plane) Normalized() Plane {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
@@ -3338,6 +6866,19 @@ func (gdt *Plane) Center() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -3353,6 +6894,19 @@ func (gdt *Plane) GetAnyPoint() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3374,6 +6928,25 @@ func (gdt *Plane) IsPointOver(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3393,6 +6966,25 @@ func (gdt *Plane) DistanceTo(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -3416,6 +7008,31 @@ func (gdt *Plane) HasPoint(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3435,6 +7052,25 @@ func (gdt *Plane) Project(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3460,6 +7096,37 @@ func (gdt *Plane) Intersect3(
 		in2,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3483,6 +7150,37 @@ func (gdt *Plane) IntersectsRay(
 		in1,
 		in2,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -3508,6 +7206,37 @@ func (gdt *Plane) IntersectsSegment(
 		in2,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3523,6 +7252,19 @@ func (gdt *Plane) OperatorNeg() Plane {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
@@ -3544,6 +7286,25 @@ func (gdt *Plane) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3554,6 +7315,21 @@ func (gdt *Plane) SetNormal(
 
 	/* go_godot_plane_set_normal(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_plane)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_normal))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_plane_get_normal -> godot_vector3 */
@@ -3568,6 +7344,19 @@ func (gdt *Plane) GetNormal() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -3585,6 +7374,19 @@ func (gdt *Plane) GetD() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -3595,6 +7397,21 @@ func (gdt *Plane) SetD(
 
 	/* go_godot_plane_set_d(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_plane)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_d))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 type PoolArrayReadAccess C.godot_pool_array_read_access
@@ -3621,6 +7438,22 @@ func InitPoolByteArrayGodotType() {
 func NewPoolByteArray() PoolByteArray {
 	dest := PoolByteArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -3631,6 +7464,29 @@ func NewPoolByteArrayCopy(
 ) PoolByteArray {
 	dest := PoolByteArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -3640,6 +7496,29 @@ func NewPoolByteArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolByteArray {
 	dest := PoolByteArray{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
@@ -3653,6 +7532,21 @@ func (gdt *PoolByteArray) Append(
 
 	/* go_godot_pool_byte_array_append(API_STRUCT,uint8_t) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_append_array -> void */
@@ -3662,6 +7556,21 @@ func (gdt *PoolByteArray) AppendArray(
 
 	/* go_godot_pool_byte_array_append_array(API_STRUCT, *godot_pool_byte_array) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_byte_array_insert -> godot_error */
@@ -3683,6 +7592,31 @@ func (gdt *PoolByteArray) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -3691,6 +7625,14 @@ func (gdt *PoolByteArray) Invert() {
 
 	/* go_godot_pool_byte_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_byte_array_push_back -> void */
@@ -3700,6 +7642,21 @@ func (gdt *PoolByteArray) PushBack(
 
 	/* go_godot_pool_byte_array_push_back(API_STRUCT,uint8_t) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_remove -> void */
@@ -3709,6 +7666,21 @@ func (gdt *PoolByteArray) Remove(
 
 	/* go_godot_pool_byte_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_resize -> void */
@@ -3718,6 +7690,21 @@ func (gdt *PoolByteArray) Resize(
 
 	/* go_godot_pool_byte_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_byte_array_read -> godot_pool_byte_array_read_access */
@@ -3732,6 +7719,19 @@ func (gdt *PoolByteArray) Read() PoolByteArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolByteArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -3749,6 +7749,19 @@ func (gdt *PoolByteArray) Write() PoolByteArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolByteArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -3759,6 +7772,28 @@ func (gdt *PoolByteArray) Set(
 
 	/* go_godot_pool_byte_array_set(API_STRUCT,godot_int,uint8_t) ->void */
 
+	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_byte_array_get -> uint8_t */
@@ -3778,6 +7813,25 @@ func (gdt *PoolByteArray) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*uint8)(unsafe.Pointer(&ret))
 }
 
@@ -3793,6 +7847,19 @@ func (gdt *PoolByteArray) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -3819,6 +7886,19 @@ func (gdt *PoolByteArray) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -3842,6 +7922,19 @@ func (gdt *PoolByteArrayReadAccess) Copy() PoolByteArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolByteArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -3858,6 +7951,19 @@ func (gdt *PoolByteArrayReadAccess) Ptr() uint8 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*uint8)(unsafe.Pointer(&ret))
 }
 
@@ -3868,6 +7974,21 @@ func (gdt *PoolByteArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_byte_array_read_access_operator_assign(API_STRUCT, *godot_pool_byte_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_byte_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_byte_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_read_access_destroy -> void */
@@ -3899,6 +8020,19 @@ func (gdt *PoolByteArrayWriteAccess) Copy() PoolByteArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolByteArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -3915,6 +8049,19 @@ func (gdt *PoolByteArrayWriteAccess) Ptr() uint8 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*uint8)(unsafe.Pointer(&ret))
 }
 
@@ -3925,6 +8072,21 @@ func (gdt *PoolByteArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_byte_array_write_access_operator_assign(API_STRUCT, *godot_pool_byte_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_byte_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_byte_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_byte_array_write_access_destroy -> void */
@@ -3946,6 +8108,22 @@ func InitPoolColorArrayGodotType() {
 func NewPoolColorArray() PoolColorArray {
 	dest := PoolColorArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -3956,6 +8134,29 @@ func NewPoolColorArrayCopy(
 ) PoolColorArray {
 	dest := PoolColorArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -3965,6 +8166,29 @@ func NewPoolColorArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolColorArray {
 	dest := PoolColorArray{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
@@ -3978,6 +8202,21 @@ func (gdt *PoolColorArray) Append(
 
 	/* go_godot_pool_color_array_append(API_STRUCT, *godot_color) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_color)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_append_array -> void */
@@ -3987,6 +8226,21 @@ func (gdt *PoolColorArray) AppendArray(
 
 	/* go_godot_pool_color_array_append_array(API_STRUCT, *godot_pool_color_array) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_color_array_insert -> godot_error */
@@ -4008,6 +8262,31 @@ func (gdt *PoolColorArray) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -4016,6 +8295,14 @@ func (gdt *PoolColorArray) Invert() {
 
 	/* go_godot_pool_color_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_color_array_push_back -> void */
@@ -4025,6 +8312,21 @@ func (gdt *PoolColorArray) PushBack(
 
 	/* go_godot_pool_color_array_push_back(API_STRUCT, *godot_color) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_color)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_remove -> void */
@@ -4034,6 +8336,21 @@ func (gdt *PoolColorArray) Remove(
 
 	/* go_godot_pool_color_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_resize -> void */
@@ -4043,6 +8360,21 @@ func (gdt *PoolColorArray) Resize(
 
 	/* go_godot_pool_color_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_color_array_read -> godot_pool_color_array_read_access */
@@ -4057,6 +8389,19 @@ func (gdt *PoolColorArray) Read() PoolColorArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolColorArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -4074,6 +8419,19 @@ func (gdt *PoolColorArray) Write() PoolColorArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolColorArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4084,6 +8442,28 @@ func (gdt *PoolColorArray) Set(
 
 	/* go_godot_pool_color_array_set(API_STRUCT,godot_int, *godot_color) ->void */
 
+	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := (*C.godot_color)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_color_array_get -> godot_color */
@@ -4103,6 +8483,25 @@ func (gdt *PoolColorArray) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -4118,6 +8517,19 @@ func (gdt *PoolColorArray) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -4144,6 +8556,19 @@ func (gdt *PoolColorArray) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -4167,6 +8592,19 @@ func (gdt *PoolColorArrayReadAccess) Copy() PoolColorArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolColorArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4183,6 +8621,19 @@ func (gdt *PoolColorArrayReadAccess) Ptr() Color {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -4193,6 +8644,21 @@ func (gdt *PoolColorArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_color_array_read_access_operator_assign(API_STRUCT, *godot_pool_color_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_color_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_color_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_read_access_destroy -> void */
@@ -4224,6 +8690,19 @@ func (gdt *PoolColorArrayWriteAccess) Copy() PoolColorArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolColorArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4240,6 +8719,19 @@ func (gdt *PoolColorArrayWriteAccess) Ptr() Color {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Color)(unsafe.Pointer(&ret))
 }
 
@@ -4250,6 +8742,21 @@ func (gdt *PoolColorArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_color_array_write_access_operator_assign(API_STRUCT, *godot_pool_color_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_color_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_color_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_color_array_write_access_destroy -> void */
@@ -4271,6 +8778,22 @@ func InitPoolIntArrayGodotType() {
 func NewPoolIntArray() PoolIntArray {
 	dest := PoolIntArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -4281,6 +8804,29 @@ func NewPoolIntArrayCopy(
 ) PoolIntArray {
 	dest := PoolIntArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -4290,6 +8836,29 @@ func NewPoolIntArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolIntArray {
 	dest := PoolIntArray{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
@@ -4303,6 +8872,21 @@ func (gdt *PoolIntArray) Append(
 
 	/* go_godot_pool_int_array_append(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_append_array -> void */
@@ -4312,6 +8896,21 @@ func (gdt *PoolIntArray) AppendArray(
 
 	/* go_godot_pool_int_array_append_array(API_STRUCT, *godot_pool_int_array) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_int_array_insert -> godot_error */
@@ -4333,6 +8932,31 @@ func (gdt *PoolIntArray) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -4341,6 +8965,14 @@ func (gdt *PoolIntArray) Invert() {
 
 	/* go_godot_pool_int_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_int_array_push_back -> void */
@@ -4350,6 +8982,21 @@ func (gdt *PoolIntArray) PushBack(
 
 	/* go_godot_pool_int_array_push_back(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_remove -> void */
@@ -4359,6 +9006,21 @@ func (gdt *PoolIntArray) Remove(
 
 	/* go_godot_pool_int_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_resize -> void */
@@ -4368,6 +9030,21 @@ func (gdt *PoolIntArray) Resize(
 
 	/* go_godot_pool_int_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_int_array_read -> godot_pool_int_array_read_access */
@@ -4382,6 +9059,19 @@ func (gdt *PoolIntArray) Read() PoolIntArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolIntArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -4399,6 +9089,19 @@ func (gdt *PoolIntArray) Write() PoolIntArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolIntArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4409,6 +9112,28 @@ func (gdt *PoolIntArray) Set(
 
 	/* go_godot_pool_int_array_set(API_STRUCT,godot_int,godot_int) ->void */
 
+	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := *(*C.godot_int)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_int_array_get -> godot_int */
@@ -4428,6 +9153,25 @@ func (gdt *PoolIntArray) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -4443,6 +9187,19 @@ func (gdt *PoolIntArray) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -4469,6 +9226,19 @@ func (gdt *PoolIntArray) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -4492,6 +9262,19 @@ func (gdt *PoolIntArrayReadAccess) Copy() PoolIntArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolIntArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4508,6 +9291,19 @@ func (gdt *PoolIntArrayReadAccess) Ptr() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -4518,6 +9314,21 @@ func (gdt *PoolIntArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_int_array_read_access_operator_assign(API_STRUCT, *godot_pool_int_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_int_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_int_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_read_access_destroy -> void */
@@ -4549,6 +9360,19 @@ func (gdt *PoolIntArrayWriteAccess) Copy() PoolIntArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolIntArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4565,6 +9389,19 @@ func (gdt *PoolIntArrayWriteAccess) Ptr() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -4575,6 +9412,21 @@ func (gdt *PoolIntArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_int_array_write_access_operator_assign(API_STRUCT, *godot_pool_int_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_int_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_int_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_int_array_write_access_destroy -> void */
@@ -4596,6 +9448,22 @@ func InitPoolRealArrayGodotType() {
 func NewPoolRealArray() PoolRealArray {
 	dest := PoolRealArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -4606,6 +9474,29 @@ func NewPoolRealArrayCopy(
 ) PoolRealArray {
 	dest := PoolRealArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -4615,6 +9506,29 @@ func NewPoolRealArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolRealArray {
 	dest := PoolRealArray{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
@@ -4628,6 +9542,21 @@ func (gdt *PoolRealArray) Append(
 
 	/* go_godot_pool_real_array_append(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_append_array -> void */
@@ -4637,6 +9566,21 @@ func (gdt *PoolRealArray) AppendArray(
 
 	/* go_godot_pool_real_array_append_array(API_STRUCT, *godot_pool_real_array) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_real_array_insert -> godot_error */
@@ -4658,6 +9602,31 @@ func (gdt *PoolRealArray) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -4666,6 +9635,14 @@ func (gdt *PoolRealArray) Invert() {
 
 	/* go_godot_pool_real_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_real_array_push_back -> void */
@@ -4675,6 +9652,21 @@ func (gdt *PoolRealArray) PushBack(
 
 	/* go_godot_pool_real_array_push_back(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_remove -> void */
@@ -4684,6 +9676,21 @@ func (gdt *PoolRealArray) Remove(
 
 	/* go_godot_pool_real_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_resize -> void */
@@ -4693,6 +9700,21 @@ func (gdt *PoolRealArray) Resize(
 
 	/* go_godot_pool_real_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_real_array_read -> godot_pool_real_array_read_access */
@@ -4707,6 +9729,19 @@ func (gdt *PoolRealArray) Read() PoolRealArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolRealArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -4724,6 +9759,19 @@ func (gdt *PoolRealArray) Write() PoolRealArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolRealArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4734,6 +9782,28 @@ func (gdt *PoolRealArray) Set(
 
 	/* go_godot_pool_real_array_set(API_STRUCT,godot_int,godot_real) ->void */
 
+	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_real_array_get -> godot_real */
@@ -4753,6 +9823,25 @@ func (gdt *PoolRealArray) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -4768,6 +9857,19 @@ func (gdt *PoolRealArray) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -4794,6 +9896,19 @@ func (gdt *PoolRealArray) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -4817,6 +9932,19 @@ func (gdt *PoolRealArrayReadAccess) Copy() PoolRealArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolRealArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4833,6 +9961,19 @@ func (gdt *PoolRealArrayReadAccess) Ptr() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -4843,6 +9984,21 @@ func (gdt *PoolRealArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_real_array_read_access_operator_assign(API_STRUCT, *godot_pool_real_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_real_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_real_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_read_access_destroy -> void */
@@ -4874,6 +10030,19 @@ func (gdt *PoolRealArrayWriteAccess) Copy() PoolRealArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolRealArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -4890,6 +10059,19 @@ func (gdt *PoolRealArrayWriteAccess) Ptr() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -4900,6 +10082,21 @@ func (gdt *PoolRealArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_real_array_write_access_operator_assign(API_STRUCT, *godot_pool_real_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_real_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_real_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_real_array_write_access_destroy -> void */
@@ -4921,6 +10118,22 @@ func InitPoolStringArrayGodotType() {
 func NewPoolStringArray() PoolStringArray {
 	dest := PoolStringArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -4931,6 +10144,29 @@ func NewPoolStringArrayCopy(
 ) PoolStringArray {
 	dest := PoolStringArray{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -4940,6 +10176,29 @@ func NewPoolStringArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolStringArray {
 	dest := PoolStringArray{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
@@ -4953,6 +10212,21 @@ func (gdt *PoolStringArray) Append(
 
 	/* go_godot_pool_string_array_append(API_STRUCT, *godot_string) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_string)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_append_array -> void */
@@ -4962,6 +10236,21 @@ func (gdt *PoolStringArray) AppendArray(
 
 	/* go_godot_pool_string_array_append_array(API_STRUCT, *godot_pool_string_array) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_string_array_insert -> godot_error */
@@ -4983,6 +10272,31 @@ func (gdt *PoolStringArray) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -4991,6 +10305,14 @@ func (gdt *PoolStringArray) Invert() {
 
 	/* go_godot_pool_string_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_string_array_push_back -> void */
@@ -5000,6 +10322,21 @@ func (gdt *PoolStringArray) PushBack(
 
 	/* go_godot_pool_string_array_push_back(API_STRUCT, *godot_string) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_string)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_remove -> void */
@@ -5009,6 +10346,21 @@ func (gdt *PoolStringArray) Remove(
 
 	/* go_godot_pool_string_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_resize -> void */
@@ -5018,6 +10370,21 @@ func (gdt *PoolStringArray) Resize(
 
 	/* go_godot_pool_string_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_string_array_read -> godot_pool_string_array_read_access */
@@ -5032,6 +10399,19 @@ func (gdt *PoolStringArray) Read() PoolStringArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolStringArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -5049,6 +10429,19 @@ func (gdt *PoolStringArray) Write() PoolStringArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolStringArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5059,6 +10452,28 @@ func (gdt *PoolStringArray) Set(
 
 	/* go_godot_pool_string_array_set(API_STRUCT,godot_int, *godot_string) ->void */
 
+	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := (*C.godot_string)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_string_array_get -> godot_string */
@@ -5078,6 +10493,25 @@ func (gdt *PoolStringArray) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -5093,6 +10527,19 @@ func (gdt *PoolStringArray) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -5119,6 +10566,19 @@ func (gdt *PoolStringArray) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -5142,6 +10602,19 @@ func (gdt *PoolStringArrayReadAccess) Copy() PoolStringArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolStringArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5158,6 +10631,19 @@ func (gdt *PoolStringArrayReadAccess) Ptr() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -5168,6 +10654,21 @@ func (gdt *PoolStringArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_string_array_read_access_operator_assign(API_STRUCT, *godot_pool_string_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_string_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_string_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_read_access_destroy -> void */
@@ -5199,6 +10700,19 @@ func (gdt *PoolStringArrayWriteAccess) Copy() PoolStringArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolStringArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5215,6 +10729,19 @@ func (gdt *PoolStringArrayWriteAccess) Ptr() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -5225,6 +10752,21 @@ func (gdt *PoolStringArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_string_array_write_access_operator_assign(API_STRUCT, *godot_pool_string_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_string_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_string_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_string_array_write_access_destroy -> void */
@@ -5246,6 +10788,22 @@ func InitPoolVector2ArrayGodotType() {
 func NewPoolVector2Array() PoolVector2Array {
 	dest := PoolVector2Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -5256,6 +10814,29 @@ func NewPoolVector2ArrayCopy(
 ) PoolVector2Array {
 	dest := PoolVector2Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -5265,6 +10846,29 @@ func NewPoolVector2ArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolVector2Array {
 	dest := PoolVector2Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
@@ -5278,6 +10882,21 @@ func (gdt *PoolVector2Array) Append(
 
 	/* go_godot_pool_vector2_array_append(API_STRUCT, *godot_vector2) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_append_array -> void */
@@ -5287,6 +10906,21 @@ func (gdt *PoolVector2Array) AppendArray(
 
 	/* go_godot_pool_vector2_array_append_array(API_STRUCT, *godot_pool_vector2_array) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_vector2_array_insert -> godot_error */
@@ -5308,6 +10942,31 @@ func (gdt *PoolVector2Array) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -5316,6 +10975,14 @@ func (gdt *PoolVector2Array) Invert() {
 
 	/* go_godot_pool_vector2_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_vector2_array_push_back -> void */
@@ -5325,6 +10992,21 @@ func (gdt *PoolVector2Array) PushBack(
 
 	/* go_godot_pool_vector2_array_push_back(API_STRUCT, *godot_vector2) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_remove -> void */
@@ -5334,6 +11016,21 @@ func (gdt *PoolVector2Array) Remove(
 
 	/* go_godot_pool_vector2_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_resize -> void */
@@ -5343,6 +11040,21 @@ func (gdt *PoolVector2Array) Resize(
 
 	/* go_godot_pool_vector2_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_vector2_array_read -> godot_pool_vector2_array_read_access */
@@ -5357,6 +11069,19 @@ func (gdt *PoolVector2Array) Read() PoolVector2ArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolVector2ArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -5374,6 +11099,19 @@ func (gdt *PoolVector2Array) Write() PoolVector2ArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector2ArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5384,6 +11122,28 @@ func (gdt *PoolVector2Array) Set(
 
 	/* go_godot_pool_vector2_array_set(API_STRUCT,godot_int, *godot_vector2) ->void */
 
+	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_vector2_array_get -> godot_vector2 */
@@ -5403,6 +11163,25 @@ func (gdt *PoolVector2Array) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -5418,6 +11197,19 @@ func (gdt *PoolVector2Array) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -5444,6 +11236,19 @@ func (gdt *PoolVector2Array) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -5467,6 +11272,19 @@ func (gdt *PoolVector2ArrayReadAccess) Copy() PoolVector2ArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector2ArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5483,6 +11301,19 @@ func (gdt *PoolVector2ArrayReadAccess) Ptr() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -5493,6 +11324,21 @@ func (gdt *PoolVector2ArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_vector2_array_read_access_operator_assign(API_STRUCT, *godot_pool_vector2_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_vector2_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector2_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_read_access_destroy -> void */
@@ -5524,6 +11370,19 @@ func (gdt *PoolVector2ArrayWriteAccess) Copy() PoolVector2ArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector2ArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5540,6 +11399,19 @@ func (gdt *PoolVector2ArrayWriteAccess) Ptr() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -5550,6 +11422,21 @@ func (gdt *PoolVector2ArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_vector2_array_write_access_operator_assign(API_STRUCT, *godot_pool_vector2_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_vector2_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector2_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector2_array_write_access_destroy -> void */
@@ -5571,6 +11458,22 @@ func InitPoolVector3ArrayGodotType() {
 func NewPoolVector3Array() PoolVector3Array {
 	dest := PoolVector3Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -5581,6 +11484,29 @@ func NewPoolVector3ArrayCopy(
 ) PoolVector3Array {
 	dest := PoolVector3Array{}
 
+	api := CoreApi
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -5590,6 +11516,29 @@ func NewPoolVector3ArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolVector3Array {
 	dest := PoolVector3Array{}
+
+	api := CoreApi
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
@@ -5603,6 +11552,21 @@ func (gdt *PoolVector3Array) Append(
 
 	/* go_godot_pool_vector3_array_append(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_append_array -> void */
@@ -5612,6 +11576,21 @@ func (gdt *PoolVector3Array) AppendArray(
 
 	/* go_godot_pool_vector3_array_append_array(API_STRUCT, *godot_pool_vector3_array) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_array))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_vector3_array_insert -> godot_error */
@@ -5633,6 +11612,31 @@ func (gdt *PoolVector3Array) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Error)(unsafe.Pointer(&ret))
 }
 
@@ -5641,6 +11645,14 @@ func (gdt *PoolVector3Array) Invert() {
 
 	/* go_godot_pool_vector3_array_invert(API_STRUCT) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 }
 
 /* Setter Method: godot_pool_vector3_array_push_back -> void */
@@ -5650,6 +11662,21 @@ func (gdt *PoolVector3Array) PushBack(
 
 	/* go_godot_pool_vector3_array_push_back(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_remove -> void */
@@ -5659,6 +11686,21 @@ func (gdt *PoolVector3Array) Remove(
 
 	/* go_godot_pool_vector3_array_remove(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_resize -> void */
@@ -5668,6 +11710,21 @@ func (gdt *PoolVector3Array) Resize(
 
 	/* go_godot_pool_vector3_array_resize(API_STRUCT,godot_int) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_pool_vector3_array_read -> godot_pool_vector3_array_read_access */
@@ -5682,6 +11739,19 @@ func (gdt *PoolVector3Array) Read() PoolVector3ArrayReadAccess {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolVector3ArrayReadAccess)(unsafe.Pointer(&ret))
 }
@@ -5699,6 +11769,19 @@ func (gdt *PoolVector3Array) Write() PoolVector3ArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector3ArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5709,6 +11792,28 @@ func (gdt *PoolVector3Array) Set(
 
 	/* go_godot_pool_vector3_array_set(API_STRUCT,godot_int, *godot_vector3) ->void */
 
+	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_pool_vector3_array_get -> godot_vector3 */
@@ -5728,6 +11833,25 @@ func (gdt *PoolVector3Array) Get(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -5743,6 +11867,19 @@ func (gdt *PoolVector3Array) Size() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -5769,6 +11906,19 @@ func (gdt *PoolVector3Array) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -5792,6 +11942,19 @@ func (gdt *PoolVector3ArrayReadAccess) Copy() PoolVector3ArrayReadAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector3ArrayReadAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5808,6 +11971,19 @@ func (gdt *PoolVector3ArrayReadAccess) Ptr() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -5818,6 +11994,21 @@ func (gdt *PoolVector3ArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_vector3_array_read_access_operator_assign(API_STRUCT, *godot_pool_vector3_array_read_access) ->void */
 
+	rcv := (*C.godot_pool_vector3_array_read_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector3_array_read_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_read_access_destroy -> void */
@@ -5849,6 +12040,19 @@ func (gdt *PoolVector3ArrayWriteAccess) Copy() PoolVector3ArrayWriteAccess {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector3ArrayWriteAccess)(unsafe.Pointer(&ret))
 }
 
@@ -5865,6 +12069,19 @@ func (gdt *PoolVector3ArrayWriteAccess) Ptr() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -5875,6 +12092,21 @@ func (gdt *PoolVector3ArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_vector3_array_write_access_operator_assign(API_STRUCT, *godot_pool_vector3_array_write_access) ->void */
 
+	rcv := (*C.godot_pool_vector3_array_write_access)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_pool_vector3_array_write_access)(unsafe.Pointer(&p_other))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_pool_vector3_array_write_access_destroy -> void */
@@ -5898,6 +12130,50 @@ func NewQuat(
 ) Quat {
 	dest := Quat{}
 
+	api := CoreApi
+	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_z))
+	in3 := *(*C.godot_real)(unsafe.Pointer(&p_w))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -5907,6 +12183,36 @@ func NewQuatWithAxisAngle(
 	p_axis Vector3 /* godot_vector3 */, p_angle float32, /* else case */
 ) Quat {
 	dest := Quat{}
+
+	api := CoreApi
+	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_angle))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
@@ -5918,6 +12224,29 @@ func NewQuatWithBasis(
 ) Quat {
 	dest := Quat{}
 
+	api := Core11Api
+	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -5927,6 +12256,29 @@ func NewQuatWithEuler(
 	p_euler Vector3, /* godot_vector3 */
 ) Quat {
 	dest := Quat{}
+
+	api := Core11Api
+	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
@@ -5946,6 +12298,19 @@ func (gdt *Quat) GetX() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -5956,6 +12321,21 @@ func (gdt *Quat) SetX(
 
 	/* go_godot_quat_set_x(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_quat_get_y -> godot_real */
@@ -5971,6 +12351,19 @@ func (gdt *Quat) GetY() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -5981,6 +12374,21 @@ func (gdt *Quat) SetY(
 
 	/* go_godot_quat_set_y(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_quat_get_z -> godot_real */
@@ -5996,6 +12404,19 @@ func (gdt *Quat) GetZ() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -6006,6 +12427,21 @@ func (gdt *Quat) SetZ(
 
 	/* go_godot_quat_set_z(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_quat_get_w -> godot_real */
@@ -6021,6 +12457,19 @@ func (gdt *Quat) GetW() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -6031,6 +12480,21 @@ func (gdt *Quat) SetW(
 
 	/* go_godot_quat_set_w(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_quat_as_string -> godot_string */
@@ -6045,6 +12509,19 @@ func (gdt *Quat) AsString() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -6062,6 +12539,19 @@ func (gdt *Quat) Length() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -6077,6 +12567,19 @@ func (gdt *Quat) LengthSquared() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -6094,6 +12597,19 @@ func (gdt *Quat) Normalized() Quat {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6110,6 +12626,19 @@ func (gdt *Quat) IsNormalized() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6125,6 +12654,19 @@ func (gdt *Quat) Inverse() Quat {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -6146,6 +12688,25 @@ func (gdt *Quat) Dot(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -6165,6 +12726,25 @@ func (gdt *Quat) Xform(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -6188,6 +12768,31 @@ func (gdt *Quat) Slerp(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6209,6 +12814,31 @@ func (gdt *Quat) Slerpni(
 		in0,
 		in1,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -6236,6 +12866,43 @@ func (gdt *Quat) CubicSlerp(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6255,6 +12922,25 @@ func (gdt *Quat) OperatorMultiply(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -6276,6 +12962,25 @@ func (gdt *Quat) OperatorAdd(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6295,6 +13000,25 @@ func (gdt *Quat) OperatorSubtract(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -6316,6 +13040,25 @@ func (gdt *Quat) OperatorDivide(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6336,6 +13079,25 @@ func (gdt *Quat) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6352,6 +13114,19 @@ func (gdt *Quat) OperatorNeg() Quat {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
 
@@ -6362,6 +13137,28 @@ func (gdt *Quat) SetAxisAngle(
 
 	/* go_godot_quat_set_axis_angle(API_STRUCT, *godot_vector3,godot_real) ->void */
 
+	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_angle))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 type Rect2 C.godot_rect2
@@ -6376,6 +13173,36 @@ func NewRect2WithPositionAndSize(
 ) Rect2 {
 	dest := Rect2{}
 
+	api := CoreApi
+	rcv := (*C.godot_rect2)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
+	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
 	return dest
@@ -6385,6 +13212,50 @@ func NewRect2(
 	p_x float32 /* else case */, p_y float32 /* else case */, p_width float32 /* else case */, p_height float32, /* else case */
 ) Rect2 {
 	dest := Rect2{}
+
+	api := CoreApi
+	rcv := (*C.godot_rect2)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_width))
+	in3 := *(*C.godot_real)(unsafe.Pointer(&p_height))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
 
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
@@ -6404,6 +13275,19 @@ func (gdt *Rect2) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -6419,6 +13303,19 @@ func (gdt *Rect2) GetArea() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -6440,6 +13337,25 @@ func (gdt *Rect2) Intersects(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6460,6 +13376,25 @@ func (gdt *Rect2) Encloses(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6475,6 +13410,19 @@ func (gdt *Rect2) HasNoArea() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -6496,6 +13444,25 @@ func (gdt *Rect2) Clip(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -6515,6 +13482,25 @@ func (gdt *Rect2) Merge(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -6536,6 +13522,25 @@ func (gdt *Rect2) HasPoint(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6555,6 +13560,25 @@ func (gdt *Rect2) Grow(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -6576,6 +13600,25 @@ func (gdt *Rect2) Expand(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -6596,6 +13639,25 @@ func (gdt *Rect2) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6611,6 +13673,19 @@ func (gdt *Rect2) GetPosition() Vector2 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -6628,6 +13703,19 @@ func (gdt *Rect2) GetSize() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -6638,6 +13726,21 @@ func (gdt *Rect2) SetPosition(
 
 	/* go_godot_rect2_set_position(API_STRUCT, *godot_vector2) ->void */
 
+	rcv := (*C.godot_rect2)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_rect2_set_size -> void */
@@ -6647,6 +13750,21 @@ func (gdt *Rect2) SetSize(
 
 	/* go_godot_rect2_set_size(API_STRUCT, *godot_vector2) ->void */
 
+	rcv := (*C.godot_rect2)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_rect2_grow_individual -> godot_rect2 */
@@ -6672,6 +13790,43 @@ func (gdt *Rect2) GrowIndividual(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -6694,6 +13849,31 @@ func (gdt *Rect2) GrowMargin(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -6710,6 +13890,19 @@ func (gdt *Rect2) Abs() Rect2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -6723,6 +13916,22 @@ func InitRIDGodotType() {
 func NewRID() RID {
 	dest := RID{}
 
+	api := CoreApi
+	rcv := (*C.godot_rid)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
 	return dest
@@ -6732,6 +13941,29 @@ func NewRIDWithResource(
 	p_from *GodotObject,
 ) RID {
 	dest := RID{}
+
+	api := CoreApi
+	rcv := (*C.godot_rid)(unsafe.Pointer(&dest))
+	in0 := unsafe.Pointer(p_from)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
@@ -6750,6 +13982,19 @@ func (gdt *RID) GetId() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -6771,6 +14016,25 @@ func (gdt *RID) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6790,6 +14054,25 @@ func (gdt *RID) OperatorLess(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -6814,6 +14097,19 @@ func (gdt *CharString) Length() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -6829,6 +14125,19 @@ func (gdt *CharString) GetData() string {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return C.GoString(ret)
 }
@@ -6852,6 +14161,22 @@ func InitStringGodotType() {
 func NewString() String {
 	dest := String{}
 
+	api := CoreApi
+	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -6862,6 +14187,29 @@ func NewStringCopy(
 ) String {
 	dest := String{}
 
+	api := CoreApi
+	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_string)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -6871,6 +14219,36 @@ func NewStringWithWideString(
 	p_contents int32 /* wchar_t */, p_size int32, /* else case */
 ) String {
 	dest := String{}
+
+	api := CoreApi
+	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
+	in0 := (*C.wchar_t)(unsafe.Pointer(&p_contents))
+	in1 := *(*C.int)(unsafe.Pointer(&p_size))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
@@ -6894,6 +14272,25 @@ func (gdt *String) OperatorIndex(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -6914,6 +14311,25 @@ func (gdt *String) OperatorIndexConst(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -6929,6 +14345,19 @@ func (gdt *String) WideStr() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -6950,6 +14379,25 @@ func (gdt *String) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -6969,6 +14417,25 @@ func (gdt *String) OperatorLess(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -6990,6 +14457,25 @@ func (gdt *String) OperatorPlus(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7005,6 +14491,19 @@ func (gdt *String) Length() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7026,6 +14525,25 @@ func (gdt *String) BeginsWith(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -7041,6 +14559,19 @@ func (gdt *String) Bigrams() Array {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -7062,6 +14593,25 @@ func (gdt *String) EndsWith(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -7081,6 +14631,25 @@ func (gdt *String) Find(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7104,6 +14673,31 @@ func (gdt *String) FindFrom(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7123,6 +14717,25 @@ func (gdt *String) Findmk(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7146,6 +14759,31 @@ func (gdt *String) FindmkFrom(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7165,6 +14803,25 @@ func (gdt *String) Findn(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7188,6 +14845,31 @@ func (gdt *String) FindnFrom(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7207,6 +14889,25 @@ func (gdt *String) FindLast(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7228,6 +14929,25 @@ func (gdt *String) Format(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7244,6 +14964,19 @@ func (gdt *String) HexToInt() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7259,6 +14992,19 @@ func (gdt *String) HexToIntWithoutPrefix() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7282,6 +15028,31 @@ func (gdt *String) Insert(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7297,6 +15068,19 @@ func (gdt *String) IsNumeric() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -7318,6 +15102,25 @@ func (gdt *String) IsSubsequenceOf(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -7338,6 +15141,25 @@ func (gdt *String) IsSubsequenceOfi(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -7357,6 +15179,25 @@ func (gdt *String) Lpad(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -7380,6 +15221,31 @@ func (gdt *String) LpadWithCustomCharacter(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7399,6 +15265,25 @@ func (gdt *String) Match(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -7420,6 +15305,25 @@ func (gdt *String) Matchn(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -7440,6 +15344,25 @@ func (gdt *String) PadDecimals(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7459,6 +15382,25 @@ func (gdt *String) PadZeros(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -7482,6 +15424,31 @@ func (gdt *String) ReplaceFirst(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7503,6 +15470,31 @@ func (gdt *String) Replace(
 		in0,
 		in1,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -7526,6 +15518,31 @@ func (gdt *String) Replacen(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7546,6 +15563,25 @@ func (gdt *String) Rfind(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7565,6 +15601,25 @@ func (gdt *String) Rfindn(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7588,6 +15643,31 @@ func (gdt *String) RfindFrom(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7610,6 +15690,31 @@ func (gdt *String) RfindnFrom(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -7629,6 +15734,25 @@ func (gdt *String) Rpad(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -7652,6 +15776,31 @@ func (gdt *String) RpadWithCustomCharacter(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7671,6 +15820,25 @@ func (gdt *String) Similarity(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -7694,6 +15862,31 @@ func (gdt *String) Sprintf(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7716,6 +15909,31 @@ func (gdt *String) Substr(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7731,6 +15949,19 @@ func (gdt *String) ToDouble() float64 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float64)(unsafe.Pointer(&ret))
 }
@@ -7748,6 +15979,19 @@ func (gdt *String) ToFloat() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -7763,6 +16007,19 @@ func (gdt *String) ToInt() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7780,6 +16037,19 @@ func (gdt *String) CamelcaseToUnderscore() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7795,6 +16065,19 @@ func (gdt *String) CamelcaseToUnderscoreLowercased() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -7812,6 +16095,19 @@ func (gdt *String) Capitalize() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7827,6 +16123,19 @@ func (gdt *String) HexToInt64() int64 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int64)(unsafe.Pointer(&ret))
 }
@@ -7844,6 +16153,19 @@ func (gdt *String) HexToInt64WithPrefix() int64 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int64)(unsafe.Pointer(&ret))
 }
 
@@ -7859,6 +16181,19 @@ func (gdt *String) ToInt64() int64 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int64)(unsafe.Pointer(&ret))
 }
@@ -7879,6 +16214,25 @@ func (gdt *String) GetSliceCount(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -7902,6 +16256,31 @@ func (gdt *String) GetSlice(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -7921,6 +16300,25 @@ func (gdt *String) Split(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -7942,6 +16340,25 @@ func (gdt *String) SplitAllowEmpty(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -7961,6 +16378,25 @@ func (gdt *String) SplitFloats(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -7982,6 +16418,25 @@ func (gdt *String) SplitFloatsAllowsEmpty(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -8001,6 +16456,25 @@ func (gdt *String) SplitFloatsMk(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -8022,6 +16496,25 @@ func (gdt *String) SplitFloatsMkAllowsEmpty(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -8041,6 +16534,25 @@ func (gdt *String) SplitInts(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -8062,6 +16574,25 @@ func (gdt *String) SplitIntsAllowsEmpty(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -8081,6 +16612,25 @@ func (gdt *String) SplitIntsMk(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -8102,6 +16652,25 @@ func (gdt *String) SplitIntsMkAllowsEmpty(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -8117,6 +16686,19 @@ func (gdt *String) SplitSpaces() Array {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Array)(unsafe.Pointer(&ret))
 }
@@ -8134,6 +16716,19 @@ func (gdt *String) ToLower() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8149,6 +16744,19 @@ func (gdt *String) ToUpper() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8166,6 +16774,19 @@ func (gdt *String) GetBasename() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8181,6 +16802,19 @@ func (gdt *String) GetExtension() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8202,6 +16836,25 @@ func (gdt *String) Left(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8221,6 +16874,25 @@ func (gdt *String) OrdAt(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -8242,6 +16914,25 @@ func (gdt *String) PlusFile(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8261,6 +16952,25 @@ func (gdt *String) Right(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8284,6 +16994,31 @@ func (gdt *String) StripEdges(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8300,6 +17035,19 @@ func (gdt *String) StripEscapes() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8310,6 +17058,28 @@ func (gdt *String) Erase(
 
 	/* go_godot_string_erase(API_STRUCT,godot_int,godot_int) ->void */
 
+	rcv := (*C.godot_string)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_pos))
+	in1 := *(*C.godot_int)(unsafe.Pointer(&p_chars))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_string_ascii -> godot_char_string */
@@ -8324,6 +17094,19 @@ func (gdt *String) Ascii() CharString {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*CharString)(unsafe.Pointer(&ret))
 }
@@ -8341,6 +17124,19 @@ func (gdt *String) AsciiExtended() CharString {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*CharString)(unsafe.Pointer(&ret))
 }
 
@@ -8356,6 +17152,19 @@ func (gdt *String) Utf8() CharString {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*CharString)(unsafe.Pointer(&ret))
 }
@@ -8377,6 +17186,25 @@ func (gdt *String) ParseUtf8(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8401,6 +17229,31 @@ func (gdt *String) ParseUtf8WithLen(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8416,6 +17269,19 @@ func (gdt *String) Hash64() uint64 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*uint64)(unsafe.Pointer(&ret))
 }
@@ -8433,6 +17299,19 @@ func (gdt *String) Md5Buffer() PoolByteArray {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolByteArray)(unsafe.Pointer(&ret))
 }
 
@@ -8448,6 +17327,19 @@ func (gdt *String) Md5Text() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8465,6 +17357,19 @@ func (gdt *String) Sha256Buffer() PoolByteArray {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolByteArray)(unsafe.Pointer(&ret))
 }
 
@@ -8480,6 +17385,19 @@ func (gdt *String) Sha256Text() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8497,6 +17415,19 @@ func (gdt *String) Empty() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8512,6 +17443,19 @@ func (gdt *String) GetBaseDir() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8529,6 +17473,19 @@ func (gdt *String) GetFile() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8544,6 +17501,19 @@ func (gdt *String) IsAbsPath() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8561,6 +17531,19 @@ func (gdt *String) IsRelPath() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8576,6 +17559,19 @@ func (gdt *String) IsResourceFile() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8597,6 +17593,25 @@ func (gdt *String) PathTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8617,6 +17632,25 @@ func (gdt *String) PathToFile(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8632,6 +17666,19 @@ func (gdt *String) SimplifyPath() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8649,6 +17696,19 @@ func (gdt *String) CEscape() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8664,6 +17724,19 @@ func (gdt *String) CEscapeMultiline() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8681,6 +17754,19 @@ func (gdt *String) CUnescape() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8696,6 +17782,19 @@ func (gdt *String) HttpEscape() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8713,6 +17812,19 @@ func (gdt *String) HttpUnescape() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8728,6 +17840,19 @@ func (gdt *String) JsonEscape() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8749,6 +17874,25 @@ func (gdt *String) WordWrap(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8764,6 +17908,19 @@ func (gdt *String) XmlEscape() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8781,6 +17938,19 @@ func (gdt *String) XmlEscapeWithQuotes() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8796,6 +17966,19 @@ func (gdt *String) XmlUnescape() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8813,6 +17996,19 @@ func (gdt *String) PercentDecode() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8829,6 +18025,19 @@ func (gdt *String) PercentEncode() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8844,6 +18053,19 @@ func (gdt *String) IsValidFloat() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8865,6 +18087,25 @@ func (gdt *String) IsValidHexNumber(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8880,6 +18121,19 @@ func (gdt *String) IsValidHtmlColor() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8897,6 +18151,19 @@ func (gdt *String) IsValidIdentifier() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8913,6 +18180,19 @@ func (gdt *String) IsValidInteger() bool {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -8928,6 +18208,19 @@ func (gdt *String) IsValidIpAddress() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -8954,6 +18247,19 @@ func (gdt *String) Dedent() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -8973,6 +18279,25 @@ func (gdt *String) TrimPrefix(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -8994,6 +18319,25 @@ func (gdt *String) TrimSuffix(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -9013,6 +18357,25 @@ func (gdt *String) Rstrip(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -9038,6 +18401,37 @@ func (gdt *String) Rsplit(
 		in2,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	return *(*PoolStringArray)(unsafe.Pointer(&ret))
 }
 
@@ -9061,6 +18455,37 @@ func (gdt *String) Count(
 		in1,
 		in2,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -9086,6 +18511,37 @@ func (gdt *String) Countn(
 		in2,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -9101,6 +18557,29 @@ func NewStringName(
 ) StringName {
 	dest := StringName{}
 
+	api := CoreApi
+	rcv := (*C.godot_string_name)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_string)(unsafe.Pointer(&p_name))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
 	return dest
@@ -9110,6 +18589,30 @@ func NewStringNameData(
 	p_name string,
 ) StringName {
 	dest := StringName{}
+
+	api := CoreApi
+	rcv := (*C.godot_string_name)(unsafe.Pointer(&dest))
+	in0 := C.CString(p_name)
+	defer C.free(unsafe.Pointer(in0))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
@@ -9129,6 +18632,19 @@ func (gdt *StringName) GetName() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -9145,6 +18661,19 @@ func (gdt *StringName) GetHash() uint32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*uint32)(unsafe.Pointer(&ret))
 }
 
@@ -9160,6 +18689,19 @@ func (gdt *StringName) GetDataUniquePointer() unsafe.Pointer {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return unsafe.Pointer(ret)
 }
@@ -9181,6 +18723,25 @@ func (gdt *StringName) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -9200,6 +18761,25 @@ func (gdt *StringName) OperatorLess(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -9225,6 +18805,50 @@ func NewTransformWithAxisOrigin(
 ) Transform {
 	dest := Transform{}
 
+	api := CoreApi
+	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_x_axis))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_y_axis))
+	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_z_axis))
+	in3 := (*C.godot_vector3)(unsafe.Pointer(&p_origin))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -9235,6 +18859,36 @@ func NewTransform(
 ) Transform {
 	dest := Transform{}
 
+	api := CoreApi
+	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
+	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_origin))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -9242,6 +18896,22 @@ func NewTransform(
 
 func NewTransformIdentity() Transform {
 	dest := Transform{}
+
+	api := CoreApi
+	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -9252,6 +18922,29 @@ func NewTransformWithQuat(
 	p_quat Quat, /* godot_quat */
 ) Transform {
 	dest := Transform{}
+
+	api := Core11Api
+	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -9271,6 +18964,19 @@ func (gdt *Transform) GetBasis() Basis {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -9281,6 +18987,21 @@ func (gdt *Transform) SetBasis(
 
 	/* go_godot_transform_set_basis(API_STRUCT, *godot_basis) ->void */
 
+	rcv := (*C.godot_transform)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_basis)(unsafe.Pointer(&p_v))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_transform_get_origin -> godot_vector3 */
@@ -9296,6 +19017,19 @@ func (gdt *Transform) GetOrigin() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -9306,6 +19040,21 @@ func (gdt *Transform) SetOrigin(
 
 	/* go_godot_transform_set_origin(API_STRUCT, *godot_vector3) ->void */
 
+	rcv := (*C.godot_transform)(unsafe.Pointer(gdt))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_transform_as_string -> godot_string */
@@ -9320,6 +19069,19 @@ func (gdt *Transform) AsString() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -9337,6 +19099,19 @@ func (gdt *Transform) Inverse() Transform {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9353,6 +19128,19 @@ func (gdt *Transform) AffineInverse() Transform {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9368,6 +19156,19 @@ func (gdt *Transform) Orthonormalized() Transform {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -9391,6 +19192,31 @@ func (gdt *Transform) Rotated(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9411,6 +19237,25 @@ func (gdt *Transform) Scaled(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9430,6 +19275,25 @@ func (gdt *Transform) Translated(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
@@ -9453,6 +19317,31 @@ func (gdt *Transform) LookingAt(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9472,6 +19361,25 @@ func (gdt *Transform) XformPlane(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
@@ -9493,6 +19401,25 @@ func (gdt *Transform) XformInvPlane(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
 
@@ -9512,6 +19439,25 @@ func (gdt *Transform) OperatorEqual(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -9533,6 +19479,25 @@ func (gdt *Transform) OperatorMultiply(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -9552,6 +19517,25 @@ func (gdt *Transform) XformVector3(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -9573,6 +19557,25 @@ func (gdt *Transform) XformInvVector3(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -9592,6 +19595,25 @@ func (gdt *Transform) XformAABB(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
@@ -9613,6 +19635,25 @@ func (gdt *Transform) XformInvAABB(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
 
@@ -9628,6 +19669,36 @@ func NewTransform2D(
 ) Transform2D {
 	dest := Transform2D{}
 
+	api := CoreApi
+	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_rot))
+	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -9638,6 +19709,43 @@ func NewTransform2DAxisOrigin(
 ) Transform2D {
 	dest := Transform2D{}
 
+	api := CoreApi
+	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_x_axis))
+	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_y_axis))
+	in2 := (*C.godot_vector2)(unsafe.Pointer(&p_origin))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -9645,6 +19753,22 @@ func NewTransform2DAxisOrigin(
 
 func NewTransform2DIdentity() Transform2D {
 	dest := Transform2D{}
+
+	api := CoreApi
+	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
@@ -9664,6 +19788,19 @@ func (gdt *Transform2D) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -9679,6 +19816,19 @@ func (gdt *Transform2D) Inverse() Transform2D {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -9696,6 +19846,19 @@ func (gdt *Transform2D) AffineInverse() Transform2D {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
 
@@ -9711,6 +19874,19 @@ func (gdt *Transform2D) GetRotation() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -9728,6 +19904,19 @@ func (gdt *Transform2D) GetOrigin() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -9744,6 +19933,19 @@ func (gdt *Transform2D) GetScale() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -9759,6 +19961,19 @@ func (gdt *Transform2D) Orthonormalized() Transform2D {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -9780,6 +19995,25 @@ func (gdt *Transform2D) Rotated(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
 
@@ -9799,6 +20033,25 @@ func (gdt *Transform2D) Scaled(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -9820,6 +20073,25 @@ func (gdt *Transform2D) Translated(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
 
@@ -9839,6 +20111,25 @@ func (gdt *Transform2D) XformVector2(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -9860,6 +20151,25 @@ func (gdt *Transform2D) XformInvVector2(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -9880,6 +20190,25 @@ func (gdt *Transform2D) BasisXformVector2(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -9899,6 +20228,25 @@ func (gdt *Transform2D) BasisXformInvVector2(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -9922,6 +20270,31 @@ func (gdt *Transform2D) InterpolateWith(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
 
@@ -9941,6 +20314,25 @@ func (gdt *Transform2D) OperatorEqual(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -9962,6 +20354,25 @@ func (gdt *Transform2D) OperatorMultiply(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
 
@@ -9981,6 +20392,25 @@ func (gdt *Transform2D) XformRect2(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -10002,6 +20432,25 @@ func (gdt *Transform2D) XformInvRect2(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
 
@@ -10017,6 +20466,29 @@ func NewVariantCopy(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_variant)(unsafe.Pointer(&p_src))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10024,6 +20496,22 @@ func NewVariantCopy(
 
 func NewVariantNil() Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10035,6 +20523,29 @@ func NewVariantBool(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_bool)(unsafe.Pointer(&p_b))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10044,6 +20555,29 @@ func NewVariantUint(
 	p_i uint64, /* else case */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := *(*C.uint64_t)(unsafe.Pointer(&p_i))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10055,6 +20589,29 @@ func NewVariantInt(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := *(*C.int64_t)(unsafe.Pointer(&p_i))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10064,6 +20621,29 @@ func NewVariantReal(
 	p_r float64, /* else case */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := *(*C.double)(unsafe.Pointer(&p_r))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10075,6 +20655,31 @@ func NewVariantString(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	// hide godot_string / String and expose native go string
+	strIn0 := internWithGoString(p_s)
+	in0 := (*C.godot_string)(unsafe.Pointer(&strIn0))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10084,6 +20689,29 @@ func NewVariantVector2(
 	p_v2 Vector2, /* godot_vector2 */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_v2))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10095,6 +20723,29 @@ func NewVariantRect2(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_rect2)(unsafe.Pointer(&p_rect2))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10104,6 +20755,29 @@ func NewVariantVector3(
 	p_v3 Vector3, /* godot_vector3 */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v3))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10115,6 +20789,29 @@ func NewVariantTransform2D(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_transform2d)(unsafe.Pointer(&p_t2d))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10124,6 +20821,29 @@ func NewVariantPlane(
 	p_plane Plane, /* godot_plane */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_plane)(unsafe.Pointer(&p_plane))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10135,6 +20855,29 @@ func NewVariantQuat(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10144,6 +20887,29 @@ func NewVariantAABB(
 	p_aabb AABB, /* godot_aabb */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_aabb)(unsafe.Pointer(&p_aabb))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10155,6 +20921,29 @@ func NewVariantBasis(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10164,6 +20953,29 @@ func NewVariantTransform(
 	p_trans Transform, /* godot_transform */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_transform)(unsafe.Pointer(&p_trans))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10175,6 +20987,29 @@ func NewVariantColor(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_color)(unsafe.Pointer(&p_color))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10184,6 +21019,29 @@ func NewVariantNodePath(
 	p_np NodePath, /* godot_node_path */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_node_path)(unsafe.Pointer(&p_np))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10195,6 +21053,29 @@ func NewVariantRID(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_rid)(unsafe.Pointer(&p_rid))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10204,6 +21085,29 @@ func NewVariantObject(
 	p_obj *GodotObject,
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := unsafe.Pointer(p_obj)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10215,6 +21119,29 @@ func NewVariantDictionary(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_dictionary)(unsafe.Pointer(&p_dict))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10224,6 +21151,29 @@ func NewVariantArray(
 	p_arr Array, /* godot_array */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_array)(unsafe.Pointer(&p_arr))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10235,6 +21185,29 @@ func NewVariantPoolByteArray(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_pba))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10244,6 +21217,29 @@ func NewVariantPoolIntArray(
 	p_pia PoolIntArray, /* godot_pool_int_array */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_pia))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10255,6 +21251,29 @@ func NewVariantPoolRealArray(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_pra))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10264,6 +21283,29 @@ func NewVariantPoolStringArray(
 	p_psa PoolStringArray, /* godot_pool_string_array */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_psa))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10275,6 +21317,29 @@ func NewVariantPoolVector2Array(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_pv2a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10285,6 +21350,29 @@ func NewVariantPoolVector3Array(
 ) Variant {
 	dest := Variant{}
 
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_pv3a))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -10294,6 +21382,29 @@ func NewVariantPoolColorArray(
 	p_pca PoolColorArray, /* godot_pool_color_array */
 ) Variant {
 	dest := Variant{}
+
+	api := CoreApi
+	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
+	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_pca))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -10313,6 +21424,19 @@ func (gdt *Variant) GetType() VariantType {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*VariantType)(unsafe.Pointer(&ret))
 }
 
@@ -10328,6 +21452,19 @@ func (gdt *Variant) AsBool() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10345,6 +21482,19 @@ func (gdt *Variant) AsUint() uint64 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*uint64)(unsafe.Pointer(&ret))
 }
 
@@ -10360,6 +21510,19 @@ func (gdt *Variant) AsInt() int64 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int64)(unsafe.Pointer(&ret))
 }
@@ -10377,6 +21540,19 @@ func (gdt *Variant) AsReal() float64 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float64)(unsafe.Pointer(&ret))
 }
 
@@ -10392,6 +21568,19 @@ func (gdt *Variant) AsString() String {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*String)(unsafe.Pointer(&ret))
 }
@@ -10409,6 +21598,19 @@ func (gdt *Variant) AsVector2() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -10424,6 +21626,19 @@ func (gdt *Variant) AsRect2() Rect2 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Rect2)(unsafe.Pointer(&ret))
 }
@@ -10441,6 +21656,19 @@ func (gdt *Variant) AsVector3() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -10456,6 +21684,19 @@ func (gdt *Variant) AsTransform2D() Transform2D {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Transform2D)(unsafe.Pointer(&ret))
 }
@@ -10473,6 +21714,19 @@ func (gdt *Variant) AsPlane() Plane {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Plane)(unsafe.Pointer(&ret))
 }
 
@@ -10488,6 +21742,19 @@ func (gdt *Variant) AsQuat() Quat {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Quat)(unsafe.Pointer(&ret))
 }
@@ -10505,6 +21772,19 @@ func (gdt *Variant) AsAABB() AABB {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*AABB)(unsafe.Pointer(&ret))
 }
 
@@ -10520,6 +21800,19 @@ func (gdt *Variant) AsBasis() Basis {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -10537,6 +21830,19 @@ func (gdt *Variant) AsTransform() Transform {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Transform)(unsafe.Pointer(&ret))
 }
 
@@ -10552,6 +21858,19 @@ func (gdt *Variant) AsColor() Color {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Color)(unsafe.Pointer(&ret))
 }
@@ -10569,6 +21888,19 @@ func (gdt *Variant) AsNodePath() NodePath {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*NodePath)(unsafe.Pointer(&ret))
 }
 
@@ -10584,6 +21916,19 @@ func (gdt *Variant) AsRID() RID {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*RID)(unsafe.Pointer(&ret))
 }
@@ -10601,6 +21946,19 @@ func (gdt *Variant) AsObject() *GodotObject {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return (*GodotObject)(unsafe.Pointer(ret))
 }
 
@@ -10616,6 +21974,19 @@ func (gdt *Variant) AsDictionary() Dictionary {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Dictionary)(unsafe.Pointer(&ret))
 }
@@ -10633,6 +22004,19 @@ func (gdt *Variant) AsArray() Array {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Array)(unsafe.Pointer(&ret))
 }
 
@@ -10648,6 +22032,19 @@ func (gdt *Variant) AsPoolByteArray() PoolByteArray {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolByteArray)(unsafe.Pointer(&ret))
 }
@@ -10665,6 +22062,19 @@ func (gdt *Variant) AsPoolIntArray() PoolIntArray {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolIntArray)(unsafe.Pointer(&ret))
 }
 
@@ -10680,6 +22090,19 @@ func (gdt *Variant) AsPoolRealArray() PoolRealArray {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolRealArray)(unsafe.Pointer(&ret))
 }
@@ -10697,6 +22120,19 @@ func (gdt *Variant) AsPoolStringArray() PoolStringArray {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolStringArray)(unsafe.Pointer(&ret))
 }
 
@@ -10712,6 +22148,19 @@ func (gdt *Variant) AsPoolVector2Array() PoolVector2Array {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolVector2Array)(unsafe.Pointer(&ret))
 }
@@ -10729,6 +22178,19 @@ func (gdt *Variant) AsPoolVector3Array() PoolVector3Array {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*PoolVector3Array)(unsafe.Pointer(&ret))
 }
 
@@ -10744,6 +22206,19 @@ func (gdt *Variant) AsPoolColorArray() PoolColorArray {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*PoolColorArray)(unsafe.Pointer(&ret))
 }
@@ -10773,6 +22248,43 @@ func (gdt *Variant) Call(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Variant)(unsafe.Pointer(&ret))
 }
 
@@ -10792,6 +22304,25 @@ func (gdt *Variant) HasMethod(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10813,6 +22344,25 @@ func (gdt *Variant) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -10832,6 +22382,25 @@ func (gdt *Variant) OperatorLess(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10853,6 +22422,25 @@ func (gdt *Variant) HashCompare(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -10868,6 +22456,19 @@ func (gdt *Variant) Booleanize() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -10992,6 +22593,36 @@ func NewVector2(
 ) Vector2 {
 	dest := Vector2{}
 
+	api := CoreApi
+	rcv := (*C.godot_vector2)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	RegisterState.Stats.GodotTypeAllocs["Vector2"]++
 
 	return dest
@@ -11010,6 +22641,19 @@ func (gdt *Vector2) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -11025,6 +22669,19 @@ func (gdt *Vector2) Normalized() Vector2 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11042,6 +22699,19 @@ func (gdt *Vector2) Length() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11057,6 +22727,19 @@ func (gdt *Vector2) Angle() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11074,6 +22757,19 @@ func (gdt *Vector2) LengthSquared() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11089,6 +22785,19 @@ func (gdt *Vector2) IsNormalized() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11110,6 +22819,25 @@ func (gdt *Vector2) DistanceTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11129,6 +22857,25 @@ func (gdt *Vector2) DistanceSquaredTo(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11150,6 +22897,25 @@ func (gdt *Vector2) AngleTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11169,6 +22935,25 @@ func (gdt *Vector2) AngleToPoint(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11191,6 +22976,31 @@ func (gdt *Vector2) LinearInterpolate(
 		in0,
 		in1,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11218,6 +23028,43 @@ func (gdt *Vector2) CubicInterpolate(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11238,6 +23085,25 @@ func (gdt *Vector2) Rotated(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11254,6 +23120,19 @@ func (gdt *Vector2) Tangent() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11269,6 +23148,19 @@ func (gdt *Vector2) Floor() Vector2 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11290,6 +23182,25 @@ func (gdt *Vector2) Snapped(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11305,6 +23216,19 @@ func (gdt *Vector2) Aspect() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11326,6 +23250,25 @@ func (gdt *Vector2) Dot(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11345,6 +23288,25 @@ func (gdt *Vector2) Slide(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11366,6 +23328,25 @@ func (gdt *Vector2) Bounce(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11386,6 +23367,25 @@ func (gdt *Vector2) Reflect(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11401,6 +23401,19 @@ func (gdt *Vector2) Abs() Vector2 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11422,6 +23435,25 @@ func (gdt *Vector2) Clamped(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11441,6 +23473,25 @@ func (gdt *Vector2) OperatorAdd(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11462,6 +23513,25 @@ func (gdt *Vector2) OperatorSubtract(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11481,6 +23551,25 @@ func (gdt *Vector2) OperatorMultiplyVector(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11502,6 +23591,25 @@ func (gdt *Vector2) OperatorMultiplyScalar(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11521,6 +23629,25 @@ func (gdt *Vector2) OperatorDivideVector(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
@@ -11542,6 +23669,25 @@ func (gdt *Vector2) OperatorDivideScalar(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11561,6 +23707,25 @@ func (gdt *Vector2) OperatorEqual(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11582,6 +23747,25 @@ func (gdt *Vector2) OperatorLess(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -11598,6 +23782,19 @@ func (gdt *Vector2) OperatorNeg() Vector2 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11608,6 +23805,21 @@ func (gdt *Vector2) SetX(
 
 	/* go_godot_vector2_set_x(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_vector2)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Setter Method: godot_vector2_set_y -> void */
@@ -11617,6 +23829,21 @@ func (gdt *Vector2) SetY(
 
 	/* go_godot_vector2_set_y(API_STRUCT,godot_real) ->void */
 
+	rcv := (*C.godot_vector2)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_y))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 }
 
 /* Getter Method: godot_vector2_get_x -> godot_real */
@@ -11631,6 +23858,19 @@ func (gdt *Vector2) GetX() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11647,6 +23887,19 @@ func (gdt *Vector2) GetY() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11670,6 +23923,31 @@ func (gdt *Vector2) MoveToward(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11690,6 +23968,25 @@ func (gdt *Vector2) DirectionTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector2)(unsafe.Pointer(&ret))
 }
 
@@ -11704,6 +24001,43 @@ func NewVector3(
 	p_x float32 /* else case */, p_y float32 /* else case */, p_z float32, /* else case */
 ) Vector3 {
 	dest := Vector3{}
+
+	api := CoreApi
+	rcv := (*C.godot_vector3)(unsafe.Pointer(&dest))
+	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
+	in2 := *(*C.godot_real)(unsafe.Pointer(&p_z))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
 
 	RegisterState.Stats.GodotTypeAllocs["Vector3"]++
 
@@ -11723,6 +24057,19 @@ func (gdt *Vector3) AsString() String {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*String)(unsafe.Pointer(&ret))
 }
 
@@ -11738,6 +24085,19 @@ func (gdt *Vector3) MinAxis() int32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*int32)(unsafe.Pointer(&ret))
 }
@@ -11755,6 +24115,19 @@ func (gdt *Vector3) MaxAxis() int32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*int32)(unsafe.Pointer(&ret))
 }
 
@@ -11770,6 +24143,19 @@ func (gdt *Vector3) Length() float32 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11787,6 +24173,19 @@ func (gdt *Vector3) LengthSquared() float32 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -11802,6 +24201,19 @@ func (gdt *Vector3) IsNormalized() bool {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*bool)(unsafe.Pointer(&ret))
 }
@@ -11819,6 +24231,19 @@ func (gdt *Vector3) Normalized() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -11834,6 +24259,19 @@ func (gdt *Vector3) Inverse() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -11854,6 +24292,25 @@ func (gdt *Vector3) Snapped(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -11877,6 +24334,31 @@ func (gdt *Vector3) Rotated(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -11898,6 +24380,31 @@ func (gdt *Vector3) LinearInterpolate(
 		in0,
 		in1,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -11925,6 +24432,43 @@ func (gdt *Vector3) CubicInterpolate(
 		in3,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in2)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in3)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -11944,6 +24488,25 @@ func (gdt *Vector3) Dot(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -11965,6 +24528,25 @@ func (gdt *Vector3) Cross(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -11985,6 +24567,25 @@ func (gdt *Vector3) Outer(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
 
@@ -12000,6 +24601,19 @@ func (gdt *Vector3) ToDiagonalMatrix() Basis {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Basis)(unsafe.Pointer(&ret))
 }
@@ -12017,6 +24631,19 @@ func (gdt *Vector3) Abs() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12033,6 +24660,19 @@ func (gdt *Vector3) Floor() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12048,6 +24688,19 @@ func (gdt *Vector3) Ceil() Vector3 {
 		api,
 		rcv,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12069,6 +24722,25 @@ func (gdt *Vector3) DistanceTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -12088,6 +24760,25 @@ func (gdt *Vector3) DistanceSquaredTo(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -12109,6 +24800,25 @@ func (gdt *Vector3) AngleTo(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*float32)(unsafe.Pointer(&ret))
 }
 
@@ -12128,6 +24838,25 @@ func (gdt *Vector3) Slide(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12149,6 +24878,25 @@ func (gdt *Vector3) Bounce(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12168,6 +24916,25 @@ func (gdt *Vector3) Reflect(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12189,6 +24956,25 @@ func (gdt *Vector3) OperatorAdd(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12208,6 +24994,25 @@ func (gdt *Vector3) OperatorSubtract(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12229,6 +25034,25 @@ func (gdt *Vector3) OperatorMultiplyVector(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12248,6 +25072,25 @@ func (gdt *Vector3) OperatorMultiplyScalar(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12269,6 +25112,25 @@ func (gdt *Vector3) OperatorDivideVector(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12288,6 +25150,25 @@ func (gdt *Vector3) OperatorDivideScalar(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
@@ -12309,6 +25190,25 @@ func (gdt *Vector3) OperatorEqual(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -12329,6 +25229,25 @@ func (gdt *Vector3) OperatorLess(
 		in0,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+
 	return *(*bool)(unsafe.Pointer(&ret))
 }
 
@@ -12345,6 +25264,19 @@ func (gdt *Vector3) OperatorNeg() Vector3 {
 		rcv,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12355,6 +25287,28 @@ func (gdt *Vector3) SetAxis(
 
 	/* go_godot_vector3_set_axis(API_STRUCT,godot_vector3_axis,godot_real) ->void */
 
+	rcv := (*C.godot_vector3)(unsafe.Pointer(gdt))
+	in0 := *(*C.godot_vector3_axis)(unsafe.Pointer(&p_axis))
+	in1 := *(*C.godot_real)(unsafe.Pointer(&p_val))
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
 }
 
 /* Getter Method: godot_vector3_get_axis -> godot_real */
@@ -12373,6 +25327,25 @@ func (gdt *Vector3) GetAxis(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*float32)(unsafe.Pointer(&ret))
 }
@@ -12396,6 +25369,31 @@ func (gdt *Vector3) MoveToward(
 		in1,
 	)
 
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in1)
+
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }
 
@@ -12415,6 +25413,25 @@ func (gdt *Vector3) DirectionTo(
 		rcv,
 		in0,
 	)
+
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(api)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(rcv)
+	go func(x interface{}) {
+		select {
+		case <-gotime.After(100 * gotime.Millisecond):
+			return
+		}
+	}(in0)
 
 	return *(*Vector3)(unsafe.Pointer(&ret))
 }

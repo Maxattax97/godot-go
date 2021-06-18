@@ -37,7 +37,6 @@ package gdnative
 */
 import "C"
 import (
-"fmt"
 "unsafe"
 "runtime"
 gotime "time"
@@ -103,6 +102,59 @@ func init() {
     func {{ .Name }}({{ template "ARGUMENTS" . }}) {{ $returnTypeGoName }} {
         dest := {{ $returnTypeGoName }}{}
 
+        api := {{ .ApiMetadata.Name }}
+        {{- if or .ReturnType.IsGodotObjectPointer .ReturnType.IsVoidPointer }}
+            rcv := unsafe.Pointer(&dest)
+        {{- else }}
+            rcv := (*C.{{ .ReturnType.CName }})(unsafe.Pointer(&dest))
+        {{- end }}
+        {{- range $k, $arg := .Arguments }}
+            {{- if $arg.Type.IsGodotObjectPointer }}
+                in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+            {{- else if and (or $arg.Type.IsString $arg.Type.IsStringName) (ne $returnTypeGoName "String") (ne $returnTypeGoName "StringName") }}
+                // hide {{ $arg.Type.CName }} / {{ $arg.Type.GoName }} and expose native go string
+                strIn{{ $k }} := internWithGoString({{ $arg.Name }})
+                in{{ $k }} := (*C.{{ $arg.Type.CName }})(unsafe.Pointer(&strIn{{ $k }}))
+            {{- else if $arg.Type.IsVoidPointer }}
+                in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+            {{- else if $arg.Type.IsCharPointer }}
+                in{{ $k }} := C.CString({{ $arg.Name }})
+                defer C.free(unsafe.Pointer(in{{ $k }}))
+            {{- else if $arg.Type.IsGodotVariantPointerArray }}
+                cArr{{ $k }} := AllocNewArrayAsUnsafePointer({{ $arg.Name }})
+                defer Free(cArr{{ $k }})
+                in{{ $k }} := (**C.{{ $arg.Type.CName }})(unsafe.Pointer(cArr{{ $k }}))
+            {{- else if $arg.Type.IsVoidPointerArray }}
+                cArr{{ $k }} := ArrayRefFromPtrSlice({{ $arg.Name }})
+                in{{ $k }} := (*unsafe.Pointer)(unsafe.Pointer(cArr{{ $k }}))
+            {{- else if $arg.Type.IsPointer }}
+                in{{ $k }} := (*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+            {{- else }}
+                in{{ $k }} := *(*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+            {{- end }}
+        {{- end }}
+
+        go func(x interface{}) {
+			select {
+			case <-gotime.After(100 * gotime.Millisecond):
+				return
+			}
+		}(api)
+		go func(x interface{}) {
+			select {
+			case <-gotime.After(100 * gotime.Millisecond):
+				return
+			}
+		}(rcv)
+        {{- range $k, $arg := .Arguments }}
+			go func(x interface{}) {
+				select {
+				case <-gotime.After(100 * gotime.Millisecond):
+					return
+				}
+			}(in{{$k}})
+        {{- end }}
+
         RegisterState.Stats.GodotTypeAllocs["{{ $returnTypeGoName }}"]++
 
         {{/* {{- if $hasDestroyMethod }}
@@ -120,9 +172,48 @@ func init() {
     func (gdt *{{ .Receiver.Type.GoName }}) {{ .Name }}({{ template "ARGUMENTS" . }}) {
         {{ template "DESCRIBE_CMETHOD" . }}
 
+
         {{- if eq .Name "Destroy" }}
             RegisterState.Stats.GodotTypeFrees["{{ .Receiver.Type.GoName }}"]++
             {{/* runtime.SetFinalizer(gdt, nil) */}}
+        {{- else}}
+            rcv := (*C.{{ .Receiver.Type.CName }})(unsafe.Pointer(gdt))
+            {{- range $k, $arg := .Arguments }}
+                {{- if $arg.Type.IsGodotObjectPointer }}
+                    in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+                {{- else if $arg.Type.IsVoidPointer }}
+                    in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+                {{- else if $arg.Type.IsCharPointer }}
+                    in{{ $k }} := C.CString({{ $arg.Name }})
+                    defer C.free(unsafe.Pointer(in{{ $k }}))
+                {{- else if $arg.Type.IsGodotVariantPointerArray }}
+                    cArr{{ $k }} := AllocNewArrayAsUnsafePointer({{ $arg.Name }})
+                    defer Free(cArr{{ $k }})
+                    in{{ $k }} := (**C.{{ $arg.Type.CName }})(unsafe.Pointer(cArr{{ $k }}))
+                {{- else if $arg.Type.IsVoidPointerArray }}
+                    cArr{{ $k }} := ArrayRefFromPtrSlice({{ $arg.Name }})
+                    in{{ $k }} := (*unsafe.Pointer)(unsafe.Pointer(cArr{{ $k }}))
+                {{- else if $arg.Type.IsPointer }}
+                    in{{ $k }} := (*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+                {{- else }}
+                    in{{ $k }} := *(*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+                {{- end }}
+            {{- end }}
+
+            go func(x interface{}) {
+                select {
+                case <-gotime.After(100 * gotime.Millisecond):
+                    return
+                }
+            }(rcv)
+            {{- range $k, $arg := .Arguments }}
+                go func(x interface{}) {
+                    select {
+                    case <-gotime.After(100 * gotime.Millisecond):
+                        return
+                    }
+                }(in{{$k}})
+            {{- end }}
         {{- end }}
     }
 {{ end }}
@@ -174,6 +265,27 @@ func init() {
             {{- end }}
         )
 
+        go func(x interface{}) {
+            select {
+            case <-gotime.After(100 * gotime.Millisecond):
+                return
+            }
+        }(api)
+        go func(x interface{}) {
+            select {
+            case <-gotime.After(100 * gotime.Millisecond):
+                return
+            }
+        }(rcv)
+        {{- range $k, $arg := .Arguments }}
+            go func(x interface{}) {
+                select {
+                case <-gotime.After(100 * gotime.Millisecond):
+                    return
+                }
+            }(in{{$k}})
+        {{- end }}
+
         return {{ if .ReturnType.IsGodotObjectPointer -}}
             (*GodotObject)(unsafe.Pointer(ret))
         {{- else if .ReturnType.IsCharPointer -}}
@@ -200,32 +312,47 @@ func init() {
     {{- else -}}
         {{ .ReturnType.GoName }}
     {{- end }} {
+        api := {{ .ApiMetadata.Name }}
+        {{- range $k, $arg := .Arguments }}
+            {{- if $arg.Type.IsGodotObjectPointer }}
+                in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+            {{- else if $arg.Type.IsVoidPointer }}
+                in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
+            {{- else if $arg.Type.IsCharPointer }}
+                in{{ $k }} := C.CString({{ $arg.Name }})
+                defer C.free(unsafe.Pointer(in{{ $k }}))
+            {{- else if $arg.Type.IsGodotVariantPointerArray }}
+                cArr{{ $k }} := AllocNewArrayAsUnsafePointer({{ $arg.Name }})
+                defer Free(cArr{{ $k }})
+                in{{ $k }} := (**C.{{ $arg.Type.CName }})(unsafe.Pointer(cArr{{ $k }}))
+            {{- else if $arg.Type.IsVoidPointerArray }}
+                cArr{{ $k }} := ArrayRefFromPtrSlice({{ $arg.Name }})
+                in{{ $k }} := (*unsafe.Pointer)(unsafe.Pointer(cArr{{ $k }}))
+            {{- else if $arg.Type.IsPointer }}
+                in{{ $k }} := (*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+            {{- else }}
+                in{{ $k }} := *(*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
+            {{- end }}
+        {{- end }}
+
         {{ template "DESCRIBE_CMETHOD" . }}
+        go func(x interface{}) {
+            select {
+            case <-gotime.After(100 * gotime.Millisecond):
+                return
+            }
+        }(api)
+        {{- range $k, $arg := .Arguments }}
+            go func(x interface{}) {
+                select {
+                case <-gotime.After(100 * gotime.Millisecond):
+                    return
+                }
+            }(in{{$k}})
+        {{- end }}
+            
         {{ if .IsSetter }}
         {{ else }}
-            api := {{ .ApiMetadata.Name }}
-            {{- range $k, $arg := .Arguments }}
-                {{- if $arg.Type.IsGodotObjectPointer }}
-                    in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
-                {{- else if $arg.Type.IsVoidPointer }}
-                    in{{ $k }} := unsafe.Pointer({{ $arg.Name }})
-                {{- else if $arg.Type.IsCharPointer }}
-                    in{{ $k }} := C.CString({{ $arg.Name }})
-                    defer C.free(unsafe.Pointer(in{{ $k }}))
-                {{- else if $arg.Type.IsGodotVariantPointerArray }}
-                    cArr{{ $k }} := AllocNewArrayAsUnsafePointer({{ $arg.Name }})
-                    defer Free(cArr{{ $k }})
-                    in{{ $k }} := (**C.{{ $arg.Type.CName }})(unsafe.Pointer(cArr{{ $k }}))
-                {{- else if $arg.Type.IsVoidPointerArray }}
-                    cArr{{ $k }} := ArrayRefFromPtrSlice({{ $arg.Name }})
-                    in{{ $k }} := (*unsafe.Pointer)(unsafe.Pointer(cArr{{ $k }}))
-                {{- else if $arg.Type.IsPointer }}
-                    in{{ $k }} := (*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
-                {{- else }}
-                    in{{ $k }} := *(*C.{{ $arg.Type.CName }})(unsafe.Pointer(&{{ $arg.Name }}))
-                {{- end }}
-            {{- end }}
-
             ret := C.go_{{ .CName }}(
                 api,
                 {{- range $k, $arg := .Arguments }}
