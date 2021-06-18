@@ -37,6 +37,7 @@ package gdnative
 */
 import "C"
 import (
+"fmt"
 "unsafe"
 "runtime"
 gotime "time"
@@ -146,6 +147,7 @@ func init() {
 		go func(x interface{}) {
 			select {
 			case <-gotime.After(33 * gotime.Millisecond):
+                fmt.Printf("\tLetting go of object\n")
 				return
 			}
 		}(rcv)
@@ -153,6 +155,7 @@ func init() {
 			go func(x interface{}) {
 				select {
 				case <-gotime.After(33 * gotime.Millisecond):
+                    fmt.Printf("\tLetting go of object\n")
 					return
 				}
 			}(in{{$k}})
@@ -211,6 +214,7 @@ func init() {
 			go func(x interface{}) {
 				select {
 				case <-gotime.After(33 * gotime.Millisecond):
+                    fmt.Printf("\tLetting go of object\n")
 					return
 				}
 			}(in{{$k}})
@@ -274,6 +278,7 @@ func init() {
 			go func(x interface{}) {
 				select {
 				case <-gotime.After(33 * gotime.Millisecond):
+                    fmt.Printf("\tLetting go of object\n")
 					return
 				}
 			}(in{{$k}})
@@ -342,6 +347,7 @@ func init() {
 				go func(x interface{}) {
 					select {
 					case <-gotime.After(33 * gotime.Millisecond):
+                        fmt.Printf("\tLetting go of object\n")
 						return
 					}
 				}(in{{$k}})
@@ -358,6 +364,7 @@ func init() {
 				go func(x interface{}) {
 					select {
 					case <-gotime.After(33 * gotime.Millisecond):
+                        fmt.Printf("\tLetting go of object\n")
 						return
 					}
 				}(in{{$k}})

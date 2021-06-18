@@ -402,6 +402,7 @@ func init() {
 					go func(x interface{}) {
 						select {
 						case <-gotime.After(33 * gotime.Millisecond):
+							fmt.Printf("\tLetting go of object\n")
 							return
 						}
 					}(_arg{{ $k }})
@@ -410,6 +411,7 @@ func init() {
 				go func(x interface{}) {
 					select {
 					case <-gotime.After(33 * gotime.Millisecond):
+						fmt.Printf("\tLetting go of object\n")
 						return
 					}
 				}(ptrArguments)
