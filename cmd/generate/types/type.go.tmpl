@@ -39,7 +39,7 @@ import "C"
 import (
 "unsafe"
 "runtime"
-"time"
+gotime "time"
 )
 
 func init() {
@@ -145,14 +145,14 @@ func init() {
 
 		go func(x interface{}) {
 			select {
-			case <-time.After(33 * time.Millisecond):
+			case <-gotime.After(33 * gotime.Millisecond):
 				return
 			}
 		}(rcv)
         {{- range $k, $arg := .Arguments }}
 			go func(x interface{}) {
 				select {
-				case <-time.After(33 * time.Millisecond):
+				case <-gotime.After(33 * gotime.Millisecond):
 					return
 				}
 			}(in{{$k}})
@@ -210,7 +210,7 @@ func init() {
         {{- range $k, $arg := .Arguments }}
 			go func(x interface{}) {
 				select {
-				case <-time.After(33 * time.Millisecond):
+				case <-gotime.After(33 * gotime.Millisecond):
 					return
 				}
 			}(in{{$k}})
@@ -273,7 +273,7 @@ func init() {
         {{- range $k, $arg := .Arguments }}
 			go func(x interface{}) {
 				select {
-				case <-time.After(33 * time.Millisecond):
+				case <-gotime.After(33 * gotime.Millisecond):
 					return
 				}
 			}(in{{$k}})
@@ -341,7 +341,7 @@ func init() {
             {{- range $k, $arg := .Arguments }}
 				go func(x interface{}) {
 					select {
-					case <-time.After(33 * time.Millisecond):
+					case <-gotime.After(33 * gotime.Millisecond):
 						return
 					}
 				}(in{{$k}})
@@ -357,7 +357,7 @@ func init() {
             {{- range $k, $arg := .Arguments }}
 				go func(x interface{}) {
 					select {
-					case <-time.After(33 * time.Millisecond):
+					case <-gotime.After(33 * gotime.Millisecond):
 						return
 					}
 				}(in{{$k}})
