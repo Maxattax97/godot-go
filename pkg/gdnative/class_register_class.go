@@ -8,6 +8,7 @@ package gdnative
 */
 import "C"
 import (
+	"fmt"
 	"reflect"
 	"unsafe"
 
@@ -114,6 +115,7 @@ func RegisterClass(instance NativeScriptClass) {
 	instance.OnClassRegistered(event)
 
 	log.Info("class registered", StringField("class", className))
+	fmt.Printf("godot-go: Class registered %v\n", className)
 }
 
 //export go_create_func

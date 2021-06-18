@@ -131,6 +131,7 @@ func GodotGdnativeInit(options *GdnativeInitOptions) {
 	}
 
 	log.Debug("GodotGdnativeInit finished")
+	fmt.Printf("Godot-Go GDNative init finished.\n")
 }
 
 // func GodotGdnativeProfilingAddData(signature *byte, time uint64) {
@@ -163,6 +164,7 @@ func GodotGdnativeTerminate(options *GdnativeTerminateOptions) {
 	CoreApi = nil
 
 	log.Debug("GodotGdnativeTerminate finished")
+	fmt.Printf("Godot-Go GDNative terminate finished.\n")
 }
 
 // GodotNativescriptInit should be called from the exported nativescript_init function.
@@ -205,6 +207,7 @@ func GodotNativescriptInit(handle unsafe.Pointer) {
 	}
 
 	log.Debug("GodotNativescriptInit finished")
+	fmt.Printf("Godot-Go GDNative SCRIPT init finished.\n")
 }
 
 // GodotNativescriptTerminate should be called from the exported nativescript_terminate function.
@@ -228,4 +231,5 @@ func GodotNativescriptTerminate(handle unsafe.Pointer) {
 	RegisterState.NativescriptHandle = nil
 
 	log.Debug("GodotNativescriptTerminate finished")
+	fmt.Printf("Godot-Go GDNative SCRIPT terminate finished.\n")
 }
