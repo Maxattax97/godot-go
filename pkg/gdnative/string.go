@@ -7,7 +7,7 @@ package gdnative
 */
 import "C"
 import (
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/log"
 )
 
 // NewStringFromGoString create a new string and fills it with the go string.

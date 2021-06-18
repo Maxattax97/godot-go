@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/log"
 )
 
 // MethodData is used as the key for the internal identity map

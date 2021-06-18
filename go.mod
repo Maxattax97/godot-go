@@ -1,4 +1,4 @@
-module github.com/godot-go/godot-go
+module github.com/Maxattax97/godot-go
 
 go 1.15
 

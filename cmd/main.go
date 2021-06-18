@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/godot-go/godot-go/cmd/generate/classes"
-	"github.com/godot-go/godot-go/cmd/generate/gdnativewrapper"
-	"github.com/godot-go/godot-go/cmd/generate/types"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
+
+	"github.com/Maxattax97/godot-go/cmd/generate/classes"
+	"github.com/Maxattax97/godot-go/cmd/generate/gdnativewrapper"
+	"github.com/Maxattax97/godot-go/cmd/generate/types"
 
 	"github.com/spf13/cobra"
 )

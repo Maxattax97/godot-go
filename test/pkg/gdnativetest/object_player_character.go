@@ -5,8 +5,8 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/godot-go/godot-go/pkg/gdnative"
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/gdnative"
+	"github.com/Maxattax97/godot-go/pkg/log"
 )
 
 // PlayerCharacter is a custom NativeScript class that represents an entity in the game

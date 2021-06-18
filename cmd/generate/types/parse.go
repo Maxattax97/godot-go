@@ -4,13 +4,14 @@ package types
 
 import (
 	"fmt"
-	"github.com/pinzolo/casee"
 	"io/ioutil"
 	"os"
-	"regexp"
 	"path/filepath"
+	"regexp"
 	"strings"
-	"github.com/godot-go/godot-go/cmd/gdnativeapijson"
+
+	"github.com/Maxattax97/godot-go/cmd/gdnativeapijson"
+	"github.com/pinzolo/casee"
 )
 
 var cTypeRegex = regexp.MustCompile(`(const)?\s*([\w_][\w_\d]*)\s*(\**)`)
@@ -124,8 +125,6 @@ func parseTypeDef(typeLines []string, headerName string) gdnativeapijson.GoTypeD
 		}
 
 		var err error
-
-
 
 		// Get the words of the line
 		words := strings.Split(line, " ")
@@ -294,7 +293,7 @@ func findTypeDefs(content []byte) [][]string {
 			if len(blocks) == 0 {
 				panic(fmt.Sprintln("\tLine", i, ": extra closing bracket encountered", line))
 			}
-			n := len(blocks)-1
+			n := len(blocks) - 1
 			b := blocks[n]
 			blocks = blocks[:n]
 
@@ -341,7 +340,7 @@ func findTypeDefs(content []byte) [][]string {
 				singleType = append(singleType, line)
 			}
 		} else if len(blocks) > 0 {
-			b := blocks[len(blocks) - 1]
+			b := blocks[len(blocks)-1]
 			if b == typedefBlock {
 				singleType = append(singleType, line)
 			}

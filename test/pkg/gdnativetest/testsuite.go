@@ -9,7 +9,7 @@ import "C"
 import (
 	"os"
 
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/log"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

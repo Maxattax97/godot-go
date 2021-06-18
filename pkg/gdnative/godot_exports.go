@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"unsafe"
 
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/log"
 )
 
 //GodotGoVersion holds the relese version

@@ -3,7 +3,7 @@ package gdnativeapijson
 import (
 	"strings"
 
-	"github.com/godot-go/godot-go/cmd/generate/classes"
+	"github.com/Maxattax97/godot-go/cmd/generate/classes"
 
 	"github.com/pinzolo/casee"
 )

@@ -11,8 +11,8 @@ import (
 	"sort"
 	"text/template"
 
-	"github.com/godot-go/godot-go/cmd/gdnativeapijson"
-	"github.com/godot-go/godot-go/cmd/generate/classes"
+	"github.com/Maxattax97/godot-go/cmd/gdnativeapijson"
+	"github.com/Maxattax97/godot-go/cmd/generate/classes"
 )
 
 // TODO: Some headers have been removed to reduce compile time.

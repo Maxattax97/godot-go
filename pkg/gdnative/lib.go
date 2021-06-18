@@ -16,7 +16,7 @@ import (
 	"sort"
 	"unsafe"
 
-	"github.com/godot-go/godot-go/pkg/log"
+	"github.com/Maxattax97/godot-go/pkg/log"
 )
 
 type RegisterStateStruct struct {

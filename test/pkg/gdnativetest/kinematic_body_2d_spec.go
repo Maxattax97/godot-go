@@ -1,7 +1,7 @@
 package gdnativetest
 
 import (
-	"github.com/godot-go/godot-go/pkg/gdnative"
+	"github.com/Maxattax97/godot-go/pkg/gdnative"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

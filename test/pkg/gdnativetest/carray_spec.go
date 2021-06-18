@@ -7,8 +7,9 @@ package gdnativetest
 */
 import "C"
 import (
-	"github.com/godot-go/godot-go/pkg/gdnative"
 	"unsafe"
+
+	"github.com/Maxattax97/godot-go/pkg/gdnative"
 
 	//revive:disable:dot-imports
 	. "github.com/onsi/ginkgo"
@@ -21,7 +22,7 @@ func testcall(api unsafe.Pointer, pArgs []unsafe.Pointer, pRet unsafe.Pointer) {
 		(*C.godot_gdnative_core_api_struct)(api),
 		*(**unsafe.Pointer)(unsafe.Pointer(&pArgs)),
 		pRet,
-	);
+	)
 }
 
 var _ = Describe("Array Helpers", func() {
@@ -35,10 +36,10 @@ var _ = Describe("Array Helpers", func() {
 			)
 
 			var (
-				cn   *C.char = C.CString(name)
-				cf   C.float = (C.float)(f)
-				ci   C.int   = (C.int)(i)
-				cb   C.bool  = (C.bool)(b)
+				cn *C.char = C.CString(name)
+				cf C.float = (C.float)(f)
+				ci C.int   = (C.int)(i)
+				cb C.bool  = (C.bool)(b)
 			)
 
 			defer C.free(unsafe.Pointer(cn))
@@ -73,10 +74,10 @@ var _ = Describe("Array Helpers", func() {
 			)
 
 			var (
-				cn   *C.char = C.CString(name)
-				cf   C.float = (C.float)(f)
-				ci   C.int   = (C.int)(i)
-				cb   C.bool  = (C.bool)(b)
+				cn *C.char = C.CString(name)
+				cf C.float = (C.float)(f)
+				ci C.int   = (C.int)(i)
+				cb C.bool  = (C.bool)(b)
 			)
 
 			defer C.free(unsafe.Pointer(cn))

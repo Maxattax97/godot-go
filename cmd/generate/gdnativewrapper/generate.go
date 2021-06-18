@@ -1,18 +1,18 @@
 // Package gdnativewrapper generates C code to wrap all of the gdnative
 // methods to call functions on the gdnative_api_structs to work
-// around the cgo C function pointer limitation. 
+// around the cgo C function pointer limitation.
 package gdnativewrapper
 
 import (
-	"path/filepath"
 	"bytes"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 	"text/template"
 
-	"github.com/godot-go/godot-go/cmd/gdnativeapijson"
+	"github.com/Maxattax97/godot-go/cmd/gdnativeapijson"
 )
 
 // View is a structure that holds the api struct, so it can be used inside
@@ -93,15 +93,15 @@ func Generate(packagePath string) {
 	// Generate the C bindings
 	log.Println("Generating", view.StructType, "C headers...")
 	writeTemplate(
-		filepath.Join(packagePath,"cmd/generate/gdnativewrapper/gdnative.h.tmpl"),
-		filepath.Join(packagePath,"pkg/gdnative/gdnative.wrapper.gen.h"),
+		filepath.Join(packagePath, "cmd/generate/gdnativewrapper/gdnative.h.tmpl"),
+		filepath.Join(packagePath, "pkg/gdnative/gdnative.wrapper.gen.h"),
 		view,
 	)
 
 	log.Println("Generating", view.StructType, "C bindings...")
 	writeTemplate(
 		filepath.Join(packagePath, "cmd/generate/gdnativewrapper/gdnative.c.tmpl"),
-		filepath.Join(packagePath,"pkg/gdnative/gdnative.wrapper.gen.c"),
+		filepath.Join(packagePath, "pkg/gdnative/gdnative.wrapper.gen.c"),
 		view,
 	)
 
@@ -137,19 +137,19 @@ func Generate(packagePath string) {
 // fileExists checks if a file exists and is not a directory before we
 // try using it to prevent further errors.
 func fileExists(filename string) bool {
-    info, err := os.Stat(filename)
-    if os.IsNotExist(err) {
-        return false
-    }
-    return !info.IsDir()
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
 
 // returns true if there were changes
 func writeTemplate(templatePath, outputPath string, view View) {
 	var (
-		err error
+		err          error
 		generatedBuf bytes.Buffer
-		t *template.Template
+		t            *template.Template
 	)
 
 	// Create a template from our template file.

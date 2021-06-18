@@ -9,7 +9,7 @@ import "C"
 import (
 	"reflect"
 
-	"github.com/godot-go/godot-go/pkg/gdnative"
+	"github.com/Maxattax97/godot-go/pkg/gdnative"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -53,7 +53,7 @@ var _ = Describe("Variant", func() {
 		})
 
 		It("should return a real type with float32", func() {
-			var f float32  = 3.6
+			var f float32 = 3.6
 			v := gdnative.GoTypeToVariant(reflect.ValueOf(f))
 			defer v.Destroy()
 
@@ -62,7 +62,7 @@ var _ = Describe("Variant", func() {
 		})
 
 		It("should return a real type with float64", func() {
-			var f float64  = 3.6
+			var f float64 = 3.6
 			v := gdnative.GoTypeToVariant(reflect.ValueOf(f))
 			defer v.Destroy()
 
@@ -126,7 +126,6 @@ var _ = Describe("Variant", func() {
 			newNode2d := gdnative.NewNode2DWithOwner(v.AsObject())
 			Ω(n).Should(Equal(newNode2d))
 
-			
 		})
 	})
 })
