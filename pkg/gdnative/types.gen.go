@@ -128,10 +128,11 @@ func init() {
 func StringChr(
 	p_character int32, /* else case */
 ) String {
-	api := CoreApi
-	in0 := *(*C.wchar_t)(unsafe.Pointer(&p_character))
 
 	/* go_godot_string_chr(API_STRUCT,wchar_t) ->godot_string */
+
+	api := CoreApi
+	in0 := *(*C.wchar_t)(unsafe.Pointer(&p_character))
 
 	ret := C.go_godot_string_chr(
 		api,
@@ -147,15 +148,8 @@ func StringChr(
 func ObjectDestroy(
 	p_o *GodotObject,
 ) {
-	api := CoreApi
-	in0 := unsafe.Pointer(p_o)
 
 	/* go_godot_object_destroy(API_STRUCT, *godot_object) ->void */
-
-	C.go_godot_object_destroy(
-		api,
-		in0,
-	)
 
 }
 
@@ -164,11 +158,12 @@ func ObjectDestroy(
 func GlobalGetSingleton(
 	p_name string,
 ) *GodotObject {
+
+	/* go_godot_global_get_singleton(API_STRUCT, *char) -> *GodotObject */
+
 	api := CoreApi
 	in0 := C.CString(p_name)
 	defer C.free(unsafe.Pointer(in0))
-
-	/* go_godot_global_get_singleton(API_STRUCT, *char) -> *GodotObject */
 
 	ret := C.go_godot_global_get_singleton(
 		api,
@@ -184,13 +179,14 @@ func GlobalGetSingleton(
 func MethodBindGetMethod(
 	p_classname string, p_methodname string,
 ) *MethodBind {
+
+	/* go_godot_method_bind_get_method(API_STRUCT, *char, *char) -> *MethodBind */
+
 	api := CoreApi
 	in0 := C.CString(p_classname)
 	defer C.free(unsafe.Pointer(in0))
 	in1 := C.CString(p_methodname)
 	defer C.free(unsafe.Pointer(in1))
-
-	/* go_godot_method_bind_get_method(API_STRUCT, *char, *char) -> *MethodBind */
 
 	ret := C.go_godot_method_bind_get_method(
 		api,
@@ -207,10 +203,11 @@ func MethodBindGetMethod(
 func Alloc(
 	p_bytes int32, /* else case */
 ) unsafe.Pointer {
-	api := CoreApi
-	in0 := *(*C.int)(unsafe.Pointer(&p_bytes))
 
 	/* go_godot_alloc(API_STRUCT,int) -> *void */
+
+	api := CoreApi
+	in0 := *(*C.int)(unsafe.Pointer(&p_bytes))
 
 	ret := C.go_godot_alloc(
 		api,
@@ -226,11 +223,12 @@ func Alloc(
 func Realloc(
 	p_ptr unsafe.Pointer, p_bytes int32, /* else case */
 ) unsafe.Pointer {
+
+	/* go_godot_realloc(API_STRUCT, *void,int) -> *void */
+
 	api := CoreApi
 	in0 := unsafe.Pointer(p_ptr)
 	in1 := *(*C.int)(unsafe.Pointer(&p_bytes))
-
-	/* go_godot_realloc(API_STRUCT, *void,int) -> *void */
 
 	ret := C.go_godot_realloc(
 		api,
@@ -247,15 +245,8 @@ func Realloc(
 func Free(
 	p_ptr unsafe.Pointer,
 ) {
-	api := CoreApi
-	in0 := unsafe.Pointer(p_ptr)
 
 	/* go_godot_free(API_STRUCT, *void) ->void */
-
-	C.go_godot_free(
-		api,
-		in0,
-	)
 
 }
 
@@ -264,24 +255,8 @@ func Free(
 func PrintError(
 	p_description string, p_function string, p_file string, p_line int32, /* else case */
 ) {
-	api := CoreApi
-	in0 := C.CString(p_description)
-	defer C.free(unsafe.Pointer(in0))
-	in1 := C.CString(p_function)
-	defer C.free(unsafe.Pointer(in1))
-	in2 := C.CString(p_file)
-	defer C.free(unsafe.Pointer(in2))
-	in3 := *(*C.int)(unsafe.Pointer(&p_line))
 
 	/* go_godot_print_error(API_STRUCT, *char, *char, *char,int) ->void */
-
-	C.go_godot_print_error(
-		api,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
 
 }
 
@@ -290,24 +265,8 @@ func PrintError(
 func PrintWarning(
 	p_description string, p_function string, p_file string, p_line int32, /* else case */
 ) {
-	api := CoreApi
-	in0 := C.CString(p_description)
-	defer C.free(unsafe.Pointer(in0))
-	in1 := C.CString(p_function)
-	defer C.free(unsafe.Pointer(in1))
-	in2 := C.CString(p_file)
-	defer C.free(unsafe.Pointer(in2))
-	in3 := *(*C.int)(unsafe.Pointer(&p_line))
 
 	/* go_godot_print_warning(API_STRUCT, *char, *char, *char,int) ->void */
-
-	C.go_godot_print_warning(
-		api,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
 
 }
 
@@ -316,15 +275,8 @@ func PrintWarning(
 func Print(
 	p_message String, /* godot_string */
 ) {
-	api := CoreApi
-	in0 := (*C.godot_string)(unsafe.Pointer(&p_message))
 
 	/* go_godot_print(API_STRUCT, *godot_string) ->void */
-
-	C.go_godot_print(
-		api,
-		in0,
-	)
 
 }
 
@@ -333,10 +285,11 @@ func Print(
 func IsInstanceValid(
 	p_object *GodotObject,
 ) bool {
-	api := Core11Api
-	in0 := unsafe.Pointer(p_object)
 
 	/* go_godot_is_instance_valid(API_STRUCT, *godot_object) ->bool */
+
+	api := Core11Api
+	in0 := unsafe.Pointer(p_object)
 
 	ret := C.go_godot_is_instance_valid(
 		api,
@@ -352,10 +305,11 @@ func IsInstanceValid(
 func VariantGetOperatorName(
 	p_op VariantOperator, /* else case */
 ) String {
-	api := Core11Api
-	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
 
 	/* go_godot_variant_get_operator_name(API_STRUCT,godot_variant_operator) ->godot_string */
+
+	api := Core11Api
+	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
 
 	ret := C.go_godot_variant_get_operator_name(
 		api,
@@ -371,23 +325,8 @@ func VariantGetOperatorName(
 func VariantEvaluate(
 	p_op VariantOperator /* else case */, p_a Variant /* godot_variant */, p_b Variant /* godot_variant */, r_ret Variant /* godot_variant */, r_valid bool, /* godot_bool */
 ) {
-	api := Core11Api
-	in0 := *(*C.godot_variant_operator)(unsafe.Pointer(&p_op))
-	in1 := (*C.godot_variant)(unsafe.Pointer(&p_a))
-	in2 := (*C.godot_variant)(unsafe.Pointer(&p_b))
-	in3 := (*C.godot_variant)(unsafe.Pointer(&r_ret))
-	in4 := (*C.godot_bool)(unsafe.Pointer(&r_valid))
 
 	/* go_godot_variant_evaluate(API_STRUCT,godot_variant_operator, *godot_variant, *godot_variant, *godot_variant, *godot_bool) ->void */
-
-	C.go_godot_variant_evaluate(
-		api,
-		in0,
-		in1,
-		in2,
-		in3,
-		in4,
-	)
 
 }
 
@@ -396,10 +335,11 @@ func VariantEvaluate(
 func GetClassTag(
 	p_class StringName, /* godot_string_name */
 ) unsafe.Pointer {
-	api := Core12Api
-	in0 := (*C.godot_string_name)(unsafe.Pointer(&p_class))
 
 	/* go_godot_get_class_tag(API_STRUCT, *godot_string_name) -> *void */
+
+	api := Core12Api
+	in0 := (*C.godot_string_name)(unsafe.Pointer(&p_class))
 
 	ret := C.go_godot_get_class_tag(
 		api,
@@ -415,11 +355,12 @@ func GetClassTag(
 func ObjectCastTo(
 	p_object *GodotObject, p_class_tag unsafe.Pointer,
 ) *GodotObject {
+
+	/* go_godot_object_cast_to(API_STRUCT, *godot_object, *void) -> *GodotObject */
+
 	api := Core12Api
 	in0 := unsafe.Pointer(p_object)
 	in1 := unsafe.Pointer(p_class_tag)
-
-	/* go_godot_object_cast_to(API_STRUCT, *godot_object, *void) -> *GodotObject */
 
 	ret := C.go_godot_object_cast_to(
 		api,
@@ -436,10 +377,11 @@ func ObjectCastTo(
 func InstanceFromId(
 	p_instance_id int32, /* else case */
 ) *GodotObject {
-	api := Core12Api
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_instance_id))
 
 	/* go_godot_instance_from_id(API_STRUCT,godot_int) -> *GodotObject */
+
+	api := Core12Api
+	in0 := *(*C.godot_int)(unsafe.Pointer(&p_instance_id))
 
 	ret := C.go_godot_instance_from_id(
 		api,
@@ -462,20 +404,6 @@ func NewAABB(
 	p_pos Vector3 /* godot_vector3 */, p_size Vector3, /* godot_vector3 */
 ) AABB {
 	dest := AABB{}
-
-	api := CoreApi
-	rcv := (*C.godot_aabb)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_pos))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_size))
-
-	/* go_godot_aabb_new(API_STRUCT, *godot_vector3, *godot_vector3) -> *AABB */
-
-	C.go_godot_aabb_new(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["AABB"]++
 
@@ -505,15 +433,6 @@ func (gdt *AABB) SetPosition(
 
 	/* go_godot_aabb_set_position(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_aabb)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
-
-	C.go_godot_aabb_set_position(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_aabb_get_size -> godot_vector3 */
@@ -539,15 +458,6 @@ func (gdt *AABB) SetSize(
 
 	/* go_godot_aabb_set_size(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_aabb)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
-
-	C.go_godot_aabb_set_size(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_aabb_as_string -> godot_string */
@@ -962,16 +872,6 @@ func InitArrayGodotType() {
 func NewArray() Array {
 	dest := Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_array_new(API_STRUCT) -> *Array */
-
-	C.go_godot_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -981,18 +881,6 @@ func NewArrayCopy(
 	p_src Array, /* godot_array */
 ) Array {
 	dest := Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_array_new_copy(API_STRUCT, *godot_array) -> *Array */
-
-	C.go_godot_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1004,18 +892,6 @@ func NewArrayPoolColorArray(
 ) Array {
 	dest := Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_pca))
-
-	/* go_godot_array_new_pool_color_array(API_STRUCT, *godot_pool_color_array) -> *Array */
-
-	C.go_godot_array_new_pool_color_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1025,18 +901,6 @@ func NewArrayPoolVector3Array(
 	p_pv3a PoolVector3Array, /* godot_pool_vector3_array */
 ) Array {
 	dest := Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_pv3a))
-
-	/* go_godot_array_new_pool_vector3_array(API_STRUCT, *godot_pool_vector3_array) -> *Array */
-
-	C.go_godot_array_new_pool_vector3_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1048,18 +912,6 @@ func NewArrayPoolVector2Array(
 ) Array {
 	dest := Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_pv2a))
-
-	/* go_godot_array_new_pool_vector2_array(API_STRUCT, *godot_pool_vector2_array) -> *Array */
-
-	C.go_godot_array_new_pool_vector2_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1069,18 +921,6 @@ func NewArrayPoolStringArray(
 	p_psa PoolStringArray, /* godot_pool_string_array */
 ) Array {
 	dest := Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_psa))
-
-	/* go_godot_array_new_pool_string_array(API_STRUCT, *godot_pool_string_array) -> *Array */
-
-	C.go_godot_array_new_pool_string_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1092,18 +932,6 @@ func NewArrayPoolRealArray(
 ) Array {
 	dest := Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_pra))
-
-	/* go_godot_array_new_pool_real_array(API_STRUCT, *godot_pool_real_array) -> *Array */
-
-	C.go_godot_array_new_pool_real_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1114,18 +942,6 @@ func NewArrayPoolIntArray(
 ) Array {
 	dest := Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_pia))
-
-	/* go_godot_array_new_pool_int_array(API_STRUCT, *godot_pool_int_array) -> *Array */
-
-	C.go_godot_array_new_pool_int_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
 	return dest
@@ -1135,18 +951,6 @@ func NewArrayPoolByteArray(
 	p_pba PoolByteArray, /* godot_pool_byte_array */
 ) Array {
 	dest := Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_pba))
-
-	/* go_godot_array_new_pool_byte_array(API_STRUCT, *godot_pool_byte_array) -> *Array */
-
-	C.go_godot_array_new_pool_byte_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Array"]++
 
@@ -1160,17 +964,6 @@ func (gdt *Array) Set(
 
 	/* go_godot_array_set(API_STRUCT,godot_int, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_array_get -> godot_variant */
@@ -1240,15 +1033,6 @@ func (gdt *Array) Append(
 
 	/* go_godot_array_append(API_STRUCT, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_array_clear -> void */
@@ -1256,13 +1040,6 @@ func (gdt *Array) Clear() {
 
 	/* go_godot_array_clear(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_array_clear(
-		api,
-		rcv,
-	)
 }
 
 /* Getter Method: godot_array_count -> godot_int */
@@ -1308,15 +1085,6 @@ func (gdt *Array) Erase(
 
 	/* go_godot_array_erase(API_STRUCT, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_erase(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_array_front -> godot_variant */
@@ -1436,17 +1204,6 @@ func (gdt *Array) Insert(
 
 	/* go_godot_array_insert(API_STRUCT,godot_int, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_pos))
-	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_insert(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Setter Method: godot_array_invert -> void */
@@ -1454,13 +1211,6 @@ func (gdt *Array) Invert() {
 
 	/* go_godot_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Getter Method: godot_array_pop_back -> godot_variant */
@@ -1502,15 +1252,6 @@ func (gdt *Array) PushBack(
 
 	/* go_godot_array_push_back(API_STRUCT, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_array_push_front -> void */
@@ -1520,15 +1261,6 @@ func (gdt *Array) PushFront(
 
 	/* go_godot_array_push_front(API_STRUCT, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_array_push_front(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_array_remove -> void */
@@ -1538,15 +1270,6 @@ func (gdt *Array) Remove(
 
 	/* go_godot_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_array_resize -> void */
@@ -1556,15 +1279,6 @@ func (gdt *Array) Resize(
 
 	/* go_godot_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_array_rfind -> godot_int */
@@ -1610,13 +1324,6 @@ func (gdt *Array) Sort() {
 
 	/* go_godot_array_sort(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_array_sort(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_array_sort_custom -> void */
@@ -1626,17 +1333,6 @@ func (gdt *Array) SortCustom(
 
 	/* go_godot_array_sort_custom(API_STRUCT, *godot_object, *godot_string) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-	in0 := unsafe.Pointer(p_obj)
-	in1 := (*C.godot_string)(unsafe.Pointer(&p_func))
-
-	C.go_godot_array_sort_custom(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_array_bsearch -> godot_int */
@@ -1692,13 +1388,6 @@ func (gdt *Array) Destroy() {
 
 	/* go_godot_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["Array"]++
 
 }
@@ -1760,13 +1449,6 @@ func (gdt *Array) Shuffle() {
 
 	/* go_godot_array_shuffle(API_STRUCT) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_array_shuffle(
-		api,
-		rcv,
-	)
 }
 
 /* Getter Method: godot_array_slice -> godot_array */
@@ -1807,22 +1489,6 @@ func NewBasisWithRows(
 ) Basis {
 	dest := Basis{}
 
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_x_axis))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_y_axis))
-	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_z_axis))
-
-	/* go_godot_basis_new_with_rows(API_STRUCT, *godot_vector3, *godot_vector3, *godot_vector3) -> *Basis */
-
-	C.go_godot_basis_new_with_rows(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -1832,20 +1498,6 @@ func NewBasisWithAxisAndAngle(
 	p_axis Vector3 /* godot_vector3 */, p_phi float32, /* else case */
 ) Basis {
 	dest := Basis{}
-
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_phi))
-
-	/* go_godot_basis_new_with_axis_and_angle(API_STRUCT, *godot_vector3,godot_real) -> *Basis */
-
-	C.go_godot_basis_new_with_axis_and_angle(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -1857,18 +1509,6 @@ func NewBasisWithEuler(
 ) Basis {
 	dest := Basis{}
 
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
-
-	/* go_godot_basis_new_with_euler(API_STRUCT, *godot_vector3) -> *Basis */
-
-	C.go_godot_basis_new_with_euler(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
 	return dest
@@ -1876,16 +1516,6 @@ func NewBasisWithEuler(
 
 func NewBasis() Basis {
 	dest := Basis{}
-
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
-
-	/* go_godot_basis_new(API_STRUCT) -> *Basis */
-
-	C.go_godot_basis_new(
-		api,
-		rcv,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -1896,18 +1526,6 @@ func NewBasisWithEulerQuat(
 	p_euler Quat, /* godot_quat */
 ) Basis {
 	dest := Basis{}
-
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_quat)(unsafe.Pointer(&p_euler))
-
-	/* go_godot_basis_new_with_euler_quat(API_STRUCT, *godot_quat) -> *Basis */
-
-	C.go_godot_basis_new_with_euler_quat(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Basis"]++
 
@@ -2191,15 +1809,6 @@ func (gdt *Basis) GetElements(
 
 	/* go_godot_basis_get_elements(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_elements))
-
-	C.go_godot_basis_get_elements(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_basis_get_axis -> godot_vector3 */
@@ -2229,17 +1838,6 @@ func (gdt *Basis) SetAxis(
 
 	/* go_godot_basis_set_axis(API_STRUCT,godot_int, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_axis))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_value))
-
-	C.go_godot_basis_set_axis(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_basis_get_row -> godot_vector3 */
@@ -2269,17 +1867,6 @@ func (gdt *Basis) SetRow(
 
 	/* go_godot_basis_set_row(API_STRUCT,godot_int, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_row))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_value))
-
-	C.go_godot_basis_set_row(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_basis_operator_equal -> godot_bool */
@@ -2427,15 +2014,6 @@ func (gdt *Basis) SetQuat(
 
 	/* go_godot_basis_set_quat(API_STRUCT, *godot_quat) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
-
-	C.go_godot_basis_set_quat(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_basis_set_axis_angle_scale -> void */
@@ -2445,19 +2023,6 @@ func (gdt *Basis) SetAxisAngleScale(
 
 	/* go_godot_basis_set_axis_angle_scale(API_STRUCT, *godot_vector3,godot_real, *godot_vector3) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_phi))
-	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
-
-	C.go_godot_basis_set_axis_angle_scale(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
 }
 
 /* Setter Method: godot_basis_set_euler_scale -> void */
@@ -2467,17 +2032,6 @@ func (gdt *Basis) SetEulerScale(
 
 	/* go_godot_basis_set_euler_scale(API_STRUCT, *godot_vector3, *godot_vector3) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
-
-	C.go_godot_basis_set_euler_scale(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Setter Method: godot_basis_set_quat_scale -> void */
@@ -2487,17 +2041,6 @@ func (gdt *Basis) SetQuatScale(
 
 	/* go_godot_basis_set_quat_scale(API_STRUCT, *godot_quat, *godot_vector3) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_basis)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_scale))
-
-	C.go_godot_basis_set_quat_scale(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 type Color C.godot_color
@@ -2512,24 +2055,6 @@ func NewColorRgba(
 ) Color {
 	dest := Color{}
 
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_r))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_g))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_b))
-	in3 := *(*C.godot_real)(unsafe.Pointer(&p_a))
-
-	/* go_godot_color_new_rgba(API_STRUCT,godot_real,godot_real,godot_real,godot_real) -> *Color */
-
-	C.go_godot_color_new_rgba(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
 	return dest
@@ -2539,22 +2064,6 @@ func NewColorRgb(
 	p_r float32 /* else case */, p_g float32 /* else case */, p_b float32, /* else case */
 ) Color {
 	dest := Color{}
-
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_r))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_g))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_b))
-
-	/* go_godot_color_new_rgb(API_STRUCT,godot_real,godot_real,godot_real) -> *Color */
-
-	C.go_godot_color_new_rgb(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Color"]++
 
@@ -2584,15 +2093,6 @@ func (gdt *Color) SetR(
 
 	/* go_godot_color_set_r(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&r))
-
-	C.go_godot_color_set_r(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_color_get_g -> godot_real */
@@ -2618,15 +2118,6 @@ func (gdt *Color) SetG(
 
 	/* go_godot_color_set_g(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&g))
-
-	C.go_godot_color_set_g(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_color_get_b -> godot_real */
@@ -2652,15 +2143,6 @@ func (gdt *Color) SetB(
 
 	/* go_godot_color_set_b(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&b))
-
-	C.go_godot_color_set_b(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_color_get_a -> godot_real */
@@ -2686,15 +2168,6 @@ func (gdt *Color) SetA(
 
 	/* go_godot_color_set_a(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_color)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&a))
-
-	C.go_godot_color_set_a(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_color_get_h -> godot_real */
@@ -3083,16 +2556,6 @@ func InitDictionaryGodotType() {
 func NewDictionary() Dictionary {
 	dest := Dictionary{}
 
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(&dest))
-
-	/* go_godot_dictionary_new(API_STRUCT) -> *Dictionary */
-
-	C.go_godot_dictionary_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
 	return dest
@@ -3102,18 +2565,6 @@ func NewDictionaryCopy(
 	p_src Dictionary, /* godot_dictionary */
 ) Dictionary {
 	dest := Dictionary{}
-
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_dictionary)(unsafe.Pointer(&p_src))
-
-	/* go_godot_dictionary_new_copy(API_STRUCT, *godot_dictionary) -> *Dictionary */
-
-	C.go_godot_dictionary_new_copy(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Dictionary"]++
 
@@ -3125,13 +2576,6 @@ func (gdt *Dictionary) Destroy() {
 
 	/* go_godot_dictionary_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
-
-	C.go_godot_dictionary_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["Dictionary"]++
 
 }
@@ -3173,13 +2617,6 @@ func (gdt *Dictionary) Clear() {
 
 	/* go_godot_dictionary_clear(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
-
-	C.go_godot_dictionary_clear(
-		api,
-		rcv,
-	)
 }
 
 /* Getter Method: godot_dictionary_has -> godot_bool */
@@ -3229,15 +2666,6 @@ func (gdt *Dictionary) Erase(
 
 	/* go_godot_dictionary_erase(API_STRUCT, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_key))
-
-	C.go_godot_dictionary_erase(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_dictionary_hash -> godot_int */
@@ -3315,17 +2743,6 @@ func (gdt *Dictionary) Set(
 
 	/* go_godot_dictionary_set(API_STRUCT, *godot_variant, *godot_variant) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_dictionary)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_key))
-	in1 := (*C.godot_variant)(unsafe.Pointer(&p_value))
-
-	C.go_godot_dictionary_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_dictionary_operator_index -> godot_variant */
@@ -3592,20 +3009,6 @@ func (gdt *MethodBind) Ptrcall(
 
 	/* go_godot_method_bind_ptrcall(API_STRUCT, *godot_object, **void, *void) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_method_bind)(unsafe.Pointer(gdt))
-	in0 := unsafe.Pointer(p_instance)
-	cArr1 := ArrayRefFromPtrSlice(p_args)
-	in1 := (*unsafe.Pointer)(unsafe.Pointer(cArr1))
-	in2 := unsafe.Pointer(p_ret)
-
-	C.go_godot_method_bind_ptrcall(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
 }
 
 /* Getter Method: godot_method_bind_call -> godot_variant */
@@ -3657,20 +3060,6 @@ func NewNodePath(
 ) NodePath {
 	dest := NodePath{}
 
-	api := CoreApi
-	rcv := (*C.godot_node_path)(unsafe.Pointer(&dest))
-	// hide godot_string / String and expose native go string
-	strIn0 := internWithGoString(p_from)
-	in0 := (*C.godot_string)(unsafe.Pointer(&strIn0))
-
-	/* go_godot_node_path_new(API_STRUCT, *godot_string) -> *NodePath */
-
-	C.go_godot_node_path_new(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
 	return dest
@@ -3680,18 +3069,6 @@ func NewNodePathCopy(
 	p_src NodePath, /* godot_node_path */
 ) NodePath {
 	dest := NodePath{}
-
-	api := CoreApi
-	rcv := (*C.godot_node_path)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_node_path)(unsafe.Pointer(&p_src))
-
-	/* go_godot_node_path_new_copy(API_STRUCT, *godot_node_path) -> *NodePath */
-
-	C.go_godot_node_path_new_copy(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["NodePath"]++
 
@@ -3703,13 +3080,6 @@ func (gdt *NodePath) Destroy() {
 
 	/* go_godot_node_path_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_node_path)(unsafe.Pointer(gdt))
-
-	C.go_godot_node_path_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["NodePath"]++
 
 }
@@ -3898,24 +3268,6 @@ func NewPlaneWithReals(
 ) Plane {
 	dest := Plane{}
 
-	api := CoreApi
-	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_a))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_b))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_c))
-	in3 := *(*C.godot_real)(unsafe.Pointer(&p_d))
-
-	/* go_godot_plane_new_with_reals(API_STRUCT,godot_real,godot_real,godot_real,godot_real) -> *Plane */
-
-	C.go_godot_plane_new_with_reals(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -3926,22 +3278,6 @@ func NewPlaneWithVectors(
 ) Plane {
 	dest := Plane{}
 
-	api := CoreApi
-	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v1))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_v2))
-	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_v3))
-
-	/* go_godot_plane_new_with_vectors(API_STRUCT, *godot_vector3, *godot_vector3, *godot_vector3) -> *Plane */
-
-	C.go_godot_plane_new_with_vectors(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
 	return dest
@@ -3951,20 +3287,6 @@ func NewPlaneWithNormal(
 	p_normal Vector3 /* godot_vector3 */, p_d float32, /* else case */
 ) Plane {
 	dest := Plane{}
-
-	api := CoreApi
-	rcv := (*C.godot_plane)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_normal))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_d))
-
-	/* go_godot_plane_new_with_normal(API_STRUCT, *godot_vector3,godot_real) -> *Plane */
-
-	C.go_godot_plane_new_with_normal(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Plane"]++
 
@@ -4232,15 +3554,6 @@ func (gdt *Plane) SetNormal(
 
 	/* go_godot_plane_set_normal(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_plane)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_normal))
-
-	C.go_godot_plane_set_normal(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_plane_get_normal -> godot_vector3 */
@@ -4282,15 +3595,6 @@ func (gdt *Plane) SetD(
 
 	/* go_godot_plane_set_d(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_plane)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_d))
-
-	C.go_godot_plane_set_d(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 type PoolArrayReadAccess C.godot_pool_array_read_access
@@ -4317,16 +3621,6 @@ func InitPoolByteArrayGodotType() {
 func NewPoolByteArray() PoolByteArray {
 	dest := PoolByteArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_byte_array_new(API_STRUCT) -> *PoolByteArray */
-
-	C.go_godot_pool_byte_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -4337,18 +3631,6 @@ func NewPoolByteArrayCopy(
 ) PoolByteArray {
 	dest := PoolByteArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_byte_array_new_copy(API_STRUCT, *godot_pool_byte_array) -> *PoolByteArray */
-
-	C.go_godot_pool_byte_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
 	return dest
@@ -4358,18 +3640,6 @@ func NewPoolByteArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolByteArray {
 	dest := PoolByteArray{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_byte_array_new_with_array(API_STRUCT, *godot_array) -> *PoolByteArray */
-
-	C.go_godot_pool_byte_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolByteArray"]++
 
@@ -4383,15 +3653,6 @@ func (gdt *PoolByteArray) Append(
 
 	/* go_godot_pool_byte_array_append(API_STRUCT,uint8_t) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_byte_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_append_array -> void */
@@ -4401,15 +3662,6 @@ func (gdt *PoolByteArray) AppendArray(
 
 	/* go_godot_pool_byte_array_append_array(API_STRUCT, *godot_pool_byte_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_byte_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_byte_array_insert -> godot_error */
@@ -4439,13 +3691,6 @@ func (gdt *PoolByteArray) Invert() {
 
 	/* go_godot_pool_byte_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_byte_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_push_back -> void */
@@ -4455,15 +3700,6 @@ func (gdt *PoolByteArray) PushBack(
 
 	/* go_godot_pool_byte_array_push_back(API_STRUCT,uint8_t) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_byte_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_remove -> void */
@@ -4473,15 +3709,6 @@ func (gdt *PoolByteArray) Remove(
 
 	/* go_godot_pool_byte_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_byte_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_resize -> void */
@@ -4491,15 +3718,6 @@ func (gdt *PoolByteArray) Resize(
 
 	/* go_godot_pool_byte_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_byte_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_byte_array_read -> godot_pool_byte_array_read_access */
@@ -4541,17 +3759,6 @@ func (gdt *PoolByteArray) Set(
 
 	/* go_godot_pool_byte_array_set(API_STRUCT,godot_int,uint8_t) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := *(*C.uint8_t)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_byte_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_byte_array_get -> uint8_t */
@@ -4595,13 +3802,6 @@ func (gdt *PoolByteArray) Destroy() {
 
 	/* go_godot_pool_byte_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_byte_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolByteArray"]++
 
 }
@@ -4668,15 +3868,6 @@ func (gdt *PoolByteArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_byte_array_read_access_operator_assign(API_STRUCT, *godot_pool_byte_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_byte_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_byte_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_read_access_destroy -> void */
@@ -4684,13 +3875,6 @@ func (gdt *PoolByteArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_byte_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_byte_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolByteArrayReadAccess"]++
 
 }
@@ -4741,15 +3925,6 @@ func (gdt *PoolByteArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_byte_array_write_access_operator_assign(API_STRUCT, *godot_pool_byte_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_byte_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_byte_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_byte_array_write_access_destroy -> void */
@@ -4757,13 +3932,6 @@ func (gdt *PoolByteArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_byte_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_byte_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_byte_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolByteArrayWriteAccess"]++
 
 }
@@ -4778,16 +3946,6 @@ func InitPoolColorArrayGodotType() {
 func NewPoolColorArray() PoolColorArray {
 	dest := PoolColorArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_color_array_new(API_STRUCT) -> *PoolColorArray */
-
-	C.go_godot_pool_color_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -4798,18 +3956,6 @@ func NewPoolColorArrayCopy(
 ) PoolColorArray {
 	dest := PoolColorArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_color_array_new_copy(API_STRUCT, *godot_pool_color_array) -> *PoolColorArray */
-
-	C.go_godot_pool_color_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
 	return dest
@@ -4819,18 +3965,6 @@ func NewPoolColorArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolColorArray {
 	dest := PoolColorArray{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_color_array_new_with_array(API_STRUCT, *godot_array) -> *PoolColorArray */
-
-	C.go_godot_pool_color_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolColorArray"]++
 
@@ -4844,15 +3978,6 @@ func (gdt *PoolColorArray) Append(
 
 	/* go_godot_pool_color_array_append(API_STRUCT, *godot_color) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_color)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_color_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_append_array -> void */
@@ -4862,15 +3987,6 @@ func (gdt *PoolColorArray) AppendArray(
 
 	/* go_godot_pool_color_array_append_array(API_STRUCT, *godot_pool_color_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_color_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_color_array_insert -> godot_error */
@@ -4900,13 +4016,6 @@ func (gdt *PoolColorArray) Invert() {
 
 	/* go_godot_pool_color_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_color_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_push_back -> void */
@@ -4916,15 +4025,6 @@ func (gdt *PoolColorArray) PushBack(
 
 	/* go_godot_pool_color_array_push_back(API_STRUCT, *godot_color) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_color)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_color_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_remove -> void */
@@ -4934,15 +4034,6 @@ func (gdt *PoolColorArray) Remove(
 
 	/* go_godot_pool_color_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_color_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_resize -> void */
@@ -4952,15 +4043,6 @@ func (gdt *PoolColorArray) Resize(
 
 	/* go_godot_pool_color_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_color_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_color_array_read -> godot_pool_color_array_read_access */
@@ -5002,17 +4084,6 @@ func (gdt *PoolColorArray) Set(
 
 	/* go_godot_pool_color_array_set(API_STRUCT,godot_int, *godot_color) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := (*C.godot_color)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_color_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_color_array_get -> godot_color */
@@ -5056,13 +4127,6 @@ func (gdt *PoolColorArray) Destroy() {
 
 	/* go_godot_pool_color_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_color_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolColorArray"]++
 
 }
@@ -5129,15 +4193,6 @@ func (gdt *PoolColorArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_color_array_read_access_operator_assign(API_STRUCT, *godot_pool_color_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_color_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_color_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_read_access_destroy -> void */
@@ -5145,13 +4200,6 @@ func (gdt *PoolColorArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_color_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_color_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolColorArrayReadAccess"]++
 
 }
@@ -5202,15 +4250,6 @@ func (gdt *PoolColorArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_color_array_write_access_operator_assign(API_STRUCT, *godot_pool_color_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_color_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_color_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_color_array_write_access_destroy -> void */
@@ -5218,13 +4257,6 @@ func (gdt *PoolColorArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_color_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_color_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_color_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolColorArrayWriteAccess"]++
 
 }
@@ -5239,16 +4271,6 @@ func InitPoolIntArrayGodotType() {
 func NewPoolIntArray() PoolIntArray {
 	dest := PoolIntArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_int_array_new(API_STRUCT) -> *PoolIntArray */
-
-	C.go_godot_pool_int_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -5259,18 +4281,6 @@ func NewPoolIntArrayCopy(
 ) PoolIntArray {
 	dest := PoolIntArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_int_array_new_copy(API_STRUCT, *godot_pool_int_array) -> *PoolIntArray */
-
-	C.go_godot_pool_int_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
 	return dest
@@ -5280,18 +4290,6 @@ func NewPoolIntArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolIntArray {
 	dest := PoolIntArray{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_int_array_new_with_array(API_STRUCT, *godot_array) -> *PoolIntArray */
-
-	C.go_godot_pool_int_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolIntArray"]++
 
@@ -5305,15 +4303,6 @@ func (gdt *PoolIntArray) Append(
 
 	/* go_godot_pool_int_array_append(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_int_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_append_array -> void */
@@ -5323,15 +4312,6 @@ func (gdt *PoolIntArray) AppendArray(
 
 	/* go_godot_pool_int_array_append_array(API_STRUCT, *godot_pool_int_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_int_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_int_array_insert -> godot_error */
@@ -5361,13 +4341,6 @@ func (gdt *PoolIntArray) Invert() {
 
 	/* go_godot_pool_int_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_int_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_push_back -> void */
@@ -5377,15 +4350,6 @@ func (gdt *PoolIntArray) PushBack(
 
 	/* go_godot_pool_int_array_push_back(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_int_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_remove -> void */
@@ -5395,15 +4359,6 @@ func (gdt *PoolIntArray) Remove(
 
 	/* go_godot_pool_int_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_int_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_resize -> void */
@@ -5413,15 +4368,6 @@ func (gdt *PoolIntArray) Resize(
 
 	/* go_godot_pool_int_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_int_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_int_array_read -> godot_pool_int_array_read_access */
@@ -5463,17 +4409,6 @@ func (gdt *PoolIntArray) Set(
 
 	/* go_godot_pool_int_array_set(API_STRUCT,godot_int,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := *(*C.godot_int)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_int_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_int_array_get -> godot_int */
@@ -5517,13 +4452,6 @@ func (gdt *PoolIntArray) Destroy() {
 
 	/* go_godot_pool_int_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_int_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolIntArray"]++
 
 }
@@ -5590,15 +4518,6 @@ func (gdt *PoolIntArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_int_array_read_access_operator_assign(API_STRUCT, *godot_pool_int_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_int_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_int_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_read_access_destroy -> void */
@@ -5606,13 +4525,6 @@ func (gdt *PoolIntArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_int_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_int_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolIntArrayReadAccess"]++
 
 }
@@ -5663,15 +4575,6 @@ func (gdt *PoolIntArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_int_array_write_access_operator_assign(API_STRUCT, *godot_pool_int_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_int_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_int_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_int_array_write_access_destroy -> void */
@@ -5679,13 +4582,6 @@ func (gdt *PoolIntArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_int_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_int_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_int_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolIntArrayWriteAccess"]++
 
 }
@@ -5700,16 +4596,6 @@ func InitPoolRealArrayGodotType() {
 func NewPoolRealArray() PoolRealArray {
 	dest := PoolRealArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_real_array_new(API_STRUCT) -> *PoolRealArray */
-
-	C.go_godot_pool_real_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -5720,18 +4606,6 @@ func NewPoolRealArrayCopy(
 ) PoolRealArray {
 	dest := PoolRealArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_real_array_new_copy(API_STRUCT, *godot_pool_real_array) -> *PoolRealArray */
-
-	C.go_godot_pool_real_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
 	return dest
@@ -5741,18 +4615,6 @@ func NewPoolRealArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolRealArray {
 	dest := PoolRealArray{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_real_array_new_with_array(API_STRUCT, *godot_array) -> *PoolRealArray */
-
-	C.go_godot_pool_real_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolRealArray"]++
 
@@ -5766,15 +4628,6 @@ func (gdt *PoolRealArray) Append(
 
 	/* go_godot_pool_real_array_append(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_real_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_append_array -> void */
@@ -5784,15 +4637,6 @@ func (gdt *PoolRealArray) AppendArray(
 
 	/* go_godot_pool_real_array_append_array(API_STRUCT, *godot_pool_real_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_real_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_real_array_insert -> godot_error */
@@ -5822,13 +4666,6 @@ func (gdt *PoolRealArray) Invert() {
 
 	/* go_godot_pool_real_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_real_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_push_back -> void */
@@ -5838,15 +4675,6 @@ func (gdt *PoolRealArray) PushBack(
 
 	/* go_godot_pool_real_array_push_back(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_real_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_remove -> void */
@@ -5856,15 +4684,6 @@ func (gdt *PoolRealArray) Remove(
 
 	/* go_godot_pool_real_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_real_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_resize -> void */
@@ -5874,15 +4693,6 @@ func (gdt *PoolRealArray) Resize(
 
 	/* go_godot_pool_real_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_real_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_real_array_read -> godot_pool_real_array_read_access */
@@ -5924,17 +4734,6 @@ func (gdt *PoolRealArray) Set(
 
 	/* go_godot_pool_real_array_set(API_STRUCT,godot_int,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_real_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_real_array_get -> godot_real */
@@ -5978,13 +4777,6 @@ func (gdt *PoolRealArray) Destroy() {
 
 	/* go_godot_pool_real_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_real_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolRealArray"]++
 
 }
@@ -6051,15 +4843,6 @@ func (gdt *PoolRealArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_real_array_read_access_operator_assign(API_STRUCT, *godot_pool_real_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_real_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_real_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_read_access_destroy -> void */
@@ -6067,13 +4850,6 @@ func (gdt *PoolRealArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_real_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_real_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolRealArrayReadAccess"]++
 
 }
@@ -6124,15 +4900,6 @@ func (gdt *PoolRealArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_real_array_write_access_operator_assign(API_STRUCT, *godot_pool_real_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_real_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_real_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_real_array_write_access_destroy -> void */
@@ -6140,13 +4907,6 @@ func (gdt *PoolRealArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_real_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_real_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_real_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolRealArrayWriteAccess"]++
 
 }
@@ -6161,16 +4921,6 @@ func InitPoolStringArrayGodotType() {
 func NewPoolStringArray() PoolStringArray {
 	dest := PoolStringArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_string_array_new(API_STRUCT) -> *PoolStringArray */
-
-	C.go_godot_pool_string_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -6181,18 +4931,6 @@ func NewPoolStringArrayCopy(
 ) PoolStringArray {
 	dest := PoolStringArray{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_string_array_new_copy(API_STRUCT, *godot_pool_string_array) -> *PoolStringArray */
-
-	C.go_godot_pool_string_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
 	return dest
@@ -6202,18 +4940,6 @@ func NewPoolStringArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolStringArray {
 	dest := PoolStringArray{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_string_array_new_with_array(API_STRUCT, *godot_array) -> *PoolStringArray */
-
-	C.go_godot_pool_string_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolStringArray"]++
 
@@ -6227,15 +4953,6 @@ func (gdt *PoolStringArray) Append(
 
 	/* go_godot_pool_string_array_append(API_STRUCT, *godot_string) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_string)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_string_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_append_array -> void */
@@ -6245,15 +4962,6 @@ func (gdt *PoolStringArray) AppendArray(
 
 	/* go_godot_pool_string_array_append_array(API_STRUCT, *godot_pool_string_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_string_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_string_array_insert -> godot_error */
@@ -6283,13 +4991,6 @@ func (gdt *PoolStringArray) Invert() {
 
 	/* go_godot_pool_string_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_string_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_push_back -> void */
@@ -6299,15 +5000,6 @@ func (gdt *PoolStringArray) PushBack(
 
 	/* go_godot_pool_string_array_push_back(API_STRUCT, *godot_string) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_string)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_string_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_remove -> void */
@@ -6317,15 +5009,6 @@ func (gdt *PoolStringArray) Remove(
 
 	/* go_godot_pool_string_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_string_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_resize -> void */
@@ -6335,15 +5018,6 @@ func (gdt *PoolStringArray) Resize(
 
 	/* go_godot_pool_string_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_string_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_string_array_read -> godot_pool_string_array_read_access */
@@ -6385,17 +5059,6 @@ func (gdt *PoolStringArray) Set(
 
 	/* go_godot_pool_string_array_set(API_STRUCT,godot_int, *godot_string) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := (*C.godot_string)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_string_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_string_array_get -> godot_string */
@@ -6439,13 +5102,6 @@ func (gdt *PoolStringArray) Destroy() {
 
 	/* go_godot_pool_string_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_string_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolStringArray"]++
 
 }
@@ -6512,15 +5168,6 @@ func (gdt *PoolStringArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_string_array_read_access_operator_assign(API_STRUCT, *godot_pool_string_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_string_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_string_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_read_access_destroy -> void */
@@ -6528,13 +5175,6 @@ func (gdt *PoolStringArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_string_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_string_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolStringArrayReadAccess"]++
 
 }
@@ -6585,15 +5225,6 @@ func (gdt *PoolStringArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_string_array_write_access_operator_assign(API_STRUCT, *godot_pool_string_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_string_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_string_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_string_array_write_access_destroy -> void */
@@ -6601,13 +5232,6 @@ func (gdt *PoolStringArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_string_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_string_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_string_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolStringArrayWriteAccess"]++
 
 }
@@ -6622,16 +5246,6 @@ func InitPoolVector2ArrayGodotType() {
 func NewPoolVector2Array() PoolVector2Array {
 	dest := PoolVector2Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_vector2_array_new(API_STRUCT) -> *PoolVector2Array */
-
-	C.go_godot_pool_vector2_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -6642,18 +5256,6 @@ func NewPoolVector2ArrayCopy(
 ) PoolVector2Array {
 	dest := PoolVector2Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_vector2_array_new_copy(API_STRUCT, *godot_pool_vector2_array) -> *PoolVector2Array */
-
-	C.go_godot_pool_vector2_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
 	return dest
@@ -6663,18 +5265,6 @@ func NewPoolVector2ArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolVector2Array {
 	dest := PoolVector2Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_vector2_array_new_with_array(API_STRUCT, *godot_array) -> *PoolVector2Array */
-
-	C.go_godot_pool_vector2_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector2Array"]++
 
@@ -6688,15 +5278,6 @@ func (gdt *PoolVector2Array) Append(
 
 	/* go_godot_pool_vector2_array_append(API_STRUCT, *godot_vector2) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector2_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_append_array -> void */
@@ -6706,15 +5287,6 @@ func (gdt *PoolVector2Array) AppendArray(
 
 	/* go_godot_pool_vector2_array_append_array(API_STRUCT, *godot_pool_vector2_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_vector2_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_vector2_array_insert -> godot_error */
@@ -6744,13 +5316,6 @@ func (gdt *PoolVector2Array) Invert() {
 
 	/* go_godot_pool_vector2_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector2_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_push_back -> void */
@@ -6760,15 +5325,6 @@ func (gdt *PoolVector2Array) PushBack(
 
 	/* go_godot_pool_vector2_array_push_back(API_STRUCT, *godot_vector2) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector2_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_remove -> void */
@@ -6778,15 +5334,6 @@ func (gdt *PoolVector2Array) Remove(
 
 	/* go_godot_pool_vector2_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_vector2_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_resize -> void */
@@ -6796,15 +5343,6 @@ func (gdt *PoolVector2Array) Resize(
 
 	/* go_godot_pool_vector2_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_vector2_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_vector2_array_read -> godot_pool_vector2_array_read_access */
@@ -6846,17 +5384,6 @@ func (gdt *PoolVector2Array) Set(
 
 	/* go_godot_pool_vector2_array_set(API_STRUCT,godot_int, *godot_vector2) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector2_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_vector2_array_get -> godot_vector2 */
@@ -6900,13 +5427,6 @@ func (gdt *PoolVector2Array) Destroy() {
 
 	/* go_godot_pool_vector2_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector2_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector2Array"]++
 
 }
@@ -6973,15 +5493,6 @@ func (gdt *PoolVector2ArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_vector2_array_read_access_operator_assign(API_STRUCT, *godot_pool_vector2_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector2_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_vector2_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_read_access_destroy -> void */
@@ -6989,13 +5500,6 @@ func (gdt *PoolVector2ArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_vector2_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector2_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector2ArrayReadAccess"]++
 
 }
@@ -7046,15 +5550,6 @@ func (gdt *PoolVector2ArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_vector2_array_write_access_operator_assign(API_STRUCT, *godot_pool_vector2_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector2_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_vector2_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector2_array_write_access_destroy -> void */
@@ -7062,13 +5557,6 @@ func (gdt *PoolVector2ArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_vector2_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector2_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector2_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector2ArrayWriteAccess"]++
 
 }
@@ -7083,16 +5571,6 @@ func InitPoolVector3ArrayGodotType() {
 func NewPoolVector3Array() PoolVector3Array {
 	dest := PoolVector3Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
-
-	/* go_godot_pool_vector3_array_new(API_STRUCT) -> *PoolVector3Array */
-
-	C.go_godot_pool_vector3_array_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -7103,18 +5581,6 @@ func NewPoolVector3ArrayCopy(
 ) PoolVector3Array {
 	dest := PoolVector3Array{}
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_src))
-
-	/* go_godot_pool_vector3_array_new_copy(API_STRUCT, *godot_pool_vector3_array) -> *PoolVector3Array */
-
-	C.go_godot_pool_vector3_array_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
 	return dest
@@ -7124,18 +5590,6 @@ func NewPoolVector3ArrayWithArray(
 	p_a Array, /* godot_array */
 ) PoolVector3Array {
 	dest := PoolVector3Array{}
-
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_a))
-
-	/* go_godot_pool_vector3_array_new_with_array(API_STRUCT, *godot_array) -> *PoolVector3Array */
-
-	C.go_godot_pool_vector3_array_new_with_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["PoolVector3Array"]++
 
@@ -7149,15 +5603,6 @@ func (gdt *PoolVector3Array) Append(
 
 	/* go_godot_pool_vector3_array_append(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector3_array_append(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_append_array -> void */
@@ -7167,15 +5612,6 @@ func (gdt *PoolVector3Array) AppendArray(
 
 	/* go_godot_pool_vector3_array_append_array(API_STRUCT, *godot_pool_vector3_array) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_array))
-
-	C.go_godot_pool_vector3_array_append_array(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_vector3_array_insert -> godot_error */
@@ -7205,13 +5641,6 @@ func (gdt *PoolVector3Array) Invert() {
 
 	/* go_godot_pool_vector3_array_invert(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector3_array_invert(
-		api,
-		rcv,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_push_back -> void */
@@ -7221,15 +5650,6 @@ func (gdt *PoolVector3Array) PushBack(
 
 	/* go_godot_pool_vector3_array_push_back(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector3_array_push_back(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_remove -> void */
@@ -7239,15 +5659,6 @@ func (gdt *PoolVector3Array) Remove(
 
 	/* go_godot_pool_vector3_array_remove(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-
-	C.go_godot_pool_vector3_array_remove(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_resize -> void */
@@ -7257,15 +5668,6 @@ func (gdt *PoolVector3Array) Resize(
 
 	/* go_godot_pool_vector3_array_resize(API_STRUCT,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_size))
-
-	C.go_godot_pool_vector3_array_resize(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_pool_vector3_array_read -> godot_pool_vector3_array_read_access */
@@ -7307,17 +5709,6 @@ func (gdt *PoolVector3Array) Set(
 
 	/* go_godot_pool_vector3_array_set(API_STRUCT,godot_int, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_idx))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_data))
-
-	C.go_godot_pool_vector3_array_set(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_pool_vector3_array_get -> godot_vector3 */
@@ -7361,13 +5752,6 @@ func (gdt *PoolVector3Array) Destroy() {
 
 	/* go_godot_pool_vector3_array_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector3_array_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector3Array"]++
 
 }
@@ -7434,15 +5818,6 @@ func (gdt *PoolVector3ArrayReadAccess) OperatorAssign(
 
 	/* go_godot_pool_vector3_array_read_access_operator_assign(API_STRUCT, *godot_pool_vector3_array_read_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array_read_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector3_array_read_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_vector3_array_read_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_read_access_destroy -> void */
@@ -7450,13 +5825,6 @@ func (gdt *PoolVector3ArrayReadAccess) Destroy() {
 
 	/* go_godot_pool_vector3_array_read_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array_read_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector3_array_read_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector3ArrayReadAccess"]++
 
 }
@@ -7507,15 +5875,6 @@ func (gdt *PoolVector3ArrayWriteAccess) OperatorAssign(
 
 	/* go_godot_pool_vector3_array_write_access_operator_assign(API_STRUCT, *godot_pool_vector3_array_write_access) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array_write_access)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_pool_vector3_array_write_access)(unsafe.Pointer(&p_other))
-
-	C.go_godot_pool_vector3_array_write_access_operator_assign(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_pool_vector3_array_write_access_destroy -> void */
@@ -7523,13 +5882,6 @@ func (gdt *PoolVector3ArrayWriteAccess) Destroy() {
 
 	/* go_godot_pool_vector3_array_write_access_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_pool_vector3_array_write_access)(unsafe.Pointer(gdt))
-
-	C.go_godot_pool_vector3_array_write_access_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["PoolVector3ArrayWriteAccess"]++
 
 }
@@ -7546,24 +5898,6 @@ func NewQuat(
 ) Quat {
 	dest := Quat{}
 
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_z))
-	in3 := *(*C.godot_real)(unsafe.Pointer(&p_w))
-
-	/* go_godot_quat_new(API_STRUCT,godot_real,godot_real,godot_real,godot_real) -> *Quat */
-
-	C.go_godot_quat_new(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -7573,20 +5907,6 @@ func NewQuatWithAxisAngle(
 	p_axis Vector3 /* godot_vector3 */, p_angle float32, /* else case */
 ) Quat {
 	dest := Quat{}
-
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_angle))
-
-	/* go_godot_quat_new_with_axis_angle(API_STRUCT, *godot_vector3,godot_real) -> *Quat */
-
-	C.go_godot_quat_new_with_axis_angle(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
@@ -7598,18 +5918,6 @@ func NewQuatWithBasis(
 ) Quat {
 	dest := Quat{}
 
-	api := Core11Api
-	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
-
-	/* go_godot_quat_new_with_basis(API_STRUCT, *godot_basis) -> *Quat */
-
-	C.go_godot_quat_new_with_basis(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
 	return dest
@@ -7619,18 +5927,6 @@ func NewQuatWithEuler(
 	p_euler Vector3, /* godot_vector3 */
 ) Quat {
 	dest := Quat{}
-
-	api := Core11Api
-	rcv := (*C.godot_quat)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_euler))
-
-	/* go_godot_quat_new_with_euler(API_STRUCT, *godot_vector3) -> *Quat */
-
-	C.go_godot_quat_new_with_euler(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Quat"]++
 
@@ -7660,15 +5956,6 @@ func (gdt *Quat) SetX(
 
 	/* go_godot_quat_set_x(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
-
-	C.go_godot_quat_set_x(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_quat_get_y -> godot_real */
@@ -7694,15 +5981,6 @@ func (gdt *Quat) SetY(
 
 	/* go_godot_quat_set_y(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
-
-	C.go_godot_quat_set_y(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_quat_get_z -> godot_real */
@@ -7728,15 +6006,6 @@ func (gdt *Quat) SetZ(
 
 	/* go_godot_quat_set_z(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
-
-	C.go_godot_quat_set_z(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_quat_get_w -> godot_real */
@@ -7762,15 +6031,6 @@ func (gdt *Quat) SetW(
 
 	/* go_godot_quat_set_w(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&val))
-
-	C.go_godot_quat_set_w(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_quat_as_string -> godot_string */
@@ -8102,17 +6362,6 @@ func (gdt *Quat) SetAxisAngle(
 
 	/* go_godot_quat_set_axis_angle(API_STRUCT, *godot_vector3,godot_real) ->void */
 
-	api := Core11Api
-	rcv := (*C.godot_quat)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_axis))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_angle))
-
-	C.go_godot_quat_set_axis_angle(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 type Rect2 C.godot_rect2
@@ -8127,20 +6376,6 @@ func NewRect2WithPositionAndSize(
 ) Rect2 {
 	dest := Rect2{}
 
-	api := CoreApi
-	rcv := (*C.godot_rect2)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
-	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_size))
-
-	/* go_godot_rect2_new_with_position_and_size(API_STRUCT, *godot_vector2, *godot_vector2) -> *Rect2 */
-
-	C.go_godot_rect2_new_with_position_and_size(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
 	return dest
@@ -8150,24 +6385,6 @@ func NewRect2(
 	p_x float32 /* else case */, p_y float32 /* else case */, p_width float32 /* else case */, p_height float32, /* else case */
 ) Rect2 {
 	dest := Rect2{}
-
-	api := CoreApi
-	rcv := (*C.godot_rect2)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_width))
-	in3 := *(*C.godot_real)(unsafe.Pointer(&p_height))
-
-	/* go_godot_rect2_new(API_STRUCT,godot_real,godot_real,godot_real,godot_real) -> *Rect2 */
-
-	C.go_godot_rect2_new(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Rect2"]++
 
@@ -8421,15 +6638,6 @@ func (gdt *Rect2) SetPosition(
 
 	/* go_godot_rect2_set_position(API_STRUCT, *godot_vector2) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_rect2)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
-
-	C.go_godot_rect2_set_position(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_rect2_set_size -> void */
@@ -8439,15 +6647,6 @@ func (gdt *Rect2) SetSize(
 
 	/* go_godot_rect2_set_size(API_STRUCT, *godot_vector2) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_rect2)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_size))
-
-	C.go_godot_rect2_set_size(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_rect2_grow_individual -> godot_rect2 */
@@ -8524,16 +6723,6 @@ func InitRIDGodotType() {
 func NewRID() RID {
 	dest := RID{}
 
-	api := CoreApi
-	rcv := (*C.godot_rid)(unsafe.Pointer(&dest))
-
-	/* go_godot_rid_new(API_STRUCT) -> *RID */
-
-	C.go_godot_rid_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
 	return dest
@@ -8543,18 +6732,6 @@ func NewRIDWithResource(
 	p_from *GodotObject,
 ) RID {
 	dest := RID{}
-
-	api := CoreApi
-	rcv := (*C.godot_rid)(unsafe.Pointer(&dest))
-	in0 := unsafe.Pointer(p_from)
-
-	/* go_godot_rid_new_with_resource(API_STRUCT, *godot_object) -> *RID */
-
-	C.go_godot_rid_new_with_resource(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["RID"]++
 
@@ -8661,13 +6838,6 @@ func (gdt *CharString) Destroy() {
 
 	/* go_godot_char_string_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_char_string)(unsafe.Pointer(gdt))
-
-	C.go_godot_char_string_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["CharString"]++
 
 }
@@ -8682,16 +6852,6 @@ func InitStringGodotType() {
 func NewString() String {
 	dest := String{}
 
-	api := CoreApi
-	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
-
-	/* go_godot_string_new(API_STRUCT) -> *String */
-
-	C.go_godot_string_new(
-		api,
-		rcv,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -8702,18 +6862,6 @@ func NewStringCopy(
 ) String {
 	dest := String{}
 
-	api := CoreApi
-	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_string)(unsafe.Pointer(&p_src))
-
-	/* go_godot_string_new_copy(API_STRUCT, *godot_string) -> *String */
-
-	C.go_godot_string_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
 	return dest
@@ -8723,20 +6871,6 @@ func NewStringWithWideString(
 	p_contents int32 /* wchar_t */, p_size int32, /* else case */
 ) String {
 	dest := String{}
-
-	api := CoreApi
-	rcv := (*C.godot_string)(unsafe.Pointer(&dest))
-	in0 := (*C.wchar_t)(unsafe.Pointer(&p_contents))
-	in1 := *(*C.int)(unsafe.Pointer(&p_size))
-
-	/* go_godot_string_new_with_wide_string(API_STRUCT, *wchar_t,int) -> *String */
-
-	C.go_godot_string_new_with_wide_string(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["String"]++
 
@@ -10176,17 +8310,6 @@ func (gdt *String) Erase(
 
 	/* go_godot_string_erase(API_STRUCT,godot_int,godot_int) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_string)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_int)(unsafe.Pointer(&p_pos))
-	in1 := *(*C.godot_int)(unsafe.Pointer(&p_chars))
-
-	C.go_godot_string_erase(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_string_ascii -> godot_char_string */
@@ -10814,13 +8937,6 @@ func (gdt *String) Destroy() {
 
 	/* go_godot_string_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_string)(unsafe.Pointer(gdt))
-
-	C.go_godot_string_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["String"]++
 
 }
@@ -10985,18 +9101,6 @@ func NewStringName(
 ) StringName {
 	dest := StringName{}
 
-	api := CoreApi
-	rcv := (*C.godot_string_name)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_string)(unsafe.Pointer(&p_name))
-
-	/* go_godot_string_name_new(API_STRUCT, *godot_string) -> *StringName */
-
-	C.go_godot_string_name_new(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
 	return dest
@@ -11006,19 +9110,6 @@ func NewStringNameData(
 	p_name string,
 ) StringName {
 	dest := StringName{}
-
-	api := CoreApi
-	rcv := (*C.godot_string_name)(unsafe.Pointer(&dest))
-	in0 := C.CString(p_name)
-	defer C.free(unsafe.Pointer(in0))
-
-	/* go_godot_string_name_new_data(API_STRUCT, *char) -> *StringName */
-
-	C.go_godot_string_name_new_data(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["StringName"]++
 
@@ -11118,13 +9209,6 @@ func (gdt *StringName) Destroy() {
 
 	/* go_godot_string_name_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_string_name)(unsafe.Pointer(gdt))
-
-	C.go_godot_string_name_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["StringName"]++
 
 }
@@ -11141,24 +9225,6 @@ func NewTransformWithAxisOrigin(
 ) Transform {
 	dest := Transform{}
 
-	api := CoreApi
-	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_x_axis))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_y_axis))
-	in2 := (*C.godot_vector3)(unsafe.Pointer(&p_z_axis))
-	in3 := (*C.godot_vector3)(unsafe.Pointer(&p_origin))
-
-	/* go_godot_transform_new_with_axis_origin(API_STRUCT, *godot_vector3, *godot_vector3, *godot_vector3, *godot_vector3) -> *Transform */
-
-	C.go_godot_transform_new_with_axis_origin(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-		in3,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -11169,20 +9235,6 @@ func NewTransform(
 ) Transform {
 	dest := Transform{}
 
-	api := CoreApi
-	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
-	in1 := (*C.godot_vector3)(unsafe.Pointer(&p_origin))
-
-	/* go_godot_transform_new(API_STRUCT, *godot_basis, *godot_vector3) -> *Transform */
-
-	C.go_godot_transform_new(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
 	return dest
@@ -11190,16 +9242,6 @@ func NewTransform(
 
 func NewTransformIdentity() Transform {
 	dest := Transform{}
-
-	api := CoreApi
-	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
-
-	/* go_godot_transform_new_identity(API_STRUCT) -> *Transform */
-
-	C.go_godot_transform_new_identity(
-		api,
-		rcv,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -11210,18 +9252,6 @@ func NewTransformWithQuat(
 	p_quat Quat, /* godot_quat */
 ) Transform {
 	dest := Transform{}
-
-	api := Core11Api
-	rcv := (*C.godot_transform)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
-
-	/* go_godot_transform_new_with_quat(API_STRUCT, *godot_quat) -> *Transform */
-
-	C.go_godot_transform_new_with_quat(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform"]++
 
@@ -11251,15 +9281,6 @@ func (gdt *Transform) SetBasis(
 
 	/* go_godot_transform_set_basis(API_STRUCT, *godot_basis) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_transform)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_basis)(unsafe.Pointer(&p_v))
-
-	C.go_godot_transform_set_basis(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_transform_get_origin -> godot_vector3 */
@@ -11285,15 +9306,6 @@ func (gdt *Transform) SetOrigin(
 
 	/* go_godot_transform_set_origin(API_STRUCT, *godot_vector3) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_transform)(unsafe.Pointer(gdt))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v))
-
-	C.go_godot_transform_set_origin(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_transform_as_string -> godot_string */
@@ -11616,20 +9628,6 @@ func NewTransform2D(
 ) Transform2D {
 	dest := Transform2D{}
 
-	api := CoreApi
-	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_rot))
-	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_pos))
-
-	/* go_godot_transform2d_new(API_STRUCT,godot_real, *godot_vector2) -> *Transform2D */
-
-	C.go_godot_transform2d_new(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -11640,22 +9638,6 @@ func NewTransform2DAxisOrigin(
 ) Transform2D {
 	dest := Transform2D{}
 
-	api := CoreApi
-	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_x_axis))
-	in1 := (*C.godot_vector2)(unsafe.Pointer(&p_y_axis))
-	in2 := (*C.godot_vector2)(unsafe.Pointer(&p_origin))
-
-	/* go_godot_transform2d_new_axis_origin(API_STRUCT, *godot_vector2, *godot_vector2, *godot_vector2) -> *Transform2D */
-
-	C.go_godot_transform2d_new_axis_origin(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
 	return dest
@@ -11663,16 +9645,6 @@ func NewTransform2DAxisOrigin(
 
 func NewTransform2DIdentity() Transform2D {
 	dest := Transform2D{}
-
-	api := CoreApi
-	rcv := (*C.godot_transform2d)(unsafe.Pointer(&dest))
-
-	/* go_godot_transform2d_new_identity(API_STRUCT) -> *Transform2D */
-
-	C.go_godot_transform2d_new_identity(
-		api,
-		rcv,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Transform2D"]++
 
@@ -12045,18 +10017,6 @@ func NewVariantCopy(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_variant)(unsafe.Pointer(&p_src))
-
-	/* go_godot_variant_new_copy(API_STRUCT, *godot_variant) -> *Variant */
-
-	C.go_godot_variant_new_copy(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12064,16 +10024,6 @@ func NewVariantCopy(
 
 func NewVariantNil() Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-
-	/* go_godot_variant_new_nil(API_STRUCT) -> *Variant */
-
-	C.go_godot_variant_new_nil(
-		api,
-		rcv,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12085,18 +10035,6 @@ func NewVariantBool(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_bool)(unsafe.Pointer(&p_b))
-
-	/* go_godot_variant_new_bool(API_STRUCT,godot_bool) -> *Variant */
-
-	C.go_godot_variant_new_bool(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12106,18 +10044,6 @@ func NewVariantUint(
 	p_i uint64, /* else case */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := *(*C.uint64_t)(unsafe.Pointer(&p_i))
-
-	/* go_godot_variant_new_uint(API_STRUCT,uint64_t) -> *Variant */
-
-	C.go_godot_variant_new_uint(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12129,18 +10055,6 @@ func NewVariantInt(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := *(*C.int64_t)(unsafe.Pointer(&p_i))
-
-	/* go_godot_variant_new_int(API_STRUCT,int64_t) -> *Variant */
-
-	C.go_godot_variant_new_int(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12150,18 +10064,6 @@ func NewVariantReal(
 	p_r float64, /* else case */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := *(*C.double)(unsafe.Pointer(&p_r))
-
-	/* go_godot_variant_new_real(API_STRUCT,double) -> *Variant */
-
-	C.go_godot_variant_new_real(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12173,20 +10075,6 @@ func NewVariantString(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	// hide godot_string / String and expose native go string
-	strIn0 := internWithGoString(p_s)
-	in0 := (*C.godot_string)(unsafe.Pointer(&strIn0))
-
-	/* go_godot_variant_new_string(API_STRUCT, *godot_string) -> *Variant */
-
-	C.go_godot_variant_new_string(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12196,18 +10084,6 @@ func NewVariantVector2(
 	p_v2 Vector2, /* godot_vector2 */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector2)(unsafe.Pointer(&p_v2))
-
-	/* go_godot_variant_new_vector2(API_STRUCT, *godot_vector2) -> *Variant */
-
-	C.go_godot_variant_new_vector2(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12219,18 +10095,6 @@ func NewVariantRect2(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_rect2)(unsafe.Pointer(&p_rect2))
-
-	/* go_godot_variant_new_rect2(API_STRUCT, *godot_rect2) -> *Variant */
-
-	C.go_godot_variant_new_rect2(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12240,18 +10104,6 @@ func NewVariantVector3(
 	p_v3 Vector3, /* godot_vector3 */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_vector3)(unsafe.Pointer(&p_v3))
-
-	/* go_godot_variant_new_vector3(API_STRUCT, *godot_vector3) -> *Variant */
-
-	C.go_godot_variant_new_vector3(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12263,18 +10115,6 @@ func NewVariantTransform2D(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_transform2d)(unsafe.Pointer(&p_t2d))
-
-	/* go_godot_variant_new_transform2d(API_STRUCT, *godot_transform2d) -> *Variant */
-
-	C.go_godot_variant_new_transform2d(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12284,18 +10124,6 @@ func NewVariantPlane(
 	p_plane Plane, /* godot_plane */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_plane)(unsafe.Pointer(&p_plane))
-
-	/* go_godot_variant_new_plane(API_STRUCT, *godot_plane) -> *Variant */
-
-	C.go_godot_variant_new_plane(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12307,18 +10135,6 @@ func NewVariantQuat(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_quat)(unsafe.Pointer(&p_quat))
-
-	/* go_godot_variant_new_quat(API_STRUCT, *godot_quat) -> *Variant */
-
-	C.go_godot_variant_new_quat(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12328,18 +10144,6 @@ func NewVariantAABB(
 	p_aabb AABB, /* godot_aabb */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_aabb)(unsafe.Pointer(&p_aabb))
-
-	/* go_godot_variant_new_aabb(API_STRUCT, *godot_aabb) -> *Variant */
-
-	C.go_godot_variant_new_aabb(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12351,18 +10155,6 @@ func NewVariantBasis(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_basis)(unsafe.Pointer(&p_basis))
-
-	/* go_godot_variant_new_basis(API_STRUCT, *godot_basis) -> *Variant */
-
-	C.go_godot_variant_new_basis(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12372,18 +10164,6 @@ func NewVariantTransform(
 	p_trans Transform, /* godot_transform */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_transform)(unsafe.Pointer(&p_trans))
-
-	/* go_godot_variant_new_transform(API_STRUCT, *godot_transform) -> *Variant */
-
-	C.go_godot_variant_new_transform(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12395,18 +10175,6 @@ func NewVariantColor(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_color)(unsafe.Pointer(&p_color))
-
-	/* go_godot_variant_new_color(API_STRUCT, *godot_color) -> *Variant */
-
-	C.go_godot_variant_new_color(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12416,18 +10184,6 @@ func NewVariantNodePath(
 	p_np NodePath, /* godot_node_path */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_node_path)(unsafe.Pointer(&p_np))
-
-	/* go_godot_variant_new_node_path(API_STRUCT, *godot_node_path) -> *Variant */
-
-	C.go_godot_variant_new_node_path(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12439,18 +10195,6 @@ func NewVariantRID(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_rid)(unsafe.Pointer(&p_rid))
-
-	/* go_godot_variant_new_rid(API_STRUCT, *godot_rid) -> *Variant */
-
-	C.go_godot_variant_new_rid(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12460,18 +10204,6 @@ func NewVariantObject(
 	p_obj *GodotObject,
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := unsafe.Pointer(p_obj)
-
-	/* go_godot_variant_new_object(API_STRUCT, *godot_object) -> *Variant */
-
-	C.go_godot_variant_new_object(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12483,18 +10215,6 @@ func NewVariantDictionary(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_dictionary)(unsafe.Pointer(&p_dict))
-
-	/* go_godot_variant_new_dictionary(API_STRUCT, *godot_dictionary) -> *Variant */
-
-	C.go_godot_variant_new_dictionary(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12504,18 +10224,6 @@ func NewVariantArray(
 	p_arr Array, /* godot_array */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_array)(unsafe.Pointer(&p_arr))
-
-	/* go_godot_variant_new_array(API_STRUCT, *godot_array) -> *Variant */
-
-	C.go_godot_variant_new_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12527,18 +10235,6 @@ func NewVariantPoolByteArray(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_byte_array)(unsafe.Pointer(&p_pba))
-
-	/* go_godot_variant_new_pool_byte_array(API_STRUCT, *godot_pool_byte_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_byte_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12548,18 +10244,6 @@ func NewVariantPoolIntArray(
 	p_pia PoolIntArray, /* godot_pool_int_array */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_int_array)(unsafe.Pointer(&p_pia))
-
-	/* go_godot_variant_new_pool_int_array(API_STRUCT, *godot_pool_int_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_int_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12571,18 +10255,6 @@ func NewVariantPoolRealArray(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_real_array)(unsafe.Pointer(&p_pra))
-
-	/* go_godot_variant_new_pool_real_array(API_STRUCT, *godot_pool_real_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_real_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12592,18 +10264,6 @@ func NewVariantPoolStringArray(
 	p_psa PoolStringArray, /* godot_pool_string_array */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_string_array)(unsafe.Pointer(&p_psa))
-
-	/* go_godot_variant_new_pool_string_array(API_STRUCT, *godot_pool_string_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_string_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -12615,18 +10275,6 @@ func NewVariantPoolVector2Array(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector2_array)(unsafe.Pointer(&p_pv2a))
-
-	/* go_godot_variant_new_pool_vector2_array(API_STRUCT, *godot_pool_vector2_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_vector2_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12637,18 +10285,6 @@ func NewVariantPoolVector3Array(
 ) Variant {
 	dest := Variant{}
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_vector3_array)(unsafe.Pointer(&p_pv3a))
-
-	/* go_godot_variant_new_pool_vector3_array(API_STRUCT, *godot_pool_vector3_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_vector3_array(
-		api,
-		rcv,
-		in0,
-	)
-
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
 	return dest
@@ -12658,18 +10294,6 @@ func NewVariantPoolColorArray(
 	p_pca PoolColorArray, /* godot_pool_color_array */
 ) Variant {
 	dest := Variant{}
-
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(&dest))
-	in0 := (*C.godot_pool_color_array)(unsafe.Pointer(&p_pca))
-
-	/* go_godot_variant_new_pool_color_array(API_STRUCT, *godot_pool_color_array) -> *Variant */
-
-	C.go_godot_variant_new_pool_color_array(
-		api,
-		rcv,
-		in0,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Variant"]++
 
@@ -13253,13 +10877,6 @@ func (gdt *Variant) Destroy() {
 
 	/* go_godot_variant_destroy(API_STRUCT) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_variant)(unsafe.Pointer(gdt))
-
-	C.go_godot_variant_destroy(
-		api,
-		rcv,
-	)
 	RegisterState.Stats.GodotTypeFrees["Variant"]++
 
 }
@@ -13374,20 +10991,6 @@ func NewVector2(
 	p_x float32 /* else case */, p_y float32, /* else case */
 ) Vector2 {
 	dest := Vector2{}
-
-	api := CoreApi
-	rcv := (*C.godot_vector2)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
-
-	/* go_godot_vector2_new(API_STRUCT,godot_real,godot_real) -> *Vector2 */
-
-	C.go_godot_vector2_new(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Vector2"]++
 
@@ -14005,15 +11608,6 @@ func (gdt *Vector2) SetX(
 
 	/* go_godot_vector2_set_x(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_vector2)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
-
-	C.go_godot_vector2_set_x(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Setter Method: godot_vector2_set_y -> void */
@@ -14023,15 +11617,6 @@ func (gdt *Vector2) SetY(
 
 	/* go_godot_vector2_set_y(API_STRUCT,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_vector2)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_y))
-
-	C.go_godot_vector2_set_y(
-		api,
-		rcv,
-		in0,
-	)
 }
 
 /* Getter Method: godot_vector2_get_x -> godot_real */
@@ -14119,22 +11704,6 @@ func NewVector3(
 	p_x float32 /* else case */, p_y float32 /* else case */, p_z float32, /* else case */
 ) Vector3 {
 	dest := Vector3{}
-
-	api := CoreApi
-	rcv := (*C.godot_vector3)(unsafe.Pointer(&dest))
-	in0 := *(*C.godot_real)(unsafe.Pointer(&p_x))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_y))
-	in2 := *(*C.godot_real)(unsafe.Pointer(&p_z))
-
-	/* go_godot_vector3_new(API_STRUCT,godot_real,godot_real,godot_real) -> *Vector3 */
-
-	C.go_godot_vector3_new(
-		api,
-		rcv,
-		in0,
-		in1,
-		in2,
-	)
 
 	RegisterState.Stats.GodotTypeAllocs["Vector3"]++
 
@@ -14786,17 +12355,6 @@ func (gdt *Vector3) SetAxis(
 
 	/* go_godot_vector3_set_axis(API_STRUCT,godot_vector3_axis,godot_real) ->void */
 
-	api := CoreApi
-	rcv := (*C.godot_vector3)(unsafe.Pointer(gdt))
-	in0 := *(*C.godot_vector3_axis)(unsafe.Pointer(&p_axis))
-	in1 := *(*C.godot_real)(unsafe.Pointer(&p_val))
-
-	C.go_godot_vector3_set_axis(
-		api,
-		rcv,
-		in0,
-		in1,
-	)
 }
 
 /* Getter Method: godot_vector3_get_axis -> godot_real */
